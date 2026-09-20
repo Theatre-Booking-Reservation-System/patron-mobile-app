@@ -1,0 +1,122 @@
+openapi: 3.0.3
+info:
+  title: Sapumal Theatre Patron API
+  version: 0.1.0-mock
+  description: Provisional mobile contract. The backend-owned contract replaces this file.
+servers:
+  - url: https://api.example.invalid/v1
+paths:
+  /productions:
+    get:
+      operationId: listProductions
+      parameters:
+        - in: query
+          name: language
+          schema:
+            type: string
+            enum: [sinhala, tamil, english]
+      responses:
+        '200':
+          description: Upcoming productions
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Production'
+  /productions/{productionId}:
+    get:
+      operationId: getProduction
+      parameters:
+        - in: path
+          name: productionId
+          required: true
+          schema: {type: string}
+      responses:
+        '200':
+          description: Production details
+          content:
+            application/json:
+              schema: {$ref: '#/components/schemas/Production'}
+  /performances/{performanceId}/seat-map:
+    get:
+      operationId: getSeatMap
+      parameters:
+        - in: path
+          name: performanceId
+          required: true
+          schema: {type: string}
+      responses:
+        '200':
+          description: Current seat map
+          content:
+            application/json:
+              schema:
+                type: array
+                items: {$ref: '#/components/schemas/Seat'}
+  /seat-holds:
+    post:
+      operationId: createSeatHold
+      responses:
+        '201': {description: Seats held for 15 minutes}
+        '409': {description: One or more seats are no longer available}
+  /quotes:
+    post:
+      operationId: createBookingQuote
+      responses:
+        '200': {description: Server-authoritative price quote}
+  /bookings:
+    get:
+      operationId: listBookings
+      responses:
+        '200': {description: Patron booking history}
+    post:
+      operationId: createBooking
+      responses:
+        '201': {description: Pending booking created}
+  /payments/sessions:
+    post:
+      operationId: createPaymentSession
+      responses:
+        '201': {description: Hosted payment session created}
+components:
+  schemas:
+    LocalizedText:
+      type: object
+      required: [en, si, ta]
+      properties:
+        en: {type: string}
+        si: {type: string}
+        ta: {type: string}
+    Performance:
+      type: object
+      required: [id, dateTime, session, earlyAccessOnly, isPoyaDay]
+      properties:
+        id: {type: string}
+        dateTime: {type: string, format: date-time}
+        session: {type: string, enum: [matinee, evening]}
+        earlyAccessOnly: {type: boolean}
+        isPoyaDay: {type: boolean}
+    Production:
+      type: object
+      required: [id, title, synopsis, language, genre, baseTicketCost, performances]
+      properties:
+        id: {type: string}
+        title: {$ref: '#/components/schemas/LocalizedText'}
+        synopsis: {$ref: '#/components/schemas/LocalizedText'}
+        language: {type: string, enum: [sinhala, tamil, english]}
+        genre: {type: string}
+        baseTicketCost: {type: integer, description: LKR whole units for mock mode}
+        performances:
+          type: array
+          items: {$ref: '#/components/schemas/Performance'}
+    Seat:
+      type: object
+      required: [id, section, row, number, status]
+      properties:
+        id: {type: string}
+        section: {type: string, enum: [stalls, circle, upperCircle]}
+        row: {type: string}
+        number: {type: integer}
+        status: {type: string, enum: [available, held, booked, unavailable]}
+        isAccessible: {type: boolean}
