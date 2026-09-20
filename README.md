@@ -1,4 +1,4 @@
-# patron_mobile_app
+# Patron Mobile App
 
 A new Flutter project.
 
