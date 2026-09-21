@@ -19,12 +19,78 @@ class ProfilePage extends StatelessWidget {
     if (patron == null) {
       return Scaffold(
         appBar: AppBar(title: Text(context.l10n.profile)),
-        body: Center(
+        body: SafeArea(
           child: Padding(
             padding: const EdgeInsets.all(24),
-            child: FilledButton(
-              onPressed: () => context.push('/login'),
-              child: Text(context.l10n.login),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                CircleAvatar(
+                  radius: 44,
+                  backgroundColor: Theme.of(
+                    context,
+                  ).colorScheme.primaryContainer,
+                  child: Icon(
+                    Icons.person_outline,
+                    size: 46,
+                    color: Theme.of(context).colorScheme.onPrimaryContainer,
+                  ),
+                ),
+                const SizedBox(height: 24),
+                Text(
+                  'You are browsing as a guest',
+                  textAlign: TextAlign.center,
+                  style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                    fontWeight: FontWeight.w800,
+                  ),
+                ),
+                const SizedBox(height: 12),
+                Text(
+                  'Create an account to book seats, manage reservations, and '
+                  'link a Sapumal loyalty card.',
+                  textAlign: TextAlign.center,
+                  style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                    color: Theme.of(context).colorScheme.onSurfaceVariant,
+                  ),
+                ),
+                const SizedBox(height: 28),
+                FilledButton(
+                  onPressed: () async {
+                    final authBloc = context.read<AuthBloc>()
+                      ..add(const AuthLogoutRequested());
+                    await authBloc.stream.firstWhere(
+                      (state) => state.status == AuthStatus.anonymous,
+                    );
+                    if (context.mounted) context.go('/register');
+                  },
+                  child: Text(context.l10n.createAccount),
+                ),
+                const SizedBox(height: 12),
+                OutlinedButton(
+                  onPressed: () async {
+                    final authBloc = context.read<AuthBloc>()
+                      ..add(const AuthLogoutRequested());
+                    await authBloc.stream.firstWhere(
+                      (state) => state.status == AuthStatus.anonymous,
+                    );
+                    if (context.mounted) context.go('/login');
+                  },
+                  child: Text(context.l10n.login),
+                ),
+                const SizedBox(height: 12),
+                TextButton(
+                  onPressed: () => context.go('/shows'),
+                  child: const Text('Continue browsing'),
+                ),
+                const SizedBox(height: 24),
+                TextButton.icon(
+                  onPressed: () =>
+                      context.read<AuthBloc>().add(const AuthLogoutRequested()),
+                  icon: const Icon(Icons.logout),
+                  label: const Text('End guest session'),
+                ),
+              ],
             ),
           ),
         ),

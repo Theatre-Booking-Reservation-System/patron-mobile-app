@@ -108,10 +108,17 @@ class _PerformanceTile extends StatelessWidget {
         enabled: !performance.isPoyaDay,
         onTap: performance.isPoyaDay
             ? null
-            : () {
-                final auth = context.read<AuthBloc>().state;
+            : () async {
+                final authBloc = context.read<AuthBloc>();
+                final auth = authBloc.state;
                 if (auth.status != AuthStatus.authenticated) {
-                  context.push('/login');
+                  if (auth.status == AuthStatus.guest) {
+                    authBloc.add(const AuthLogoutRequested());
+                    await authBloc.stream.firstWhere(
+                      (state) => state.status == AuthStatus.anonymous,
+                    );
+                  }
+                  if (context.mounted) context.push('/login');
                   return;
                 }
                 if (performance.earlyAccessOnly &&
