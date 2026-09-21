@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:patron_mobile_app/app/theme/app_theme.dart';
 import 'package:patron_mobile_app/core/localization/l10n_extension.dart';
-import 'package:patron_mobile_app/core/widgets/language_selector.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -32,7 +31,13 @@ class HomePage extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     const Icon(Icons.menu, color: Colors.white),
-                    const LanguageSelector(compact: true),
+                    Text(
+                      context.l10n.appName,
+                      style: const TextStyle(
+                        color: AppTheme.gold,
+                        fontWeight: FontWeight.w800,
+                      ),
+                    ),
                     IconButton(
                       onPressed: () {},
                       icon: const Icon(

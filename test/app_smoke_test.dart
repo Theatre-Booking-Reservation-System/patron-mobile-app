@@ -13,14 +13,18 @@ void main() {
 
   tearDown(() => getIt.reset());
 
-  testWidgets('launches the branded home screen', (tester) async {
+  testWidgets('launches the branded welcome screen', (tester) async {
     await tester.pumpWidget(const SapumalApp());
     await tester.pump(const Duration(seconds: 1));
     await tester.pumpAndSettle();
 
-    expect(find.text('SAPUMAL THEATRE'), findsOneWidget);
-    expect(find.text('Experience the Art of Performance'), findsOneWidget);
-    expect(find.text('Book Tickets'), findsOneWidget);
+    expect(find.text('Discover remarkable theatre.'), findsOneWidget);
+    expect(find.text('Get started'), findsOneWidget);
+    expect(find.text('I already have an account'), findsOneWidget);
+
+    await tester.pump(const Duration(seconds: 5));
+    await tester.pump(const Duration(milliseconds: 700));
+    expect(find.text('Choose the seats you love.'), findsOneWidget);
 
     await tester.pumpWidget(const SizedBox.shrink());
     await tester.pumpAndSettle();

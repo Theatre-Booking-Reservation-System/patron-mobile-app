@@ -23,7 +23,22 @@ void main() {
     await tester.pumpWidget(const SapumalApp());
     await tester.pump(const Duration(seconds: 1));
     await tester.pumpAndSettle();
-    expect(tester.takeException(), isNull, reason: 'home');
+    expect(tester.takeException(), isNull, reason: 'welcome');
+
+    await tester.tap(find.text('Get started'));
+    await tester.pumpAndSettle();
+    await tester.enterText(
+      find.byKey(const Key('loginEmailField')),
+      'nimal.perera@example.com',
+    );
+    await tester.enterText(
+      find.byKey(const Key('loginPasswordField')),
+      'SapumalDemo#1',
+    );
+    await tester.tap(find.byKey(const Key('signInButton')));
+    await tester.pump(const Duration(seconds: 1));
+    await tester.pumpAndSettle();
+    expect(tester.takeException(), isNull, reason: 'authenticated home');
 
     await tester.tap(find.text('Book Tickets'));
     await tester.pumpAndSettle();
