@@ -20,6 +20,20 @@ final class ProgrammeLanguageChanged extends ProgrammeEvent {
   List<Object?> get props => [language];
 }
 
+final class ProgrammeSearchChanged extends ProgrammeEvent {
+  const ProgrammeSearchChanged(this.query);
+  final String query;
+  @override
+  List<Object?> get props => [query];
+}
+
+final class ProgrammeDateChanged extends ProgrammeEvent {
+  const ProgrammeDateChanged(this.date);
+  final DateTime? date;
+  @override
+  List<Object?> get props => [date];
+}
+
 enum ProgrammeStatus { initial, loading, success, failure }
 
 class ProgrammeState extends Equatable {
@@ -27,29 +41,55 @@ class ProgrammeState extends Equatable {
     this.status = ProgrammeStatus.initial,
     this.productions = const [],
     this.language,
+    this.query = '',
+    this.date,
   });
 
   final ProgrammeStatus status;
   final List<Production> productions;
   final ProductionLanguage? language;
+  final String query;
+  final DateTime? date;
 
-  List<Production> get visibleProductions => language == null
-      ? productions
-      : productions.where((item) => item.language == language).toList();
+  List<Production> get visibleProductions {
+    final normalizedQuery = query.trim().toLowerCase();
+    return productions
+        .where((production) {
+          final matchesLanguage =
+              language == null || production.language == language;
+          final matchesSearch =
+              normalizedQuery.isEmpty ||
+              production.title.en.toLowerCase().contains(normalizedQuery) ||
+              production.title.si.toLowerCase().contains(normalizedQuery) ||
+              production.title.ta.toLowerCase().contains(normalizedQuery);
+          final matchesDate =
+              date == null ||
+              production.performances.any(
+                (performance) => _isSameDay(performance.dateTime, date!),
+              );
+          return matchesLanguage && matchesSearch && matchesDate;
+        })
+        .toList(growable: false);
+  }
 
   ProgrammeState copyWith({
     ProgrammeStatus? status,
     List<Production>? productions,
     ProductionLanguage? language,
     bool clearLanguage = false,
+    String? query,
+    DateTime? date,
+    bool clearDate = false,
   }) => ProgrammeState(
     status: status ?? this.status,
     productions: productions ?? this.productions,
     language: clearLanguage ? null : language ?? this.language,
+    query: query ?? this.query,
+    date: clearDate ? null : date ?? this.date,
   );
 
   @override
-  List<Object?> get props => [status, productions, language];
+  List<Object?> get props => [status, productions, language, query, date];
 }
 
 class ProgrammeBloc extends Bloc<ProgrammeEvent, ProgrammeState> {
@@ -80,7 +120,20 @@ class ProgrammeBloc extends Bloc<ProgrammeEvent, ProgrammeState> {
             : state.copyWith(language: event.language),
       );
     });
+    on<ProgrammeSearchChanged>(
+      (event, emit) => emit(state.copyWith(query: event.query)),
+    );
+    on<ProgrammeDateChanged>((event, emit) {
+      emit(
+        event.date == null
+            ? state.copyWith(clearDate: true)
+            : state.copyWith(date: event.date),
+      );
+    });
   }
 
   final TheatreRepository _repository;
 }
+
+bool _isSameDay(DateTime a, DateTime b) =>
+    a.year == b.year && a.month == b.month && a.day == b.day;

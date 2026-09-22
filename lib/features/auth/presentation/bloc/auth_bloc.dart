@@ -1,5 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:patron_mobile_app/features/auth/data/auth_session_store.dart';
 
 class MockPatron extends Equatable {
   const MockPatron({
@@ -125,25 +126,21 @@ class AuthState extends Equatable {
 }
 
 class AuthBloc extends Bloc<AuthEvent, AuthState> {
-  AuthBloc() : super(const AuthState.anonymous()) {
+  factory AuthBloc({
+    AuthSessionStore sessionStore = const NoopAuthSessionStore(),
+    AuthSessionData? restoredSession,
+  }) => AuthBloc._(sessionStore, restoredSession);
+
+  AuthBloc._(this._sessionStore, AuthSessionData? restoredSession)
+    : super(_stateFromSession(restoredSession)) {
     on<AuthLoginRequested>(_onLoginRequested);
-    on<AuthGuestRequested>(
-      (event, emit) => emit(const AuthState(status: AuthStatus.guest)),
-    );
+    on<AuthGuestRequested>(_onGuestRequested);
     on<AuthRegistrationRequested>(_onRegistrationRequested);
-    on<AuthLogoutRequested>((event, emit) => emit(const AuthState.anonymous()));
-    on<LoyaltyLinked>((event, emit) {
-      final patron = state.patron;
-      if (patron != null) {
-        emit(
-          AuthState(
-            status: AuthStatus.authenticated,
-            patron: patron.copyWith(isLoyaltyMember: true),
-          ),
-        );
-      }
-    });
+    on<AuthLogoutRequested>(_onLogoutRequested);
+    on<LoyaltyLinked>(_onLoyaltyLinked);
   }
+
+  final AuthSessionStore _sessionStore;
 
   Future<void> _onLoginRequested(
     AuthLoginRequested event,
@@ -162,15 +159,40 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       return;
     }
 
-    emit(
-      AuthState(
-        status: AuthStatus.authenticated,
-        patron: MockPatron(
-          name: _nameFromEmail(event.email),
-          email: event.email.trim(),
-        ),
-      ),
+    final patron = MockPatron(
+      name: _nameFromEmail(event.email),
+      email: event.email.trim(),
     );
+    await _saveSession(patron);
+    emit(AuthState(status: AuthStatus.authenticated, patron: patron));
+  }
+
+  Future<void> _onGuestRequested(
+    AuthGuestRequested event,
+    Emitter<AuthState> emit,
+  ) async {
+    await _clearSession();
+    emit(const AuthState(status: AuthStatus.guest));
+  }
+
+  Future<void> _onLogoutRequested(
+    AuthLogoutRequested event,
+    Emitter<AuthState> emit,
+  ) async {
+    await _clearSession();
+    emit(const AuthState.anonymous());
+  }
+
+  Future<void> _onLoyaltyLinked(
+    LoyaltyLinked event,
+    Emitter<AuthState> emit,
+  ) async {
+    final patron = state.patron;
+    if (patron == null) return;
+
+    final updatedPatron = patron.copyWith(isLoyaltyMember: true);
+    await _saveSession(updatedPatron);
+    emit(AuthState(status: AuthStatus.authenticated, patron: updatedPatron));
   }
 
   Future<void> _onRegistrationRequested(
@@ -207,7 +229,35 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       ),
     );
   }
+
+  Future<void> _saveSession(MockPatron patron) =>
+      _sessionStore.save(_sessionFromPatron(patron));
+
+  Future<void> _clearSession() => _sessionStore.clear();
 }
+
+AuthState _stateFromSession(AuthSessionData? session) => session == null
+    ? const AuthState.anonymous()
+    : AuthState(
+        status: AuthStatus.authenticated,
+        patron: MockPatron(
+          name: session.name,
+          email: session.email,
+          phone: session.phone,
+          dateOfBirth: session.dateOfBirth,
+          identityNumber: session.identityNumber,
+          isLoyaltyMember: session.isLoyaltyMember,
+        ),
+      );
+
+AuthSessionData _sessionFromPatron(MockPatron patron) => AuthSessionData(
+  name: patron.name,
+  email: patron.email,
+  phone: patron.phone,
+  dateOfBirth: patron.dateOfBirth,
+  identityNumber: patron.identityNumber,
+  isLoyaltyMember: patron.isLoyaltyMember,
+);
 
 bool isValidPassword(String value) =>
     value.length >= 12 &&

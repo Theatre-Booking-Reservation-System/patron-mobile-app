@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:patron_mobile_app/app/app.dart';
 import 'package:patron_mobile_app/app/dependency_injection/configure_dependencies.dart';
@@ -7,6 +8,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 void main() {
   setUp(() async {
     SharedPreferences.setMockInitialValues({});
+    FlutterSecureStorage.setMockInitialValues({});
     await getIt.reset();
     await configureDependencies();
   });
@@ -46,6 +48,11 @@ void main() {
     await tester.tap(find.text('Sanda Katha').first);
     await tester.pumpAndSettle();
     expect(tester.takeException(), isNull, reason: 'details');
+    await tester.drag(
+      find.byType(CustomScrollView).last,
+      const Offset(0, -650),
+    );
+    await tester.pumpAndSettle();
     await tester.tap(find.text('09/10/2026').first);
     await tester.pump(const Duration(seconds: 1));
     await tester.pumpAndSettle();
