@@ -215,7 +215,7 @@ class _WelcomeSlide extends StatelessWidget {
           style: const TextStyle(
             color: AppTheme.gold,
             fontSize: 12,
-            fontWeight: FontWeight.w800,
+            fontWeight: FontWeight.w600,
             letterSpacing: 1.4,
           ),
         ),
@@ -226,7 +226,7 @@ class _WelcomeSlide extends StatelessWidget {
             color: Colors.white,
             fontSize: 36,
             height: 1.05,
-            fontWeight: FontWeight.w800,
+            fontWeight: FontWeight.w600,
             letterSpacing: -1.1,
           ),
         ),

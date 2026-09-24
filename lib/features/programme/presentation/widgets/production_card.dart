@@ -66,7 +66,7 @@ class ProductionCard extends StatelessWidget {
                         overflow: TextOverflow.ellipsis,
                         style: Theme.of(context).textTheme.titleLarge?.copyWith(
                           height: 1.1,
-                          fontWeight: FontWeight.w800,
+                          fontWeight: FontWeight.w600,
                         ),
                       ),
                       const SizedBox(height: 6),
@@ -108,7 +108,7 @@ class ProductionCard extends StatelessWidget {
                               ),
                               style: TextStyle(
                                 color: scheme.primary,
-                                fontWeight: FontWeight.w800,
+                                fontWeight: FontWeight.w600,
                               ),
                             ),
                           ),
@@ -147,7 +147,7 @@ class _MetadataPill extends StatelessWidget {
       label.toUpperCase(),
       style: Theme.of(context).textTheme.labelSmall?.copyWith(
         fontSize: 10,
-        fontWeight: FontWeight.w800,
+        fontWeight: FontWeight.w600,
         letterSpacing: .4,
       ),
     ),

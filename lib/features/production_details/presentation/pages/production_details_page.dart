@@ -50,7 +50,7 @@ class ProductionDetailsPage extends StatelessWidget {
                 production.title.resolve(locale),
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
-                style: const TextStyle(fontWeight: FontWeight.w800),
+                style: const TextStyle(fontWeight: FontWeight.w600),
               ),
               background: _ProductionHero(
                 production: production,
@@ -114,7 +114,7 @@ class ProductionDetailsPage extends StatelessWidget {
                             Text(
                               AppFormatters.money(production.startingPrice),
                               style: Theme.of(context).textTheme.titleLarge
-                                  ?.copyWith(fontWeight: FontWeight.w800),
+                                  ?.copyWith(fontWeight: FontWeight.w600),
                             ),
                           ],
                         ),
@@ -135,7 +135,7 @@ class ProductionDetailsPage extends StatelessWidget {
                       child: Text(
                         context.l10n.selectPerformance,
                         style: Theme.of(context).textTheme.headlineSmall
-                            ?.copyWith(fontWeight: FontWeight.w800),
+                            ?.copyWith(fontWeight: FontWeight.w600),
                       ),
                     ),
                     Text(
@@ -283,13 +283,13 @@ class _PerformanceTile extends StatelessWidget {
                         locale,
                       ).format(performance.dateTime).toUpperCase(),
                       style: Theme.of(context).textTheme.labelSmall?.copyWith(
-                        fontWeight: FontWeight.w800,
+                        fontWeight: FontWeight.w600,
                       ),
                     ),
                     Text(
                       DateFormat.d(locale).format(performance.dateTime),
                       style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                        fontWeight: FontWeight.w900,
+                        fontWeight: FontWeight.w600,
                       ),
                     ),
                   ],
@@ -359,7 +359,7 @@ class _StatusPill extends StatelessWidget {
       style: Theme.of(context).textTheme.labelSmall?.copyWith(
         color: color.computeLuminance() > .55 ? const Color(0xFF3A2A00) : color,
         fontSize: 10,
-        fontWeight: FontWeight.w800,
+        fontWeight: FontWeight.w600,
       ),
     ),
   );

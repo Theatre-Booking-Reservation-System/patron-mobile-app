@@ -75,20 +75,20 @@ abstract final class AppTheme {
         displaySmall: TextStyle(
           fontSize: 36,
           height: 1.08,
-          fontWeight: FontWeight.w800,
+          fontWeight: FontWeight.w600,
           letterSpacing: -1.1,
         ),
         headlineMedium: TextStyle(
           fontSize: 28,
           height: 1.15,
-          fontWeight: FontWeight.w800,
+          fontWeight: FontWeight.w600,
           letterSpacing: -.6,
         ),
-        titleLarge: TextStyle(fontWeight: FontWeight.w700),
-        titleMedium: TextStyle(fontWeight: FontWeight.w700),
+        titleLarge: TextStyle(fontWeight: FontWeight.w600),
+        titleMedium: TextStyle(fontWeight: FontWeight.w600),
         bodyLarge: TextStyle(fontSize: 16, height: 1.45),
         bodyMedium: TextStyle(fontSize: 14, height: 1.4),
-        labelLarge: TextStyle(fontWeight: FontWeight.w700),
+        labelLarge: TextStyle(fontWeight: FontWeight.w600),
       ),
       appBarTheme: AppBarTheme(
         elevation: 0,
@@ -109,7 +109,7 @@ abstract final class AppTheme {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(16),
           ),
-          textStyle: const TextStyle(fontSize: 16, fontWeight: FontWeight.w700),
+          textStyle: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
         ),
       ),
       outlinedButtonTheme: OutlinedButtonThemeData(
@@ -118,7 +118,7 @@ abstract final class AppTheme {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(16),
           ),
-          textStyle: const TextStyle(fontSize: 16, fontWeight: FontWeight.w700),
+          textStyle: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
         ),
       ),
       inputDecorationTheme: InputDecorationTheme(

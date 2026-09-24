@@ -74,7 +74,7 @@ class _SeatSelectionView extends StatelessWidget {
                           Localizations.localeOf(context).languageCode,
                         ),
                         style: Theme.of(context).textTheme.titleMedium
-                            ?.copyWith(fontWeight: FontWeight.w800),
+                            ?.copyWith(fontWeight: FontWeight.w600),
                       ),
                       const SizedBox(height: 8),
                       const _Legend(),
@@ -125,7 +125,7 @@ class _SeatSelectionView extends StatelessWidget {
                           textAlign: TextAlign.center,
                           style: TextStyle(
                             color: Theme.of(context).colorScheme.surface,
-                            fontWeight: FontWeight.w700,
+                            fontWeight: FontWeight.w600,
                           ),
                         ),
                       ),
@@ -142,7 +142,7 @@ class _SeatSelectionView extends StatelessWidget {
                                   child: Text(
                                     entry.key,
                                     style: const TextStyle(
-                                      fontWeight: FontWeight.w800,
+                                      fontWeight: FontWeight.w600,
                                     ),
                                   ),
                                 ),
@@ -195,7 +195,7 @@ class _SeatSelectionView extends StatelessWidget {
                                       state.selected.length,
                                     ),
                                     style: const TextStyle(
-                                      fontWeight: FontWeight.w700,
+                                      fontWeight: FontWeight.w600,
                                     ),
                                   ),
                                   if (state.selected.isNotEmpty)
@@ -216,7 +216,7 @@ class _SeatSelectionView extends StatelessWidget {
                             Text(
                               AppFormatters.money(state.vatInclusiveTotal),
                               style: Theme.of(context).textTheme.titleMedium
-                                  ?.copyWith(fontWeight: FontWeight.w900),
+                                  ?.copyWith(fontWeight: FontWeight.w600),
                             ),
                           ],
                         ),
@@ -324,7 +324,7 @@ class _SeatButton extends StatelessWidget {
                     style: const TextStyle(
                       fontSize: 11,
                       color: Colors.black87,
-                      fontWeight: FontWeight.w700,
+                      fontWeight: FontWeight.w600,
                     ),
                   ),
           ),

@@ -32,7 +32,7 @@ class BookingSummaryPage extends StatelessWidget {
                       Text(
                         draft.production.title.resolve(locale),
                         style: Theme.of(context).textTheme.titleMedium
-                            ?.copyWith(fontWeight: FontWeight.w800),
+                            ?.copyWith(fontWeight: FontWeight.w600),
                       ),
                       const SizedBox(height: 5),
                       Text(
@@ -58,7 +58,7 @@ class BookingSummaryPage extends StatelessWidget {
                                 Text(
                                   '${line.seat.row}${line.seat.number} • ${line.seat.zoneName}',
                                   style: const TextStyle(
-                                    fontWeight: FontWeight.w800,
+                                    fontWeight: FontWeight.w600,
                                   ),
                                 ),
                                 Text(
@@ -69,7 +69,7 @@ class BookingSummaryPage extends StatelessWidget {
                           ),
                           Text(
                             AppFormatters.money(line.total),
-                            style: const TextStyle(fontWeight: FontWeight.w800),
+                            style: const TextStyle(fontWeight: FontWeight.w600),
                           ),
                         ],
                       ),
@@ -150,7 +150,7 @@ class _AmountRow extends StatelessWidget {
           child: Text(
             label,
             style: emphasized
-                ? const TextStyle(fontWeight: FontWeight.w800)
+                ? const TextStyle(fontWeight: FontWeight.w600)
                 : null,
           ),
         ),
@@ -159,7 +159,7 @@ class _AmountRow extends StatelessWidget {
           style: emphasized
               ? Theme.of(
                   context,
-                ).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w900)
+                ).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w600)
               : null,
         ),
       ],
