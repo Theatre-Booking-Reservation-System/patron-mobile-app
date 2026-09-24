@@ -3,9 +3,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:patron_mobile_app/app/theme/app_theme.dart';
 import 'package:patron_mobile_app/core/formatters/app_formatters.dart';
-import 'package:patron_mobile_app/core/widgets/production_poster.dart';
+import 'package:patron_mobile_app/core/widgets/production_poster_hero.dart';
 import 'package:patron_mobile_app/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:patron_mobile_app/features/booking/domain/entities/theatre_models.dart';
+import 'package:patron_mobile_app/features/home/domain/today_shows.dart';
 import 'package:patron_mobile_app/features/programme/presentation/bloc/programme_bloc.dart';
 
 class HomePage extends StatelessWidget {
@@ -64,12 +65,37 @@ class HomePage extends StatelessWidget {
                   );
                 }
                 final productions = state.productions;
+                final todayShows = todayShowsFor(productions, DateTime.now());
+                final todayShowIds = todayShows
+                    .map((show) => show.production.id)
+                    .toSet();
                 return SliverPadding(
                   padding: const EdgeInsets.fromLTRB(16, 10, 16, 126),
                   sliver: SliverList.list(
                     children: [
-                      if (productions.isNotEmpty)
-                        _FeaturedProduction(production: productions.first),
+                      _SectionHeading(
+                        eyebrow: 'ON STAGE TODAY',
+                        title: "Today's shows",
+                        actionLabel: 'See programme',
+                        onAction: () => context.go('/shows'),
+                      ),
+                      const SizedBox(height: 14),
+                      if (todayShows.isEmpty)
+                        const _NoShowsToday()
+                      else
+                        SizedBox(
+                          height: 306,
+                          child: ListView.separated(
+                            scrollDirection: Axis.horizontal,
+                            itemCount: todayShows.length,
+                            separatorBuilder: (_, _) =>
+                                const SizedBox(width: 12),
+                            itemBuilder: (context, index) => SizedBox(
+                              width: MediaQuery.sizeOf(context).width - 44,
+                              child: _TodayProduction(show: todayShows[index]),
+                            ),
+                          ),
+                        ),
                       const SizedBox(height: 30),
                       _SectionHeading(
                         eyebrow: 'SHORTCUTS',
@@ -117,8 +143,12 @@ class HomePage extends StatelessWidget {
                             itemCount: productions.length,
                             separatorBuilder: (_, _) =>
                                 const SizedBox(width: 12),
-                            itemBuilder: (context, index) =>
-                                _UpcomingCard(production: productions[index]),
+                            itemBuilder: (context, index) => _UpcomingCard(
+                              production: productions[index],
+                              heroEnabled: !todayShowIds.contains(
+                                productions[index].id,
+                              ),
+                            ),
                           ),
                         ),
                     ],
@@ -257,15 +287,15 @@ class _NotificationButton extends StatelessWidget {
   }
 }
 
-class _FeaturedProduction extends StatelessWidget {
-  const _FeaturedProduction({required this.production});
+class _TodayProduction extends StatelessWidget {
+  const _TodayProduction({required this.show});
 
-  final Production production;
+  final TodayShow show;
 
   @override
   Widget build(BuildContext context) {
     final locale = Localizations.localeOf(context).languageCode;
-    final performance = production.performances.first;
+    final production = show.production;
     return Material(
       color: Colors.transparent,
       clipBehavior: Clip.antiAlias,
@@ -299,15 +329,10 @@ class _FeaturedProduction extends StatelessWidget {
                 width: 184,
                 child: Opacity(
                   opacity: .94,
-                  child: Hero(
-                    tag: 'poster-${production.id}',
-                    child: ProductionPoster(
-                      title: production.title.resolve(locale),
-                      seed: production.posterSeed,
-                      height: 306,
-                      borderRadius: 0,
-                      showLabel: false,
-                    ),
+                  child: ProductionPosterHero(
+                    production: production,
+                    locale: locale,
+                    height: 306,
                   ),
                 ),
               ),
@@ -367,7 +392,7 @@ class _FeaturedProduction extends StatelessWidget {
                               ),
                             ),
                             child: const Text(
-                              'FEATURED',
+                              'TODAY',
                               style: TextStyle(
                                 color: AppTheme.gold,
                                 fontSize: 10,
@@ -406,20 +431,14 @@ class _FeaturedProduction extends StatelessWidget {
                         spacing: 8,
                         runSpacing: 7,
                         children: [
-                          _HeroMetadata(
-                            icon: Icons.calendar_today_rounded,
-                            label: AppFormatters.date(
-                              performance.dateTime,
-                              locale,
+                          for (final performance in show.performances)
+                            _HeroMetadata(
+                              icon: Icons.schedule_rounded,
+                              label: AppFormatters.time(
+                                performance.dateTime,
+                                locale,
+                              ),
                             ),
-                          ),
-                          _HeroMetadata(
-                            icon: Icons.schedule_rounded,
-                            label: AppFormatters.time(
-                              performance.dateTime,
-                              locale,
-                            ),
-                          ),
                         ],
                       ),
                       const SizedBox(height: 12),
@@ -462,6 +481,52 @@ class _FeaturedProduction extends StatelessWidget {
       ),
     );
   }
+}
+
+class _NoShowsToday extends StatelessWidget {
+  const _NoShowsToday();
+
+  @override
+  Widget build(BuildContext context) => Container(
+    height: 306,
+    padding: const EdgeInsets.all(24),
+    decoration: BoxDecoration(
+      borderRadius: BorderRadius.circular(32),
+      gradient: const LinearGradient(
+        begin: Alignment.topLeft,
+        end: Alignment.bottomRight,
+        colors: [Color(0xFF111936), Color(0xFF360E17)],
+      ),
+    ),
+    child: Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const Icon(Icons.event_busy_rounded, color: AppTheme.gold, size: 29),
+        const Spacer(),
+        const Text(
+          'No shows today',
+          style: TextStyle(
+            color: Colors.white,
+            fontSize: 25,
+            fontWeight: FontWeight.w600,
+          ),
+        ),
+        const SizedBox(height: 5),
+        const Text(
+          'The stage rests today. Explore what is coming up next.',
+          style: TextStyle(color: Colors.white70, fontSize: 13),
+        ),
+        const SizedBox(height: 8),
+        TextButton.icon(
+          onPressed: () => context.go('/shows'),
+          style: TextButton.styleFrom(foregroundColor: AppTheme.gold),
+          iconAlignment: IconAlignment.end,
+          icon: const Icon(Icons.arrow_forward_rounded, size: 18),
+          label: const Text('Browse upcoming shows'),
+        ),
+      ],
+    ),
+  );
 }
 
 class _HeroMetadata extends StatelessWidget {
@@ -576,9 +641,10 @@ class _QuickAccessItem extends StatelessWidget {
 }
 
 class _UpcomingCard extends StatelessWidget {
-  const _UpcomingCard({required this.production});
+  const _UpcomingCard({required this.production, required this.heroEnabled});
 
   final Production production;
+  final bool heroEnabled;
 
   @override
   Widget build(BuildContext context) {
@@ -599,11 +665,14 @@ class _UpcomingCard extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              ProductionPoster(
-                title: production.title.resolve(locale),
-                seed: production.posterSeed,
-                height: 158,
-                borderRadius: 0,
+              HeroMode(
+                enabled: heroEnabled,
+                child: ProductionPosterHero(
+                  production: production,
+                  locale: locale,
+                  height: 158,
+                  borderRadius: 0,
+                ),
               ),
               Padding(
                 padding: const EdgeInsets.fromLTRB(13, 11, 13, 12),
