@@ -58,10 +58,14 @@ abstract final class AppTheme {
   static ThemeData build(AppPalette palette, Brightness brightness) {
     final seed = seedFor(palette);
     final dark = brightness == Brightness.dark;
-    final scheme = ColorScheme.fromSeed(
+    final generatedScheme = ColorScheme.fromSeed(
       seedColor: seed,
       brightness: brightness,
-      primary: seed,
+    );
+    final scheme = generatedScheme.copyWith(
+      // Dark palettes need a light tonal primary for readable icons and text.
+      // The raw brand seed is intentionally reserved for light mode.
+      primary: dark ? generatedScheme.primary : seed,
       secondary: gold,
       surface: dark ? const Color(0xFF171312) : ivory,
     );
