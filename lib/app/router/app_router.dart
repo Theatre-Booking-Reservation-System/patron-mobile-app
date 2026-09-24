@@ -75,8 +75,21 @@ GoRouter createRouter() {
       ),
       GoRoute(
         path: '/production',
-        builder: (context, state) =>
-            ProductionDetailsPage(production: state.extra! as Production),
+        pageBuilder: (context, state) => CustomTransitionPage<void>(
+          key: state.pageKey,
+          transitionDuration: const Duration(milliseconds: 420),
+          reverseTransitionDuration: const Duration(milliseconds: 360),
+          child: ProductionDetailsPage(production: state.extra! as Production),
+          transitionsBuilder: (context, animation, secondaryAnimation, child) =>
+              FadeTransition(
+                opacity: CurvedAnimation(
+                  parent: animation,
+                  curve: Curves.easeOutCubic,
+                  reverseCurve: Curves.easeInCubic,
+                ),
+                child: child,
+              ),
+        ),
       ),
       GoRoute(
         path: '/seats',

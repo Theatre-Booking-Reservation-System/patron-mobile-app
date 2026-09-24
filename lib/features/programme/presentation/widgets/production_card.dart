@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:patron_mobile_app/core/formatters/app_formatters.dart';
 import 'package:patron_mobile_app/core/localization/l10n_extension.dart';
-import 'package:patron_mobile_app/core/widgets/production_poster.dart';
+import 'package:patron_mobile_app/core/widgets/production_poster_hero.dart';
 import 'package:patron_mobile_app/features/booking/domain/entities/theatre_models.dart';
 
 class ProductionCard extends StatelessWidget {
@@ -35,13 +35,10 @@ class ProductionCard extends StatelessWidget {
             children: [
               SizedBox(
                 width: 112,
-                child: Hero(
-                  tag: 'poster-${production.id}',
-                  child: ProductionPoster(
-                    title: production.title.resolve(locale),
-                    seed: production.posterSeed,
-                    height: 168,
-                  ),
+                child: ProductionPosterHero(
+                  production: production,
+                  locale: locale,
+                  height: 168,
                 ),
               ),
               const SizedBox(width: 14),

@@ -44,7 +44,7 @@ void main() {
     expect(find.byKey(const Key('loyaltyMemberBadge')), findsNothing);
     expect(find.text('Unlock early access'), findsNothing);
 
-    await tester.tap(find.text('Book Tickets'));
+    await tester.tap(find.text('Browse shows'));
     await tester.pumpAndSettle();
     expect(tester.takeException(), isNull, reason: 'programme');
     await tester.tap(find.text('Sanda Katha').first);

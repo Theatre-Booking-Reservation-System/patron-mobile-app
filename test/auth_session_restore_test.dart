@@ -32,6 +32,8 @@ void main() {
     await tester.pumpAndSettle();
 
     expect(find.text('Hello, Nimal'), findsOneWidget);
+    expect(find.text("Today's shows"), findsOneWidget);
+    expect(find.text('FEATURED'), findsNothing);
     expect(find.byKey(const Key('loyaltyMemberBadge')), findsOneWidget);
     expect(find.text('Loyalty member'), findsOneWidget);
     expect(find.text('Loyalty access is active'), findsNothing);

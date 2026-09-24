@@ -5,7 +5,7 @@ import 'package:intl/intl.dart';
 import 'package:patron_mobile_app/app/theme/app_theme.dart';
 import 'package:patron_mobile_app/core/formatters/app_formatters.dart';
 import 'package:patron_mobile_app/core/localization/l10n_extension.dart';
-import 'package:patron_mobile_app/core/widgets/production_poster.dart';
+import 'package:patron_mobile_app/core/widgets/production_poster_hero.dart';
 import 'package:patron_mobile_app/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:patron_mobile_app/features/booking/domain/entities/theatre_models.dart';
 
@@ -30,6 +30,7 @@ class ProductionDetailsPage extends StatelessWidget {
             expandedHeight: 372,
             foregroundColor: Colors.white,
             backgroundColor: const Color(0xFF162447),
+            surfaceTintColor: Colors.transparent,
             actions: [
               IconButton(
                 tooltip: context.l10n.favourite,
@@ -50,7 +51,10 @@ class ProductionDetailsPage extends StatelessWidget {
                 production.title.resolve(locale),
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
-                style: const TextStyle(fontWeight: FontWeight.w600),
+                style: const TextStyle(
+                  color: Colors.white,
+                  fontWeight: FontWeight.w600,
+                ),
               ),
               background: _ProductionHero(
                 production: production,
@@ -198,15 +202,12 @@ class _ProductionHero extends StatelessWidget {
             backgroundColor: AppTheme.gold.withValues(alpha: .11),
           ),
         ),
-        Hero(
-          tag: 'poster-${production.id}',
-          child: ConstrainedBox(
-            constraints: const BoxConstraints(maxWidth: 190),
-            child: ProductionPoster(
-              title: production.title.resolve(locale),
-              seed: production.posterSeed,
-              height: 268,
-            ),
+        ConstrainedBox(
+          constraints: const BoxConstraints(maxWidth: 190),
+          child: ProductionPosterHero(
+            production: production,
+            locale: locale,
+            height: 268,
           ),
         ),
       ],
