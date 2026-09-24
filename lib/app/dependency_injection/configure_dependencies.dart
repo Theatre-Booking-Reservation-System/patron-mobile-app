@@ -1,7 +1,9 @@
 import 'package:get_it/get_it.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:patron_mobile_app/app/settings/app_settings_bloc.dart';
 import 'package:patron_mobile_app/app/settings/app_settings_repository.dart';
 import 'package:patron_mobile_app/features/auth/presentation/bloc/auth_bloc.dart';
+import 'package:patron_mobile_app/features/auth/data/auth_session_store.dart';
 import 'package:patron_mobile_app/features/booking/data/datasources/mock_theatre_api_client.dart';
 import 'package:patron_mobile_app/features/booking/data/datasources/theatre_api_client.dart';
 import 'package:patron_mobile_app/features/booking/data/repositories/mock_theatre_repository.dart';
@@ -16,8 +18,17 @@ final getIt = GetIt.instance;
 Future<void> configureDependencies() async {
   if (getIt.isRegistered<AppSettingsBloc>()) return;
   final preferences = await SharedPreferences.getInstance();
+  const secureStorage = FlutterSecureStorage();
+  const authSessionStore = SecureAuthSessionStore(secureStorage);
+  AuthSessionData? restoredSession;
+  try {
+    restoredSession = await authSessionStore.read();
+  } on Object {
+    // Start signed out if the platform keychain is unavailable or locked.
+  }
   getIt
     ..registerSingleton<SharedPreferences>(preferences)
+    ..registerSingleton<AuthSessionStore>(authSessionStore)
     ..registerLazySingleton<AppSettingsRepository>(
       () => AppSettingsRepository(getIt()),
     )
@@ -28,7 +39,9 @@ Future<void> configureDependencies() async {
     ..registerLazySingleton<AppSettingsBloc>(
       () => AppSettingsBloc(getIt())..add(const AppSettingsStarted()),
     )
-    ..registerLazySingleton<AuthBloc>(AuthBloc.new)
+    ..registerLazySingleton<AuthBloc>(
+      () => AuthBloc(sessionStore: getIt(), restoredSession: restoredSession),
+    )
     ..registerLazySingleton<ProgrammeBloc>(
       () => ProgrammeBloc(getIt())..add(const ProgrammeRequested()),
     )

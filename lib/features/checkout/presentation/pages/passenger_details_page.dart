@@ -53,7 +53,7 @@ class _PassengerDetailsPageState extends State<PassengerDetailsPage> {
               context.l10n.contactInfo,
               style: Theme.of(
                 context,
-              ).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w800),
+              ).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w600),
             ),
             const SizedBox(height: 14),
             TextFormField(
@@ -88,7 +88,7 @@ class _PassengerDetailsPageState extends State<PassengerDetailsPage> {
               context.l10n.concessionOptional,
               style: Theme.of(
                 context,
-              ).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w800),
+              ).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w600),
             ),
             const SizedBox(height: 12),
             DropdownButtonFormField<ConcessionType>(

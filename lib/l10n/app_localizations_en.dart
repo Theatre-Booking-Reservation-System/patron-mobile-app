@@ -281,6 +281,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get loyaltyCard => 'Loyalty Card';
 
   @override
+  String get theme => 'Theme';
+
+  @override
   String get loyaltyMember => 'Loyalty member';
 
   @override

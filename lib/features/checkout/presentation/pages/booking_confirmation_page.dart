@@ -37,7 +37,7 @@ class BookingConfirmationPage extends StatelessWidget {
               textAlign: TextAlign.center,
               style: Theme.of(
                 context,
-              ).textTheme.headlineSmall?.copyWith(fontWeight: FontWeight.w900),
+              ).textTheme.headlineSmall?.copyWith(fontWeight: FontWeight.w600),
             ),
             const SizedBox(height: 8),
             Text(context.l10n.confirmationMessage, textAlign: TextAlign.center),
@@ -53,7 +53,7 @@ class BookingConfirmationPage extends StatelessWidget {
                     SelectableText(
                       booking.reference,
                       style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                        fontWeight: FontWeight.w900,
+                        fontWeight: FontWeight.w600,
                       ),
                     ),
                     const Divider(height: 28),
@@ -61,7 +61,7 @@ class BookingConfirmationPage extends StatelessWidget {
                       booking.production.title.resolve(
                         Localizations.localeOf(context).languageCode,
                       ),
-                      style: const TextStyle(fontWeight: FontWeight.w800),
+                      style: const TextStyle(fontWeight: FontWeight.w600),
                     ),
                     const SizedBox(height: 8),
                     Text(
@@ -72,7 +72,7 @@ class BookingConfirmationPage extends StatelessWidget {
                     const SizedBox(height: 8),
                     Text(
                       AppFormatters.money(booking.quote.total),
-                      style: const TextStyle(fontWeight: FontWeight.w800),
+                      style: const TextStyle(fontWeight: FontWeight.w600),
                     ),
                   ],
                 ),

@@ -616,6 +616,12 @@ abstract class AppLocalizations {
   /// **'Loyalty Card'**
   String get loyaltyCard;
 
+  /// No description provided for @theme.
+  ///
+  /// In en, this message translates to:
+  /// **'Theme'**
+  String get theme;
+
   /// No description provided for @loyaltyMember.
   ///
   /// In en, this message translates to:

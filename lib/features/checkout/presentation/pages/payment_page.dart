@@ -41,7 +41,7 @@ class _PaymentPageState extends State<PaymentPage> {
                 Text(
                   AppFormatters.money(amount),
                   style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                    fontWeight: FontWeight.w900,
+                    fontWeight: FontWeight.w600,
                   ),
                 ),
                 const SizedBox(height: 24),
@@ -97,7 +97,7 @@ class _PaymentPageState extends State<PaymentPage> {
                       context.l10n.paymentFailed,
                       style: TextStyle(
                         color: Theme.of(context).colorScheme.error,
-                        fontWeight: FontWeight.w700,
+                        fontWeight: FontWeight.w600,
                       ),
                     ),
                   ),

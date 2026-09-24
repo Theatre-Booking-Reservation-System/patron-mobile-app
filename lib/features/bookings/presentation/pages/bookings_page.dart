@@ -95,7 +95,7 @@ class _BookingList extends StatelessWidget {
               children: [
                 Text(
                   booking.production.title.resolve(locale),
-                  style: const TextStyle(fontWeight: FontWeight.w800),
+                  style: const TextStyle(fontWeight: FontWeight.w600),
                 ),
                 const SizedBox(height: 6),
                 Text(
@@ -176,7 +176,7 @@ class _BookingLookupDialogState extends State<_BookingLookupDialog> {
                 state.lookupResult!.production.title.resolve(
                   Localizations.localeOf(context).languageCode,
                 ),
-                style: const TextStyle(fontWeight: FontWeight.w800),
+                style: const TextStyle(fontWeight: FontWeight.w600),
               ),
             ],
           ],

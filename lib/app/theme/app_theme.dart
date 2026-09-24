@@ -58,10 +58,14 @@ abstract final class AppTheme {
   static ThemeData build(AppPalette palette, Brightness brightness) {
     final seed = seedFor(palette);
     final dark = brightness == Brightness.dark;
-    final scheme = ColorScheme.fromSeed(
+    final generatedScheme = ColorScheme.fromSeed(
       seedColor: seed,
       brightness: brightness,
-      primary: seed,
+    );
+    final scheme = generatedScheme.copyWith(
+      // Dark palettes need a light tonal primary for readable icons and text.
+      // The raw brand seed is intentionally reserved for light mode.
+      primary: dark ? generatedScheme.primary : seed,
       secondary: gold,
       surface: dark ? const Color(0xFF171312) : ivory,
     );
@@ -75,20 +79,20 @@ abstract final class AppTheme {
         displaySmall: TextStyle(
           fontSize: 36,
           height: 1.08,
-          fontWeight: FontWeight.w800,
+          fontWeight: FontWeight.w600,
           letterSpacing: -1.1,
         ),
         headlineMedium: TextStyle(
           fontSize: 28,
           height: 1.15,
-          fontWeight: FontWeight.w800,
+          fontWeight: FontWeight.w600,
           letterSpacing: -.6,
         ),
-        titleLarge: TextStyle(fontWeight: FontWeight.w700),
-        titleMedium: TextStyle(fontWeight: FontWeight.w700),
+        titleLarge: TextStyle(fontWeight: FontWeight.w600),
+        titleMedium: TextStyle(fontWeight: FontWeight.w600),
         bodyLarge: TextStyle(fontSize: 16, height: 1.45),
         bodyMedium: TextStyle(fontSize: 14, height: 1.4),
-        labelLarge: TextStyle(fontWeight: FontWeight.w700),
+        labelLarge: TextStyle(fontWeight: FontWeight.w600),
       ),
       appBarTheme: AppBarTheme(
         elevation: 0,
@@ -109,7 +113,7 @@ abstract final class AppTheme {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(16),
           ),
-          textStyle: const TextStyle(fontSize: 16, fontWeight: FontWeight.w700),
+          textStyle: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
         ),
       ),
       outlinedButtonTheme: OutlinedButtonThemeData(
@@ -118,7 +122,7 @@ abstract final class AppTheme {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(16),
           ),
-          textStyle: const TextStyle(fontSize: 16, fontWeight: FontWeight.w700),
+          textStyle: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
         ),
       ),
       inputDecorationTheme: InputDecorationTheme(
