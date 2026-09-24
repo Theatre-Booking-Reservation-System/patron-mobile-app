@@ -15,6 +15,8 @@ import 'package:patron_mobile_app/features/checkout/presentation/pages/booking_s
 import 'package:patron_mobile_app/features/checkout/presentation/pages/passenger_details_page.dart';
 import 'package:patron_mobile_app/features/checkout/presentation/pages/payment_page.dart';
 import 'package:patron_mobile_app/features/more/presentation/pages/more_page.dart';
+import 'package:patron_mobile_app/features/profile/presentation/pages/language_page.dart';
+import 'package:patron_mobile_app/features/profile/presentation/pages/theme_page.dart';
 import 'package:patron_mobile_app/features/production_details/presentation/pages/production_details_page.dart';
 import 'package:patron_mobile_app/features/seat_selection/presentation/pages/seat_selection_page.dart';
 
@@ -104,6 +106,11 @@ GoRouter createRouter() {
       GoRoute(
         path: '/confirmation',
         builder: (context, state) => const BookingConfirmationPage(),
+      ),
+      GoRoute(path: '/theme', builder: (context, state) => const ThemePage()),
+      GoRoute(
+        path: '/language',
+        builder: (context, state) => const LanguagePage(),
       ),
     ],
     errorBuilder: (context, state) =>

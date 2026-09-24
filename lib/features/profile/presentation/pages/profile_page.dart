@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:patron_mobile_app/app/settings/app_settings_bloc.dart';
-import 'package:patron_mobile_app/app/settings/app_settings_repository.dart';
 import 'package:patron_mobile_app/app/theme/app_theme.dart';
 import 'package:patron_mobile_app/core/localization/l10n_extension.dart';
-import 'package:patron_mobile_app/core/widgets/language_selector.dart';
 import 'package:patron_mobile_app/features/auth/presentation/bloc/auth_bloc.dart';
 
 class ProfilePage extends StatelessWidget {
@@ -14,7 +11,6 @@ class ProfilePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final auth = context.watch<AuthBloc>().state;
-    final settings = context.watch<AppSettingsBloc>().state;
     final patron = auth.patron;
     if (patron == null) {
       return Scaffold(
@@ -42,7 +38,7 @@ class ProfilePage extends StatelessWidget {
                   'You are browsing as a guest',
                   textAlign: TextAlign.center,
                   style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                    fontWeight: FontWeight.w800,
+                    fontWeight: FontWeight.w600,
                   ),
                 ),
                 const SizedBox(height: 12),
@@ -102,13 +98,16 @@ class ProfilePage extends StatelessWidget {
           SliverAppBar(
             expandedHeight: 180,
             pinned: true,
+            foregroundColor: Colors.white,
             title: Text(context.l10n.profile),
             flexibleSpace: FlexibleSpaceBar(
               background: DecoratedBox(
                 decoration: BoxDecoration(
                   gradient: LinearGradient(
                     colors: [
-                      Theme.of(context).colorScheme.primary,
+                      Theme.of(context).brightness == Brightness.dark
+                          ? Theme.of(context).colorScheme.primaryContainer
+                          : Theme.of(context).colorScheme.primary,
                       Colors.black87,
                     ],
                   ),
@@ -138,7 +137,7 @@ class ProfilePage extends StatelessWidget {
                                 style: const TextStyle(
                                   color: Colors.white,
                                   fontSize: 18,
-                                  fontWeight: FontWeight.w800,
+                                  fontWeight: FontWeight.w600,
                                 ),
                               ),
                               Text(
@@ -152,7 +151,7 @@ class ProfilePage extends StatelessWidget {
                                     context.l10n.loyaltyMember,
                                     style: const TextStyle(
                                       color: AppTheme.gold,
-                                      fontWeight: FontWeight.w700,
+                                      fontWeight: FontWeight.w600,
                                     ),
                                   ),
                                 ),
@@ -185,6 +184,16 @@ class ProfilePage extends StatelessWidget {
                   },
                 ),
                 _ProfileTile(
+                  icon: Icons.palette_outlined,
+                  label: context.l10n.theme,
+                  onTap: () => context.push('/theme'),
+                ),
+                _ProfileTile(
+                  icon: Icons.language_rounded,
+                  label: context.l10n.language,
+                  onTap: () => context.push('/language'),
+                ),
+                _ProfileTile(
                   icon: Icons.credit_card,
                   label: context.l10n.paymentMethods,
                 ),
@@ -196,53 +205,7 @@ class ProfilePage extends StatelessWidget {
                 Text(
                   context.l10n.settings,
                   style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                    fontWeight: FontWeight.w800,
-                  ),
-                ),
-                const SizedBox(height: 10),
-                Card(
-                  child: Column(
-                    children: [
-                      SwitchListTile(
-                        secondary: Icon(
-                          settings.themeMode == ThemeMode.dark
-                              ? Icons.dark_mode
-                              : Icons.light_mode,
-                        ),
-                        title: Text(context.l10n.themeMode),
-                        subtitle: Text(
-                          settings.themeMode == ThemeMode.dark
-                              ? context.l10n.dark
-                              : context.l10n.light,
-                        ),
-                        value: settings.themeMode == ThemeMode.dark,
-                        onChanged: (_) => context.read<AppSettingsBloc>().add(
-                          const AppBrightnessToggled(),
-                        ),
-                      ),
-                      ListTile(
-                        leading: CircleAvatar(
-                          backgroundColor: AppTheme.seedFor(settings.palette),
-                        ),
-                        title: Text(context.l10n.colourPalette),
-                        subtitle: Text(_paletteName(context, settings.palette)),
-                        trailing: const Icon(Icons.palette_outlined),
-                        onTap: () => context.read<AppSettingsBloc>().add(
-                          const AppPaletteCycled(),
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.fromLTRB(16, 8, 16, 16),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.stretch,
-                          children: [
-                            Text(context.l10n.language),
-                            const SizedBox(height: 8),
-                            const LanguageSelector(),
-                          ],
-                        ),
-                      ),
-                    ],
+                    fontWeight: FontWeight.w600,
                   ),
                 ),
                 const SizedBox(height: 12),
@@ -271,13 +234,6 @@ class ProfilePage extends StatelessWidget {
       ),
     );
   }
-
-  String _paletteName(BuildContext context, AppPalette palette) =>
-      switch (palette) {
-        AppPalette.burgundy => context.l10n.burgundy,
-        AppPalette.midnight => context.l10n.midnight,
-        AppPalette.emerald => context.l10n.emerald,
-      };
 }
 
 class _ProfileTile extends StatelessWidget {

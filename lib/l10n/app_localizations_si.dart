@@ -279,6 +279,9 @@ class AppLocalizationsSi extends AppLocalizations {
   String get loyaltyCard => 'සාමාජික කාඩ්පත';
 
   @override
+  String get theme => 'තේමාව';
+
+  @override
   String get loyaltyMember => 'සාමාජික';
 
   @override

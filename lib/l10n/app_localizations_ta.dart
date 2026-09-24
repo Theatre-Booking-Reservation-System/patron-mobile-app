@@ -283,6 +283,9 @@ class AppLocalizationsTa extends AppLocalizations {
   String get loyaltyCard => 'உறுப்பினர் அட்டை';
 
   @override
+  String get theme => 'தீம்';
+
+  @override
   String get loyaltyMember => 'உறுப்பினர்';
 
   @override
