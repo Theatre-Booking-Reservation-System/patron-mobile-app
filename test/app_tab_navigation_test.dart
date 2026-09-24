@@ -3,6 +3,7 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:patron_mobile_app/app/app.dart';
 import 'package:patron_mobile_app/app/dependency_injection/configure_dependencies.dart';
+import 'package:patron_mobile_app/app/router/app_shell.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 void main() {
@@ -32,7 +33,8 @@ void main() {
     await tester.tap(find.byKey(const Key('guestButton')));
     await tester.pumpAndSettle();
 
-    NavigationBar navigationBar() => tester.widget(find.byType(NavigationBar));
+    LiquidGlassNavigationBar navigationBar() =>
+        tester.widget(find.byType(LiquidGlassNavigationBar));
     expect(navigationBar().selectedIndex, 0);
 
     await tester.drag(
@@ -42,7 +44,7 @@ void main() {
     await tester.pumpAndSettle();
     expect(navigationBar().selectedIndex, 1);
 
-    final bar = find.byType(NavigationBar);
+    final bar = find.byType(LiquidGlassNavigationBar);
     await tester.tap(find.descendant(of: bar, matching: find.text('Profile')));
     await tester.pump();
     expect(navigationBar().selectedIndex, 3);

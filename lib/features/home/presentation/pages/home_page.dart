@@ -31,27 +31,20 @@ class HomePage extends StatelessWidget {
         child: CustomScrollView(
           physics: const AlwaysScrollableScrollPhysics(),
           slivers: [
-            SliverAppBar.large(
+            SliverAppBar(
               pinned: true,
-              expandedHeight: 176,
-              backgroundColor: Theme.of(context).colorScheme.primary,
+              toolbarHeight: 82,
+              automaticallyImplyLeading: false,
+              titleSpacing: 16,
+              backgroundColor: Theme.of(
+                context,
+              ).colorScheme.surface.withValues(alpha: .96),
               surfaceTintColor: Colors.transparent,
-              foregroundColor: Colors.white,
-              title: Text(greeting),
+              title: _DashboardIdentity(greeting: greeting, auth: auth),
               actions: [
-                IconButton(
-                  tooltip: 'Notifications',
-                  onPressed: () {},
-                  icon: const Badge(
-                    smallSize: 7,
-                    child: Icon(Icons.notifications_none_rounded),
-                  ),
-                ),
-                const SizedBox(width: 8),
+                _NotificationButton(onPressed: () {}),
+                const SizedBox(width: 16),
               ],
-              flexibleSpace: FlexibleSpaceBar(
-                background: _DashboardHeader(isGuest: auth.isGuest),
-              ),
             ),
             BlocBuilder<ProgrammeBloc, ProgrammeState>(
               builder: (context, state) {
@@ -72,51 +65,43 @@ class HomePage extends StatelessWidget {
                 }
                 final productions = state.productions;
                 return SliverPadding(
-                  padding: const EdgeInsets.fromLTRB(16, 12, 16, 32),
+                  padding: const EdgeInsets.fromLTRB(16, 10, 16, 126),
                   sliver: SliverList.list(
                     children: [
                       if (productions.isNotEmpty)
                         _FeaturedProduction(production: productions.first),
-                      const SizedBox(height: 28),
+                      const SizedBox(height: 30),
                       _SectionHeading(
-                        title: 'Quick actions',
-                        actionLabel: 'Browse all',
+                        eyebrow: 'SHORTCUTS',
+                        title: 'Quick access',
+                        actionLabel: 'Explore all',
                         onAction: () => context.go('/shows'),
                       ),
-                      const SizedBox(height: 12),
-                      Row(
-                        children: [
-                          Expanded(
-                            child: _QuickAction(
-                              icon: Icons.theater_comedy_outlined,
-                              label: 'Browse shows',
-                              onTap: () => context.go('/shows'),
-                            ),
+                      const SizedBox(height: 14),
+                      _QuickAccessDock(
+                        actions: [
+                          _QuickActionData(
+                            icon: Icons.theater_comedy_outlined,
+                            label: 'Browse shows',
+                            onTap: () => context.go('/shows'),
                           ),
-                          const SizedBox(width: 10),
-                          Expanded(
-                            child: _QuickAction(
-                              icon: Icons.confirmation_number_outlined,
-                              label: auth.isGuest
-                                  ? 'Booking access'
-                                  : 'My bookings',
-                              onTap: () => context.go('/bookings'),
-                            ),
+                          _QuickActionData(
+                            icon: Icons.confirmation_number_outlined,
+                            label: auth.isGuest
+                                ? 'Booking access'
+                                : 'My bookings',
+                            onTap: () => context.go('/bookings'),
                           ),
-                          const SizedBox(width: 10),
-                          Expanded(
-                            child: _QuickAction(
-                              icon: Icons.loyalty_outlined,
-                              label: 'Loyalty',
-                              onTap: () => context.go('/profile'),
-                            ),
+                          _QuickActionData(
+                            icon: Icons.person_outline_rounded,
+                            label: auth.isGuest ? 'Account' : 'My profile',
+                            onTap: () => context.go('/profile'),
                           ),
                         ],
                       ),
-                      const SizedBox(height: 28),
-                      _AccessCard(auth: auth),
-                      const SizedBox(height: 28),
+                      const SizedBox(height: 32),
                       _SectionHeading(
+                        eyebrow: 'CURATED FOR YOU',
                         title: 'Coming up',
                         actionLabel: 'See programme',
                         onAction: () => context.go('/shows'),
@@ -126,7 +111,7 @@ class HomePage extends StatelessWidget {
                         const _EmptyProgramme()
                       else
                         SizedBox(
-                          height: 224,
+                          height: 250,
                           child: ListView.separated(
                             scrollDirection: Axis.horizontal,
                             itemCount: productions.length,
@@ -148,34 +133,128 @@ class HomePage extends StatelessWidget {
   }
 }
 
-class _DashboardHeader extends StatelessWidget {
-  const _DashboardHeader({required this.isGuest});
+class _DashboardIdentity extends StatelessWidget {
+  const _DashboardIdentity({required this.greeting, required this.auth});
 
-  final bool isGuest;
+  final String greeting;
+  final AuthState auth;
 
   @override
-  Widget build(BuildContext context) => Container(
-    padding: const EdgeInsets.fromLTRB(16, 80, 16, 18),
-    decoration: BoxDecoration(
-      gradient: LinearGradient(
-        begin: Alignment.topLeft,
-        end: Alignment.bottomRight,
-        colors: [
-          Theme.of(context).colorScheme.primary,
-          const Color(0xFF162447),
+  Widget build(BuildContext context) {
+    final loyaltyMember =
+        auth.status == AuthStatus.authenticated &&
+        auth.patron?.isLoyaltyMember == true;
+    final scheme = Theme.of(context).colorScheme;
+
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Row(
+          children: [
+            Flexible(
+              child: Text(
+                auth.isGuest ? 'EXPLORE SAPUMAL' : 'WELCOME BACK',
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+                style: Theme.of(context).textTheme.labelSmall?.copyWith(
+                  color: scheme.primary,
+                  letterSpacing: 1.25,
+                ),
+              ),
+            ),
+            if (loyaltyMember) ...[
+              const SizedBox(width: 9),
+              const _LoyaltyMemberBadge(),
+            ],
+          ],
+        ),
+        const SizedBox(height: 5),
+        Text(
+          greeting,
+          maxLines: 1,
+          overflow: TextOverflow.ellipsis,
+          style: Theme.of(
+            context,
+          ).textTheme.titleLarge?.copyWith(fontSize: 22, letterSpacing: -.35),
+        ),
+      ],
+    );
+  }
+}
+
+class _LoyaltyMemberBadge extends StatelessWidget {
+  const _LoyaltyMemberBadge();
+
+  @override
+  Widget build(BuildContext context) => Semantics(
+    label: 'Sapumal loyalty member',
+    child: Container(
+      key: const Key('loyaltyMemberBadge'),
+      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 5),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(999),
+        border: Border.all(color: const Color(0xFFFFE29A)),
+        gradient: const LinearGradient(
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+          colors: [Color(0xFFFFE7A7), Color(0xFFD9A62E)],
+        ),
+        boxShadow: [
+          BoxShadow(
+            color: AppTheme.gold.withValues(alpha: .22),
+            blurRadius: 12,
+            offset: const Offset(0, 4),
+          ),
+        ],
+      ),
+      child: const Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Icon(
+            Icons.workspace_premium_rounded,
+            size: 13,
+            color: Color(0xFF3C2900),
+          ),
+          SizedBox(width: 4),
+          Text(
+            'Loyalty member',
+            style: TextStyle(
+              color: Color(0xFF3C2900),
+              fontSize: 10,
+              height: 1,
+              letterSpacing: .1,
+              fontWeight: FontWeight.w600,
+            ),
+          ),
         ],
       ),
     ),
-    child: Align(
-      alignment: Alignment.bottomLeft,
-      child: Text(
-        isGuest
-            ? 'Browse freely. Sign in when you are ready to book.'
-            : 'Your next unforgettable performance starts here.',
-        style: const TextStyle(color: Colors.white70, fontSize: 15),
-      ),
-    ),
   );
+}
+
+class _NotificationButton extends StatelessWidget {
+  const _NotificationButton({required this.onPressed});
+
+  final VoidCallback onPressed;
+
+  @override
+  Widget build(BuildContext context) {
+    final scheme = Theme.of(context).colorScheme;
+    return IconButton.filledTonal(
+      tooltip: 'Notifications',
+      onPressed: onPressed,
+      style: IconButton.styleFrom(
+        minimumSize: const Size.square(44),
+        backgroundColor: scheme.surfaceContainerHigh,
+        foregroundColor: scheme.onSurface,
+      ),
+      icon: const Badge(
+        smallSize: 7,
+        child: Icon(Icons.notifications_none_rounded),
+      ),
+    );
+  }
 }
 
 class _FeaturedProduction extends StatelessWidget {
@@ -187,186 +266,230 @@ class _FeaturedProduction extends StatelessWidget {
   Widget build(BuildContext context) {
     final locale = Localizations.localeOf(context).languageCode;
     final performance = production.performances.first;
-    return Container(
+    return Material(
+      color: Colors.transparent,
       clipBehavior: Clip.antiAlias,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(28),
-        gradient: const LinearGradient(
-          begin: Alignment.topLeft,
-          end: Alignment.bottomRight,
-          colors: [Color(0xFF162447), Color(0xFF351019)],
-        ),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withValues(alpha: .14),
-            blurRadius: 24,
-            offset: const Offset(0, 12),
-          ),
-        ],
-      ),
-      child: Stack(
-        children: [
-          Positioned(
-            right: -42,
-            top: -46,
-            child: CircleAvatar(
-              radius: 108,
-              backgroundColor: AppTheme.gold.withValues(alpha: .12),
+      borderRadius: BorderRadius.circular(32),
+      child: InkWell(
+        onTap: () => context.push('/production', extra: production),
+        child: Container(
+          height: 306,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(32),
+            gradient: const LinearGradient(
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+              colors: [Color(0xFF111936), Color(0xFF360E17)],
             ),
+            boxShadow: [
+              BoxShadow(
+                color: const Color(0xFF1B1020).withValues(alpha: .22),
+                blurRadius: 30,
+                offset: const Offset(0, 16),
+              ),
+            ],
           ),
-          Padding(
-            padding: const EdgeInsets.all(20),
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                SizedBox(
-                  width: 116,
+          child: Stack(
+            fit: StackFit.expand,
+            children: [
+              Positioned(
+                right: 0,
+                top: 0,
+                bottom: 0,
+                width: 184,
+                child: Opacity(
+                  opacity: .94,
                   child: Hero(
                     tag: 'poster-${production.id}',
                     child: ProductionPoster(
                       title: production.title.resolve(locale),
                       seed: production.posterSeed,
-                      height: 172,
+                      height: 306,
+                      borderRadius: 0,
+                      showLabel: false,
                     ),
                   ),
                 ),
-                const SizedBox(width: 18),
-                Expanded(
+              ),
+              const DecoratedBox(
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                    begin: Alignment.centerLeft,
+                    end: Alignment.centerRight,
+                    colors: [
+                      Color(0xFF12172F),
+                      Color(0xF212172F),
+                      Color(0xA812172F),
+                      Color(0x0012172F),
+                    ],
+                    stops: [0, .47, .7, 1],
+                  ),
+                ),
+              ),
+              Positioned(
+                right: -38,
+                top: -48,
+                child: Container(
+                  width: 150,
+                  height: 150,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: AppTheme.gold.withValues(alpha: .13),
+                    boxShadow: [
+                      BoxShadow(
+                        color: AppTheme.gold.withValues(alpha: .09),
+                        blurRadius: 42,
+                        spreadRadius: 16,
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(22),
+                child: SizedBox(
+                  width: 238,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Text(
-                        'NEXT ON STAGE',
-                        style: TextStyle(
-                          color: AppTheme.gold,
-                          fontSize: 11,
-                          fontWeight: FontWeight.w800,
-                          letterSpacing: 1.2,
-                        ),
+                      Row(
+                        children: [
+                          Container(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 9,
+                              vertical: 6,
+                            ),
+                            decoration: BoxDecoration(
+                              color: Colors.white.withValues(alpha: .1),
+                              borderRadius: BorderRadius.circular(999),
+                              border: Border.all(
+                                color: Colors.white.withValues(alpha: .13),
+                              ),
+                            ),
+                            child: const Text(
+                              'FEATURED',
+                              style: TextStyle(
+                                color: AppTheme.gold,
+                                fontSize: 10,
+                                fontWeight: FontWeight.w600,
+                                letterSpacing: 1.15,
+                              ),
+                            ),
+                          ),
+                          const SizedBox(width: 8),
+                          Text(
+                            production.genre.toUpperCase(),
+                            style: const TextStyle(
+                              color: Colors.white60,
+                              fontSize: 10,
+                              fontWeight: FontWeight.w600,
+                              letterSpacing: .9,
+                            ),
+                          ),
+                        ],
                       ),
-                      const SizedBox(height: 10),
+                      const Spacer(),
                       Text(
                         production.title.resolve(locale),
                         maxLines: 2,
                         overflow: TextOverflow.ellipsis,
                         style: const TextStyle(
                           color: Colors.white,
-                          fontSize: 22,
-                          height: 1.1,
-                          fontWeight: FontWeight.w800,
+                          fontSize: 29,
+                          height: 1.02,
+                          letterSpacing: -.75,
+                          fontWeight: FontWeight.w600,
                         ),
                       ),
-                      const SizedBox(height: 10),
+                      const SizedBox(height: 12),
+                      Wrap(
+                        spacing: 8,
+                        runSpacing: 7,
+                        children: [
+                          _HeroMetadata(
+                            icon: Icons.calendar_today_rounded,
+                            label: AppFormatters.date(
+                              performance.dateTime,
+                              locale,
+                            ),
+                          ),
+                          _HeroMetadata(
+                            icon: Icons.schedule_rounded,
+                            label: AppFormatters.time(
+                              performance.dateTime,
+                              locale,
+                            ),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: 12),
                       Text(
-                        '${AppFormatters.date(performance.dateTime, locale)} · '
-                        '${AppFormatters.time(performance.dateTime, locale)}',
-                        style: const TextStyle(color: Colors.white70),
-                      ),
-                      const SizedBox(height: 18),
-                      FilledButton(
-                        style: FilledButton.styleFrom(
-                          minimumSize: const Size.fromHeight(44),
-                          backgroundColor: AppTheme.gold,
-                          foregroundColor: const Color(0xFF2D2104),
+                        'From ${AppFormatters.money(production.startingPrice)}',
+                        style: const TextStyle(
+                          color: Colors.white70,
+                          fontSize: 12,
+                          fontWeight: FontWeight.w600,
                         ),
-                        onPressed: () =>
-                            context.push('/production', extra: production),
-                        child: const Text('Book Tickets'),
+                      ),
+                      const SizedBox(height: 16),
+                      SizedBox(
+                        width: 172,
+                        child: FilledButton.icon(
+                          style: FilledButton.styleFrom(
+                            minimumSize: const Size.fromHeight(46),
+                            backgroundColor: AppTheme.gold,
+                            foregroundColor: const Color(0xFF2D2104),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(15),
+                            ),
+                          ),
+                          onPressed: () =>
+                              context.push('/production', extra: production),
+                          icon: const Icon(
+                            Icons.local_activity_rounded,
+                            size: 18,
+                          ),
+                          label: const Text('Book Tickets'),
+                        ),
                       ),
                     ],
                   ),
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
-        ],
+        ),
       ),
     );
   }
 }
 
-class _AccessCard extends StatelessWidget {
-  const _AccessCard({required this.auth});
+class _HeroMetadata extends StatelessWidget {
+  const _HeroMetadata({required this.icon, required this.label});
 
-  final AuthState auth;
+  final IconData icon;
+  final String label;
 
   @override
-  Widget build(BuildContext context) {
-    final loyalty = auth.patron?.isLoyaltyMember == true;
-    final guest = auth.isGuest;
-    final scheme = Theme.of(context).colorScheme;
-    return Container(
-      padding: const EdgeInsets.all(18),
-      decoration: BoxDecoration(
-        color: guest
-            ? scheme.secondaryContainer
-            : loyalty
-            ? const Color(0xFFE5F5EC)
-            : scheme.surfaceContainerLow,
-        borderRadius: BorderRadius.circular(22),
+  Widget build(BuildContext context) => Row(
+    mainAxisSize: MainAxisSize.min,
+    children: [
+      Icon(icon, color: Colors.white70, size: 13),
+      const SizedBox(width: 5),
+      Text(
+        label,
+        style: const TextStyle(
+          color: Colors.white70,
+          fontSize: 11,
+          fontWeight: FontWeight.w600,
+        ),
       ),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          CircleAvatar(
-            backgroundColor: guest
-                ? scheme.secondary
-                : loyalty
-                ? const Color(0xFF145A4A)
-                : scheme.primary,
-            foregroundColor: Colors.white,
-            child: Icon(
-              guest
-                  ? Icons.lock_person_outlined
-                  : loyalty
-                  ? Icons.workspace_premium_outlined
-                  : Icons.loyalty_outlined,
-            ),
-          ),
-          const SizedBox(width: 14),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  guest
-                      ? 'Ready when you are'
-                      : loyalty
-                      ? 'Loyalty access is active'
-                      : 'Unlock early access',
-                  style: Theme.of(context).textTheme.titleMedium,
-                ),
-                const SizedBox(height: 5),
-                Text(
-                  guest
-                      ? 'Create an account or sign in before selecting seats.'
-                      : loyalty
-                      ? 'Book seven days early and receive 10% off eligible tickets.'
-                      : 'Link a loyalty card to book seven days before general sale.',
-                  style: Theme.of(context).textTheme.bodyMedium,
-                ),
-                const SizedBox(height: 8),
-                TextButton(
-                  style: TextButton.styleFrom(
-                    padding: EdgeInsets.zero,
-                    minimumSize: const Size(0, 40),
-                  ),
-                  onPressed: () => context.go('/profile'),
-                  child: Text(
-                    guest ? 'View account options' : 'Manage loyalty',
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ],
-      ),
-    );
-  }
+    ],
+  );
 }
 
-class _QuickAction extends StatelessWidget {
-  const _QuickAction({
+class _QuickActionData {
+  const _QuickActionData({
     required this.icon,
     required this.label,
     required this.onTap,
@@ -375,31 +498,81 @@ class _QuickAction extends StatelessWidget {
   final IconData icon;
   final String label;
   final VoidCallback onTap;
+}
+
+class _QuickAccessDock extends StatelessWidget {
+  const _QuickAccessDock({required this.actions});
+
+  final List<_QuickActionData> actions;
 
   @override
-  Widget build(BuildContext context) => Material(
-    color: Theme.of(context).colorScheme.surfaceContainerLow,
-    borderRadius: BorderRadius.circular(20),
-    child: InkWell(
-      borderRadius: BorderRadius.circular(20),
-      onTap: onTap,
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 15),
+  Widget build(BuildContext context) {
+    final scheme = Theme.of(context).colorScheme;
+    return Container(
+      height: 94,
+      clipBehavior: Clip.antiAlias,
+      decoration: BoxDecoration(
+        color: scheme.surfaceContainerLow,
+        borderRadius: BorderRadius.circular(24),
+        border: Border.all(color: scheme.outlineVariant.withValues(alpha: .55)),
+      ),
+      child: Row(
+        children: [
+          for (var index = 0; index < actions.length; index++) ...[
+            Expanded(child: _QuickAccessItem(action: actions[index])),
+            if (index != actions.length - 1)
+              Container(
+                width: 1,
+                height: 42,
+                color: scheme.outlineVariant.withValues(alpha: .65),
+              ),
+          ],
+        ],
+      ),
+    );
+  }
+}
+
+class _QuickAccessItem extends StatelessWidget {
+  const _QuickAccessItem({required this.action});
+
+  final _QuickActionData action;
+
+  @override
+  Widget build(BuildContext context) {
+    final scheme = Theme.of(context).colorScheme;
+    return Material(
+      color: Colors.transparent,
+      child: InkWell(
+        onTap: action.onTap,
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(icon, color: Theme.of(context).colorScheme.primary),
-            const SizedBox(height: 9),
+            Container(
+              width: 38,
+              height: 38,
+              alignment: Alignment.center,
+              decoration: BoxDecoration(
+                color: scheme.primaryContainer.withValues(alpha: .72),
+                borderRadius: BorderRadius.circular(13),
+              ),
+              child: Icon(action.icon, size: 21, color: scheme.primary),
+            ),
+            const SizedBox(height: 7),
             Text(
-              label,
+              action.label,
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
               textAlign: TextAlign.center,
-              maxLines: 2,
-              style: Theme.of(context).textTheme.labelMedium,
+              style: Theme.of(
+                context,
+              ).textTheme.labelSmall?.copyWith(fontWeight: FontWeight.w600),
             ),
           ],
         ),
       ),
-    ),
-  );
+    );
+  }
 }
 
 class _UpcomingCard extends StatelessWidget {
@@ -411,9 +584,15 @@ class _UpcomingCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final locale = Localizations.localeOf(context).languageCode;
     final performance = production.performances.first;
+    final scheme = Theme.of(context).colorScheme;
     return SizedBox(
-      width: 164,
-      child: Card(
+      width: 184,
+      child: Material(
+        color: scheme.surfaceContainerLow,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(24),
+          side: BorderSide(color: scheme.outlineVariant.withValues(alpha: .48)),
+        ),
         clipBehavior: Clip.antiAlias,
         child: InkWell(
           onTap: () => context.push('/production', extra: production),
@@ -423,10 +602,11 @@ class _UpcomingCard extends StatelessWidget {
               ProductionPoster(
                 title: production.title.resolve(locale),
                 seed: production.posterSeed,
-                height: 128,
+                height: 158,
+                borderRadius: 0,
               ),
               Padding(
-                padding: const EdgeInsets.fromLTRB(12, 10, 12, 10),
+                padding: const EdgeInsets.fromLTRB(13, 11, 13, 12),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -435,13 +615,32 @@ class _UpcomingCard extends StatelessWidget {
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                       style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                        fontWeight: FontWeight.w800,
+                        fontWeight: FontWeight.w600,
                       ),
                     ),
-                    const SizedBox(height: 4),
-                    Text(
-                      AppFormatters.date(performance.dateTime, locale),
-                      style: Theme.of(context).textTheme.bodySmall,
+                    const SizedBox(height: 7),
+                    Row(
+                      children: [
+                        Icon(
+                          Icons.calendar_today_rounded,
+                          size: 13,
+                          color: scheme.primary,
+                        ),
+                        const SizedBox(width: 5),
+                        Expanded(
+                          child: Text(
+                            '${AppFormatters.date(performance.dateTime, locale)} · '
+                            '${AppFormatters.time(performance.dateTime, locale)}',
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                            style: Theme.of(context).textTheme.bodySmall
+                                ?.copyWith(
+                                  color: scheme.onSurfaceVariant,
+                                  fontWeight: FontWeight.w600,
+                                ),
+                          ),
+                        ),
+                      ],
                     ),
                   ],
                 ),
@@ -456,24 +655,56 @@ class _UpcomingCard extends StatelessWidget {
 
 class _SectionHeading extends StatelessWidget {
   const _SectionHeading({
+    required this.eyebrow,
     required this.title,
     required this.actionLabel,
     required this.onAction,
   });
 
+  final String eyebrow;
   final String title;
   final String actionLabel;
   final VoidCallback onAction;
 
   @override
-  Widget build(BuildContext context) => Row(
-    children: [
-      Expanded(
-        child: Text(title, style: Theme.of(context).textTheme.titleLarge),
-      ),
-      TextButton(onPressed: onAction, child: Text(actionLabel)),
-    ],
-  );
+  Widget build(BuildContext context) {
+    final scheme = Theme.of(context).colorScheme;
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.end,
+      children: [
+        Expanded(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                eyebrow,
+                style: Theme.of(context).textTheme.labelSmall?.copyWith(
+                  color: scheme.primary,
+                  fontWeight: FontWeight.w600,
+                  letterSpacing: 1.15,
+                ),
+              ),
+              const SizedBox(height: 3),
+              Text(
+                title,
+                style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                  fontSize: 23,
+                  letterSpacing: -.35,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+            ],
+          ),
+        ),
+        TextButton.icon(
+          onPressed: onAction,
+          iconAlignment: IconAlignment.end,
+          icon: const Icon(Icons.arrow_forward_rounded, size: 17),
+          label: Text(actionLabel),
+        ),
+      ],
+    );
+  }
 }
 
 class _EmptyProgramme extends StatelessWidget {
@@ -484,9 +715,17 @@ class _EmptyProgramme extends StatelessWidget {
     padding: const EdgeInsets.all(24),
     decoration: BoxDecoration(
       color: Theme.of(context).colorScheme.surfaceContainerLow,
-      borderRadius: BorderRadius.circular(22),
+      borderRadius: BorderRadius.circular(24),
     ),
-    child: const Text('New performances will appear here when announced.'),
+    child: const Row(
+      children: [
+        Icon(Icons.event_available_outlined),
+        SizedBox(width: 12),
+        Expanded(
+          child: Text('New performances will appear here when announced.'),
+        ),
+      ],
+    ),
   );
 }
 

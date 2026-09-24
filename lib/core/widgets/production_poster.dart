@@ -10,6 +10,7 @@ class ProductionPoster extends StatelessWidget {
     required this.seed,
     this.height = 160,
     this.borderRadius = 18,
+    this.showLabel = true,
     super.key,
   });
 
@@ -17,6 +18,7 @@ class ProductionPoster extends StatelessWidget {
   final int seed;
   final double height;
   final double borderRadius;
+  final bool showLabel;
 
   @override
   Widget build(BuildContext context) {
@@ -68,33 +70,36 @@ class ProductionPoster extends StatelessWidget {
                     borderRadius: BorderRadius.circular(99),
                   ),
                 ),
-                const Spacer(),
-                Text(
-                  title.toUpperCase(),
-                  maxLines: 4,
-                  overflow: TextOverflow.ellipsis,
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontWeight: FontWeight.w900,
-                    fontSize: height > 200 ? 17 : 12,
-                    height: 1.04,
-                    letterSpacing: -.25,
-                    decoration: TextDecoration.none,
+                if (showLabel) ...[
+                  const Spacer(),
+                  Text(
+                    title.toUpperCase(),
+                    maxLines: 4,
+                    overflow: TextOverflow.ellipsis,
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.w600,
+                      fontSize: height > 200 ? 17 : 12,
+                      height: 1.04,
+                      letterSpacing: -.25,
+                      decoration: TextDecoration.none,
+                    ),
                   ),
-                ),
-                const SizedBox(height: 7),
-                Text(
-                  context.l10n.appName.toUpperCase(),
-                  maxLines: 1,
-                  overflow: TextOverflow.fade,
-                  style: TextStyle(
-                    color: AppTheme.gold,
-                    fontSize: height > 200 ? 8 : 6,
-                    fontWeight: FontWeight.w700,
-                    letterSpacing: 1.1,
-                    decoration: TextDecoration.none,
+                  const SizedBox(height: 7),
+                  Text(
+                    context.l10n.appName.toUpperCase(),
+                    maxLines: 1,
+                    overflow: TextOverflow.fade,
+                    style: TextStyle(
+                      color: AppTheme.gold,
+                      fontSize: height > 200 ? 8 : 6,
+                      fontWeight: FontWeight.w600,
+                      letterSpacing: 1.1,
+                      decoration: TextDecoration.none,
+                    ),
                   ),
-                ),
+                ] else
+                  const Spacer(),
               ],
             ),
           ),

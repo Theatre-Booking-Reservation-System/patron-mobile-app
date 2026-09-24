@@ -1,3 +1,4 @@
+import 'package:flutter/widgets.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:patron_mobile_app/app/app.dart';
@@ -22,6 +23,7 @@ void main() {
       const AuthSessionData(
         name: 'Nimal Perera',
         email: 'nimal.perera@example.com',
+        isLoyaltyMember: true,
       ),
     );
     await configureDependencies();
@@ -30,6 +32,9 @@ void main() {
     await tester.pumpAndSettle();
 
     expect(find.text('Hello, Nimal'), findsOneWidget);
+    expect(find.byKey(const Key('loyaltyMemberBadge')), findsOneWidget);
+    expect(find.text('Loyalty member'), findsOneWidget);
+    expect(find.text('Loyalty access is active'), findsNothing);
     expect(find.text('Get started'), findsNothing);
   });
 }

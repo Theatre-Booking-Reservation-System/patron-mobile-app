@@ -41,6 +41,8 @@ void main() {
     await tester.pump(const Duration(seconds: 1));
     await tester.pumpAndSettle();
     expect(tester.takeException(), isNull, reason: 'authenticated home');
+    expect(find.byKey(const Key('loyaltyMemberBadge')), findsNothing);
+    expect(find.text('Unlock early access'), findsNothing);
 
     await tester.tap(find.text('Book Tickets'));
     await tester.pumpAndSettle();
