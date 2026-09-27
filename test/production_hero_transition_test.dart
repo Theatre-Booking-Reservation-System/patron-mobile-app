@@ -15,13 +15,16 @@ void main() {
     await getIt.reset();
     const store = SecureAuthSessionStore(FlutterSecureStorage());
     await store.save(
-      const AuthSessionData(
+      AuthSessionData(
+        userId: 'mock-patron-id',
+        accessToken: 'mock-access-token',
+        expiresAt: DateTime.utc(2099),
         name: 'Nimal Perera',
         email: 'nimal.perera@example.com',
         isLoyaltyMember: false,
       ),
     );
-    await configureDependencies();
+    await configureDependencies(useMockData: true);
   });
 
   tearDown(() => getIt.reset());
@@ -84,7 +87,7 @@ void main() {
     },
   );
 
-  testWidgets('upcoming dashboard poster also flies into show details', (
+  testWidgets('dashboard show opens details without duplicate Hero tags', (
     tester,
   ) async {
     tester.view
@@ -95,23 +98,17 @@ void main() {
 
     await tester.pumpWidget(const SapumalApp());
     await tester.pumpAndSettle();
-    await tester.ensureVisible(find.text('Sanda Katha').first);
+    final upcomingCard = find.byKey(const Key('upcomingShow-sanda-katha'));
+    await tester.ensureVisible(upcomingCard);
     await tester.pumpAndSettle();
 
-    final poster = find.byWidgetPredicate(
-      (widget) => widget is ProductionPoster && widget.title == 'Sanda Katha',
+    await tester.tap(
+      find.descendant(of: upcomingCard, matching: find.text('Sanda Katha')),
     );
-    final sourceRect = tester.getRect(poster);
-
-    await tester.tap(find.text('Sanda Katha').first);
     await tester.pump();
     await tester.pump(const Duration(milliseconds: 120));
-    final flightRect = tester.getRect(poster);
     await tester.pumpAndSettle();
-    final destinationRect = tester.getRect(poster);
 
-    expect(flightRect.width, greaterThan(sourceRect.width));
-    expect(flightRect.width, lessThan(destinationRect.width));
     expect(find.byType(ProductionDetailsPage), findsOneWidget);
     expect(tester.takeException(), isNull);
   });

@@ -1,17 +1,37 @@
 # Patron Mobile App
 
-A new Flutter project.
+Flutter patron application for the Sapumal Theatre booking system.
 
-## Getting Started
+## Backend configuration
 
-This project is a starting point for a Flutter application.
+The shared backend host and service prefixes are defined in
+`lib/core/config/api_config.dart`. Change `ApiConfig.baseUrl` when the backend
+host changes; feature code must not contain hard-coded service hosts.
 
-A few resources to get you started if this is your first Flutter project:
+The app integrates the backend's Identity, Catalogue, Seat, and Booking
+services through a shared Dio client. JWT access tokens are stored using
+`flutter_secure_storage` and attached automatically to authenticated requests.
 
-- [Learn Flutter](https://docs.flutter.dev/get-started/learn-flutter)
-- [Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Flutter learning resources](https://docs.flutter.dev/reference/learning-resources)
+Payments are intentionally simulated. A successful simulation submits the
+booking to the Booking service with an opaque simulated payment token.
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+The current course backend uses HTTP. Android and iOS therefore contain
+host-specific cleartext exceptions for the configured EC2 hostname. Remove
+those exceptions when HTTPS is available.
+
+## Tests
+
+Widget tests select deterministic local adapters with:
+
+```dart
+await configureDependencies(useMockData: true);
+```
+
+Normal application startup uses the remote API adapters.
+
+Run verification with:
+
+```sh
+flutter analyze
+flutter test
+```

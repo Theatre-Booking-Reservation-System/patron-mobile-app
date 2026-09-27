@@ -1,9 +1,25 @@
 import 'package:flutter_test/flutter_test.dart';
+import 'package:patron_mobile_app/features/booking/data/datasources/mock_theatre_api_client.dart';
+import 'package:patron_mobile_app/features/booking/data/repositories/mock_theatre_repository.dart';
 import 'package:patron_mobile_app/features/booking/domain/entities/theatre_models.dart';
 import 'package:patron_mobile_app/features/home/domain/today_shows.dart';
 
 void main() {
-  test('shows only scheduled, non-Poya performances for the given day', () {
+  test('mock programme has three performances on 25 September 2026', () async {
+    final productions = await MockTheatreRepository(
+      MockTheatreApiClient(),
+    ).getProductions();
+    final shows = todayShowsFor(productions, DateTime(2026, 9, 25));
+
+    expect(shows.length, 3);
+    expect(shows.map((show) => show.performances.single.id), [
+      'sk-20260925',
+      'yo-20260925',
+      'mv-20260925',
+    ]);
+  });
+
+  test('shows only performances scheduled for the given day', () {
     final day = DateTime(2026, 9, 24);
     final earlier = _production('earlier', [
       _performance('tomorrow', DateTime(2026, 9, 25, 14)),
@@ -11,7 +27,7 @@ void main() {
       _performance('matinee', DateTime(2026, 9, 24, 14)),
     ]);
     final later = _production('later', [
-      _performance('poya', DateTime(2026, 9, 24, 12), isPoyaDay: true),
+      _performance('noon', DateTime(2026, 9, 24, 12)),
       _performance('late', DateTime(2026, 9, 24, 20)),
     ]);
     final otherDay = _production('other', [
@@ -20,12 +36,12 @@ void main() {
 
     final shows = todayShowsFor([later, otherDay, earlier], day);
 
-    expect(shows.map((show) => show.production.id), ['earlier', 'later']);
-    expect(shows.first.performances.map((show) => show.id), [
+    expect(shows.map((show) => show.production.id), ['later', 'earlier']);
+    expect(shows.last.performances.map((show) => show.id), [
       'matinee',
       'evening',
     ]);
-    expect(shows.last.performances.single.id, 'late');
+    expect(shows.first.performances.map((show) => show.id), ['noon', 'late']);
     expect(todayShowsFor([otherDay], day), isEmpty);
   });
 }
@@ -38,16 +54,10 @@ Production _production(String id, List<Performance> performances) => Production(
   genre: 'Drama',
   baseTicketCost: 800,
   performances: performances,
-  posterSeed: 0,
 );
 
-Performance _performance(
-  String id,
-  DateTime dateTime, {
-  bool isPoyaDay = false,
-}) => Performance(
+Performance _performance(String id, DateTime dateTime) => Performance(
   id: id,
   dateTime: dateTime,
   session: PerformanceSession.evening,
-  isPoyaDay: isPoyaDay,
 );

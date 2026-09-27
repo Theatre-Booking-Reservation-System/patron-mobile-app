@@ -1,7 +1,6 @@
-import 'dart:async';
-
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:patron_mobile_app/core/network/api_exception.dart';
 import 'package:patron_mobile_app/features/booking/domain/entities/theatre_models.dart';
 import 'package:patron_mobile_app/features/booking/domain/repositories/theatre_repository.dart';
 import 'package:patron_mobile_app/features/booking/domain/services/ticket_pricing_service.dart';
@@ -34,11 +33,18 @@ final class SeatSectionChanged extends SeatSelectionEvent {
   List<Object?> get props => [section];
 }
 
-final class _HoldTicked extends SeatSelectionEvent {
-  const _HoldTicked();
-}
+enum SeatSelectionStatus { initial, loading, success, failure }
 
-enum SeatSelectionStatus { initial, loading, success, failure, expired }
+enum SeatSelectionFailure {
+  unauthenticated,
+  forbidden,
+  notFound,
+  noConnection,
+  timeout,
+  server,
+  invalidResponse,
+  unknown,
+}
 
 class SeatSelectionState extends Equatable {
   const SeatSelectionState({
@@ -48,7 +54,7 @@ class SeatSelectionState extends Equatable {
     this.seats = const [],
     this.selected = const [],
     this.section = SeatSection.stalls,
-    this.secondsRemaining = 900,
+    this.failure,
   });
 
   final SeatSelectionStatus status;
@@ -57,7 +63,7 @@ class SeatSelectionState extends Equatable {
   final List<Seat> seats;
   final List<Seat> selected;
   final SeatSection section;
-  final int secondsRemaining;
+  final SeatSelectionFailure? failure;
 
   List<Seat> get visibleSeats =>
       seats.where((seat) => seat.section == section).toList(growable: false);
@@ -80,7 +86,8 @@ class SeatSelectionState extends Equatable {
     List<Seat>? seats,
     List<Seat>? selected,
     SeatSection? section,
-    int? secondsRemaining,
+    SeatSelectionFailure? failure,
+    bool clearFailure = false,
   }) => SeatSelectionState(
     status: status ?? this.status,
     production: production ?? this.production,
@@ -88,7 +95,7 @@ class SeatSelectionState extends Equatable {
     seats: seats ?? this.seats,
     selected: selected ?? this.selected,
     section: section ?? this.section,
-    secondsRemaining: secondsRemaining ?? this.secondsRemaining,
+    failure: clearFailure ? null : failure ?? this.failure,
   );
 
   @override
@@ -99,7 +106,7 @@ class SeatSelectionState extends Equatable {
     seats,
     selected,
     section,
-    secondsRemaining,
+    failure,
   ];
 }
 
@@ -110,25 +117,9 @@ class SeatSelectionBloc extends Bloc<SeatSelectionEvent, SeatSelectionState> {
     on<SeatSectionChanged>(
       (event, emit) => emit(state.copyWith(section: event.section)),
     );
-    on<_HoldTicked>((event, emit) {
-      if (state.selected.isEmpty) return;
-      final remaining = state.secondsRemaining - 1;
-      if (remaining <= 0) {
-        emit(
-          state.copyWith(
-            status: SeatSelectionStatus.expired,
-            selected: const [],
-            secondsRemaining: 900,
-          ),
-        );
-      } else {
-        emit(state.copyWith(secondsRemaining: remaining));
-      }
-    });
   }
 
   final TheatreRepository _repository;
-  Timer? _timer;
 
   Future<void> _onRequested(
     SeatMapRequested event,
@@ -139,6 +130,7 @@ class SeatSelectionBloc extends Bloc<SeatSelectionEvent, SeatSelectionState> {
         status: SeatSelectionStatus.loading,
         production: event.production,
         performance: event.performance,
+        clearFailure: true,
       ),
     );
     try {
@@ -146,9 +138,33 @@ class SeatSelectionBloc extends Bloc<SeatSelectionEvent, SeatSelectionState> {
         event.production,
         event.performance,
       );
-      emit(state.copyWith(status: SeatSelectionStatus.success, seats: seats));
+      final selectedSection = seats.any((seat) => seat.section == state.section)
+          ? state.section
+          : seats.isEmpty
+          ? state.section
+          : seats.first.section;
+      emit(
+        state.copyWith(
+          status: SeatSelectionStatus.success,
+          seats: seats,
+          section: selectedSection,
+          clearFailure: true,
+        ),
+      );
+    } on ApiException catch (error) {
+      emit(
+        state.copyWith(
+          status: SeatSelectionStatus.failure,
+          failure: _mapFailure(error.type),
+        ),
+      );
     } on Object {
-      emit(state.copyWith(status: SeatSelectionStatus.failure));
+      emit(
+        state.copyWith(
+          status: SeatSelectionStatus.failure,
+          failure: SeatSelectionFailure.unknown,
+        ),
+      );
     }
   }
 
@@ -161,22 +177,17 @@ class SeatSelectionBloc extends Bloc<SeatSelectionEvent, SeatSelectionState> {
     } else {
       selected.add(event.seat);
     }
-    if (selected.isNotEmpty && state.selected.isEmpty) {
-      _timer ??= Timer.periodic(
-        const Duration(seconds: 1),
-        (_) => add(const _HoldTicked()),
-      );
-    }
-    if (selected.isEmpty) {
-      _timer?.cancel();
-      _timer = null;
-    }
-    emit(state.copyWith(selected: selected, secondsRemaining: 900));
-  }
-
-  @override
-  Future<void> close() {
-    _timer?.cancel();
-    return super.close();
+    emit(state.copyWith(selected: selected));
   }
 }
+
+SeatSelectionFailure _mapFailure(ApiFailureType type) => switch (type) {
+  ApiFailureType.unauthenticated => SeatSelectionFailure.unauthenticated,
+  ApiFailureType.forbidden => SeatSelectionFailure.forbidden,
+  ApiFailureType.notFound => SeatSelectionFailure.notFound,
+  ApiFailureType.noConnection => SeatSelectionFailure.noConnection,
+  ApiFailureType.timeout => SeatSelectionFailure.timeout,
+  ApiFailureType.server => SeatSelectionFailure.server,
+  ApiFailureType.invalidResponse => SeatSelectionFailure.invalidResponse,
+  _ => SeatSelectionFailure.unknown,
+};

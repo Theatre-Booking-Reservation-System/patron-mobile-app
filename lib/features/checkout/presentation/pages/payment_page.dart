@@ -94,7 +94,9 @@ class _PaymentPageState extends State<PaymentPage> {
                   Padding(
                     padding: const EdgeInsets.only(bottom: 12),
                     child: Text(
-                      context.l10n.paymentFailed,
+                      state.error == 'seatsUnavailable'
+                          ? 'One or more selected seats are no longer available. Please return and select seats again.'
+                          : context.l10n.paymentFailed,
                       style: TextStyle(
                         color: Theme.of(context).colorScheme.error,
                         fontWeight: FontWeight.w600,

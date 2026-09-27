@@ -106,18 +106,6 @@ class _ProgrammePageState extends State<ProgrammePage> {
                 SliverAppBar.large(
                   pinned: true,
                   title: Text(context.l10n.shows),
-                  actions: [
-                    IconButton(
-                      tooltip: 'Calendar',
-                      onPressed: () => _selectDate(state.date),
-                      icon: Badge(
-                        isLabelVisible: state.date != null,
-                        smallSize: 7,
-                        child: const Icon(Icons.calendar_month_outlined),
-                      ),
-                    ),
-                    const SizedBox(width: 8),
-                  ],
                 ),
                 SliverToBoxAdapter(
                   child: Padding(

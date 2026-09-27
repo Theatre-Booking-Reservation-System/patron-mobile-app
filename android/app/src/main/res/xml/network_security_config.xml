@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<network-security-config>
+    <domain-config cleartextTrafficPermitted="true">
+        <domain includeSubdomains="false">ec2-3-237-240-69.compute-1.amazonaws.com</domain>
+    </domain-config>
+</network-security-config>

@@ -21,6 +21,18 @@ class _SapumalAppState extends State<SapumalApp> {
   late final router = createRouter();
 
   @override
+  void initState() {
+    super.initState();
+    final auth = getIt<AuthBloc>().state;
+    if (auth.hasAppAccess) {
+      getIt<ProgrammeBloc>().add(const ProgrammeRequested());
+    }
+    if (auth.status == AuthStatus.authenticated) {
+      getIt<BookingsBloc>().add(const BookingsRequested());
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
@@ -30,17 +42,27 @@ class _SapumalAppState extends State<SapumalApp> {
         BlocProvider.value(value: getIt<CheckoutBloc>()),
         BlocProvider.value(value: getIt<BookingsBloc>()),
       ],
-      child: BlocBuilder<AppSettingsBloc, AppSettingsState>(
-        builder: (context, settings) => MaterialApp.router(
-          title: 'Sapumal Theatre',
-          debugShowCheckedModeBanner: false,
-          routerConfig: router,
-          locale: settings.locale,
-          supportedLocales: AppLocalizations.supportedLocales,
-          localizationsDelegates: AppLocalizations.localizationsDelegates,
-          themeMode: settings.themeMode,
-          theme: AppTheme.build(settings.palette, Brightness.light),
-          darkTheme: AppTheme.build(settings.palette, Brightness.dark),
+      child: BlocListener<AuthBloc, AuthState>(
+        listenWhen: (previous, current) =>
+            previous.status != current.status && current.hasAppAccess,
+        listener: (context, state) {
+          context.read<ProgrammeBloc>().add(const ProgrammeRequested());
+          if (state.status == AuthStatus.authenticated) {
+            context.read<BookingsBloc>().add(const BookingsRequested());
+          }
+        },
+        child: BlocBuilder<AppSettingsBloc, AppSettingsState>(
+          builder: (context, settings) => MaterialApp.router(
+            title: 'Sapumal Theatre',
+            debugShowCheckedModeBanner: false,
+            routerConfig: router,
+            locale: settings.locale,
+            supportedLocales: AppLocalizations.supportedLocales,
+            localizationsDelegates: AppLocalizations.localizationsDelegates,
+            themeMode: settings.themeMode,
+            theme: AppTheme.build(settings.palette, Brightness.light),
+            darkTheme: AppTheme.build(settings.palette, Brightness.dark),
+          ),
         ),
       ),
     );

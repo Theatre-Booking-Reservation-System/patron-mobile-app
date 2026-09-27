@@ -10,7 +10,7 @@ void main() {
     SharedPreferences.setMockInitialValues({});
     FlutterSecureStorage.setMockInitialValues({});
     await getIt.reset();
-    await configureDependencies();
+    await configureDependencies(useMockData: true);
   });
 
   tearDown(() => getIt.reset());

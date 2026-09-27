@@ -11,7 +11,7 @@ void main() {
     SharedPreferences.setMockInitialValues({});
     FlutterSecureStorage.setMockInitialValues({});
     await getIt.reset();
-    await configureDependencies();
+    await configureDependencies(useMockData: true);
   });
 
   tearDown(() => getIt.reset());
@@ -37,10 +37,9 @@ void main() {
         tester.widget(find.byType(LiquidGlassNavigationBar));
     expect(navigationBar().selectedIndex, 0);
 
-    await tester.drag(
-      find.byKey(const Key('primaryTabPageView')),
-      const Offset(-360, 0),
-    );
+    // Start outside the horizontal Today's shows carousel so the page swipe
+    // changes tabs rather than scrolling show cards.
+    await tester.dragFrom(const Offset(215, 700), const Offset(-360, 0));
     await tester.pumpAndSettle();
     expect(navigationBar().selectedIndex, 1);
 

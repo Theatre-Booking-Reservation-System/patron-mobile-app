@@ -9,7 +9,6 @@ List<TodayShow> todayShowsFor(List<Production> productions, DateTime day) {
         production.performances
             .where(
               (performance) =>
-                  !performance.isPoyaDay &&
                   performance.dateTime.year == day.year &&
                   performance.dateTime.month == day.month &&
                   performance.dateTime.day == day.day,

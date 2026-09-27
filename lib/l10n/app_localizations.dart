@@ -226,12 +226,6 @@ abstract class AppLocalizations {
   /// **'Evening'**
   String get evening;
 
-  /// No description provided for @poyaDay.
-  ///
-  /// In en, this message translates to:
-  /// **'Poya day - closed'**
-  String get poyaDay;
-
   /// No description provided for @earlyAccess.
   ///
   /// In en, this message translates to:
@@ -333,12 +327,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Continue'**
   String get continueLabel;
-
-  /// No description provided for @holdTime.
-  ///
-  /// In en, this message translates to:
-  /// **'Hold expires in {time}'**
-  String holdTime(String time);
 
   /// No description provided for @passengerDetails.
   ///
@@ -837,12 +825,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Enter a valid NIC or passport number.'**
   String get invalidIdentity;
-
-  /// No description provided for @seatHoldExpired.
-  ///
-  /// In en, this message translates to:
-  /// **'Your seat hold expired. Please select seats again.'**
-  String get seatHoldExpired;
 
   /// No description provided for @prototypeContent.
   ///

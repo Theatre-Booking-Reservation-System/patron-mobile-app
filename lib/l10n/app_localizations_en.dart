@@ -74,9 +74,6 @@ class AppLocalizationsEn extends AppLocalizations {
   String get evening => 'Evening';
 
   @override
-  String get poyaDay => 'Poya day - closed';
-
-  @override
   String get earlyAccess => 'Loyalty members can book seven days early.';
 
   @override
@@ -129,11 +126,6 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get continueLabel => 'Continue';
-
-  @override
-  String holdTime(String time) {
-    return 'Hold expires in $time';
-  }
 
   @override
   String get passengerDetails => 'Passenger Details';
@@ -395,10 +387,6 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get invalidIdentity => 'Enter a valid NIC or passport number.';
-
-  @override
-  String get seatHoldExpired =>
-      'Your seat hold expired. Please select seats again.';
 
   @override
   String get prototypeContent => 'Prototype content - pending approved copy';

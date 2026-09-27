@@ -7,7 +7,8 @@ import 'package:patron_mobile_app/core/localization/l10n_extension.dart';
 class ProductionPoster extends StatelessWidget {
   const ProductionPoster({
     required this.title,
-    required this.seed,
+    this.imageUrl,
+    this.seed = 0,
     this.height = 160,
     this.borderRadius = 18,
     this.showLabel = true,
@@ -15,6 +16,7 @@ class ProductionPoster extends StatelessWidget {
   });
 
   final String title;
+  final String? imageUrl;
   final int seed;
   final double height;
   final double borderRadius;
@@ -43,6 +45,12 @@ class ProductionPoster extends StatelessWidget {
         fit: StackFit.expand,
         children: [
           CustomPaint(painter: _PosterArtwork(seed: seed)),
+          if (imageUrl case final url? when url.isNotEmpty)
+            Image.network(
+              url,
+              fit: BoxFit.cover,
+              errorBuilder: (_, _, _) => const SizedBox.shrink(),
+            ),
           DecoratedBox(
             decoration: BoxDecoration(
               gradient: LinearGradient(
