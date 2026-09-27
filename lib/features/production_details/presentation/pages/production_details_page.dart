@@ -248,21 +248,19 @@ class _PerformanceTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final locale = Localizations.localeOf(context).languageCode;
+    final now = DateTime.now();
+    final released = production.isReleasedAt(now);
+    final earlyAccess = production.isLoyaltyEarlyAccessAt(now);
     final session = performance.session == PerformanceSession.matinee
         ? context.l10n.matinee
         : context.l10n.evening;
-    final unavailable = performance.isPoyaDay;
     final scheme = Theme.of(context).colorScheme;
     return Material(
-      color: unavailable
-          ? scheme.surfaceContainerLow.withValues(alpha: .65)
-          : scheme.surfaceContainerLow,
+      color: scheme.surfaceContainerLow,
       borderRadius: BorderRadius.circular(20),
       child: InkWell(
         borderRadius: BorderRadius.circular(20),
-        onTap: unavailable
-            ? null
-            : () => _openPerformance(context, production, performance),
+        onTap: () => _openPerformance(context, production, performance),
         child: Padding(
           padding: const EdgeInsets.all(14),
           child: Row(
@@ -271,9 +269,7 @@ class _PerformanceTile extends StatelessWidget {
                 width: 58,
                 height: 64,
                 decoration: BoxDecoration(
-                  color: unavailable
-                      ? scheme.surfaceContainerHighest
-                      : scheme.primaryContainer,
+                  color: scheme.primaryContainer,
                   borderRadius: BorderRadius.circular(15),
                 ),
                 child: Column(
@@ -307,33 +303,35 @@ class _PerformanceTile extends StatelessWidget {
                     ),
                     const SizedBox(height: 4),
                     Text(
-                      unavailable
-                          ? context.l10n.poyaDay
-                          : '${AppFormatters.time(performance.dateTime, locale)} · $session',
+                      '${AppFormatters.time(performance.dateTime, locale)} · $session',
                       style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                         color: scheme.onSurfaceVariant,
                       ),
                     ),
-                    if (performance.earlyAccessOnly) ...[
+                    if (earlyAccess) ...[
                       const SizedBox(height: 7),
                       const _StatusPill(
                         label: 'LOYALTY EARLY ACCESS',
                         color: AppTheme.gold,
                       ),
-                    ] else if (!unavailable) ...[
+                    ] else if (released) ...[
                       const SizedBox(height: 7),
                       const _StatusPill(
                         label: 'AVAILABLE',
                         color: Color(0xFF7BC391),
                       ),
+                    ] else if (production.releaseDate != null) ...[
+                      const SizedBox(height: 7),
+                      _StatusPill(
+                        label:
+                            'BOOKING OPENS ${DateFormat.MMMd(locale).format(production.releaseDate!).toUpperCase()}',
+                        color: scheme.outline,
+                      ),
                     ],
                   ],
                 ),
               ),
-              Icon(
-                unavailable ? Icons.lock_outline : Icons.chevron_right_rounded,
-                color: unavailable ? scheme.outline : scheme.primary,
-              ),
+              Icon(Icons.chevron_right_rounded, color: scheme.primary),
             ],
           ),
         ),
@@ -377,6 +375,30 @@ class _EarlyAccessCard extends StatelessWidget {
     final loyalty = auth.patron?.isLoyaltyMember == true;
     final guest = auth.isGuest;
     final scheme = Theme.of(context).colorScheme;
+    final locale = Localizations.localeOf(context).languageCode;
+    final now = DateTime.now();
+    final released = production.isReleasedAt(now);
+    final earlyAccess = production.isLoyaltyEarlyAccessAt(now);
+    final earlyAccessDate = production.loyaltyAccessDate;
+    final releaseDate = production.releaseDate;
+    final title = released
+        ? 'Booking is open'
+        : earlyAccess
+        ? loyalty
+              ? 'Your early access is active'
+              : 'Loyalty early access is active'
+        : loyalty && earlyAccessDate != null
+        ? 'Your early access opens ${DateFormat.MMMd(locale).format(earlyAccessDate)}'
+        : releaseDate == null
+        ? 'Booking is open'
+        : 'Booking opens ${DateFormat.MMMd(locale).format(releaseDate)}';
+    final description = released
+        ? 'All performances in this production are available to logged-in patrons.'
+        : earlyAccess
+        ? loyalty
+              ? 'Choose any performance. Your 10% loyalty discount is applied automatically.'
+              : context.l10n.earlyAccess
+        : 'Every performance in this production follows this same release schedule.';
     return Container(
       padding: const EdgeInsets.all(18),
       decoration: BoxDecoration(
@@ -391,7 +413,9 @@ class _EarlyAccessCard extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Icon(
-            loyalty
+            released
+                ? Icons.event_available_outlined
+                : loyalty
                 ? Icons.verified_rounded
                 : guest
                 ? Icons.lock_person_outlined
@@ -404,22 +428,12 @@ class _EarlyAccessCard extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  loyalty
-                      ? 'Your early access is active'
-                      : guest
-                      ? 'Loyalty access requires an account'
-                      : 'Book seven days earlier',
+                  title,
                   style: Theme.of(context).textTheme.titleMedium,
                 ),
                 const SizedBox(height: 5),
-                Text(
-                  loyalty
-                      ? 'Eligible tickets automatically receive your 10% loyalty discount.'
-                      : guest
-                      ? 'Sign in or register, then link a loyalty card from your profile.'
-                      : context.l10n.earlyAccess,
-                ),
-                if (!loyalty) ...[
+                Text(description),
+                if (!released && !loyalty) ...[
                   const SizedBox(height: 8),
                   TextButton(
                     style: TextButton.styleFrom(
@@ -456,11 +470,24 @@ Future<void> _openPerformance(
     if (context.mounted) context.push('/login');
     return;
   }
-  if (performance.earlyAccessOnly && auth.patron?.isLoyaltyMember != true) {
+  final loyalty = auth.patron?.isLoyaltyMember == true;
+  if (!production.canBookAt(DateTime.now(), isLoyaltyMember: loyalty)) {
     if (context.mounted) {
+      final isEarlyAccess = production.isLoyaltyEarlyAccessAt(DateTime.now());
+      final releaseDate = production.releaseDate;
       ScaffoldMessenger.of(
         context,
-      ).showSnackBar(SnackBar(content: Text(context.l10n.loyaltyOnly)));
+      ).showSnackBar(
+        SnackBar(
+          content: Text(
+            isEarlyAccess
+                ? context.l10n.loyaltyOnly
+                : releaseDate == null
+                ? 'Booking is not available yet.'
+                : 'Booking opens on ${DateFormat.yMMMd().format(releaseDate)}.',
+          ),
+        ),
+      );
     }
     return;
   }

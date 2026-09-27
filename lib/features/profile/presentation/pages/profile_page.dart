@@ -176,12 +176,10 @@ class ProfilePage extends StatelessWidget {
                 _ProfileTile(
                   icon: Icons.card_membership,
                   label: context.l10n.loyaltyCard,
-                  onTap: () {
-                    context.read<AuthBloc>().add(const LoyaltyLinked());
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(content: Text(context.l10n.loyaltyLinked)),
-                    );
-                  },
+                  subtitle: patron.isLoyaltyMember
+                      ? 'Membership active'
+                      : 'Not enrolled',
+                  onTap: () => context.push('/loyalty'),
                 ),
                 _ProfileTile(
                   icon: Icons.palette_outlined,
@@ -237,15 +235,22 @@ class ProfilePage extends StatelessWidget {
 }
 
 class _ProfileTile extends StatelessWidget {
-  const _ProfileTile({required this.icon, required this.label, this.onTap});
+  const _ProfileTile({
+    required this.icon,
+    required this.label,
+    this.subtitle,
+    this.onTap,
+  });
   final IconData icon;
   final String label;
+  final String? subtitle;
   final VoidCallback? onTap;
 
   @override
   Widget build(BuildContext context) => ListTile(
     leading: Icon(icon),
     title: Text(label),
+    subtitle: subtitle == null ? null : Text(subtitle!),
     trailing: const Icon(Icons.chevron_right),
     onTap: onTap ?? () {},
   );

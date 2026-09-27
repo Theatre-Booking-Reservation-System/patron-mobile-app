@@ -72,7 +72,6 @@ final _production = Production(
   language: ProductionLanguage.english,
   genre: 'Drama',
   baseTicketCost: 1000,
-  posterSeed: 0,
   performances: [
     Performance(
       id: 'performance',
@@ -89,7 +88,6 @@ final _secondProduction = Production(
   language: ProductionLanguage.english,
   genre: 'Classic',
   baseTicketCost: 1200,
-  posterSeed: 1,
   performances: [
     Performance(
       id: 'merchant-performance',

@@ -15,13 +15,16 @@ void main() {
     await getIt.reset();
     const store = SecureAuthSessionStore(FlutterSecureStorage());
     await store.save(
-      const AuthSessionData(
+      AuthSessionData(
+        userId: 'mock-patron-id',
+        accessToken: 'mock-access-token',
+        expiresAt: DateTime.utc(2099),
         name: 'Nimal Perera',
         email: 'nimal.perera@example.com',
         isLoyaltyMember: true,
       ),
     );
-    await configureDependencies();
+    await configureDependencies(useMockData: true);
   });
 
   tearDown(() => getIt.reset());

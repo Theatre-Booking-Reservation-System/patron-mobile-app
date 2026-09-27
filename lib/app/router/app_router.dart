@@ -10,12 +10,14 @@ import 'package:patron_mobile_app/features/auth/presentation/pages/registration_
 import 'package:patron_mobile_app/features/auth/presentation/pages/registration_success_page.dart';
 import 'package:patron_mobile_app/features/auth/presentation/pages/welcome_page.dart';
 import 'package:patron_mobile_app/features/booking/domain/entities/theatre_models.dart';
+import 'package:patron_mobile_app/features/bookings/presentation/pages/booking_details_page.dart';
 import 'package:patron_mobile_app/features/checkout/presentation/pages/booking_confirmation_page.dart';
 import 'package:patron_mobile_app/features/checkout/presentation/pages/booking_summary_page.dart';
 import 'package:patron_mobile_app/features/checkout/presentation/pages/passenger_details_page.dart';
 import 'package:patron_mobile_app/features/checkout/presentation/pages/payment_page.dart';
 import 'package:patron_mobile_app/features/more/presentation/pages/more_page.dart';
 import 'package:patron_mobile_app/features/profile/presentation/pages/language_page.dart';
+import 'package:patron_mobile_app/features/profile/presentation/pages/loyalty_page.dart';
 import 'package:patron_mobile_app/features/profile/presentation/pages/theme_page.dart';
 import 'package:patron_mobile_app/features/production_details/presentation/pages/production_details_page.dart';
 import 'package:patron_mobile_app/features/seat_selection/presentation/pages/seat_selection_page.dart';
@@ -120,7 +122,16 @@ GoRouter createRouter() {
         path: '/confirmation',
         builder: (context, state) => const BookingConfirmationPage(),
       ),
+      GoRoute(
+        path: '/bookings/:reference',
+        builder: (context, state) =>
+            BookingDetailsPage(reference: state.pathParameters['reference']!),
+      ),
       GoRoute(path: '/theme', builder: (context, state) => const ThemePage()),
+      GoRoute(
+        path: '/loyalty',
+        builder: (context, state) => const LoyaltyPage(),
+      ),
       GoRoute(
         path: '/language',
         builder: (context, state) => const LanguagePage(),

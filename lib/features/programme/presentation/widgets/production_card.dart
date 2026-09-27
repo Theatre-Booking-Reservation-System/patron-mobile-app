@@ -13,7 +13,7 @@ class ProductionCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final locale = Localizations.localeOf(context).languageCode;
-    final performance = production.performances.first;
+    final performance = production.performances.firstOrNull;
     final language = switch (production.language) {
       ProductionLanguage.sinhala => context.l10n.sinhala,
       ProductionLanguage.tamil => context.l10n.tamil,
@@ -86,8 +86,10 @@ class ProductionCard extends StatelessWidget {
                           const SizedBox(width: 6),
                           Expanded(
                             child: Text(
-                              '${AppFormatters.date(performance.dateTime, locale)} · '
-                              '${AppFormatters.time(performance.dateTime, locale)}',
+                              performance == null
+                                  ? 'No performances scheduled'
+                                  : '${AppFormatters.date(performance.dateTime, locale)} · '
+                                        '${AppFormatters.time(performance.dateTime, locale)}',
                               maxLines: 1,
                               overflow: TextOverflow.ellipsis,
                               style: Theme.of(context).textTheme.labelMedium,

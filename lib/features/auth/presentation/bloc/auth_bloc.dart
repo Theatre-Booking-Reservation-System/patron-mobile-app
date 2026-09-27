@@ -1,43 +1,13 @@
+import 'dart:async';
+
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:patron_mobile_app/core/network/api_client.dart';
+import 'package:patron_mobile_app/core/network/api_exception.dart';
 import 'package:patron_mobile_app/features/auth/data/auth_session_store.dart';
-
-class MockPatron extends Equatable {
-  const MockPatron({
-    required this.name,
-    required this.email,
-    this.phone,
-    this.dateOfBirth,
-    this.identityNumber,
-    this.isLoyaltyMember = false,
-  });
-
-  final String name;
-  final String email;
-  final String? phone;
-  final DateTime? dateOfBirth;
-  final String? identityNumber;
-  final bool isLoyaltyMember;
-
-  MockPatron copyWith({bool? isLoyaltyMember}) => MockPatron(
-    name: name,
-    email: email,
-    phone: phone,
-    dateOfBirth: dateOfBirth,
-    identityNumber: identityNumber,
-    isLoyaltyMember: isLoyaltyMember ?? this.isLoyaltyMember,
-  );
-
-  @override
-  List<Object?> get props => [
-    name,
-    email,
-    phone,
-    dateOfBirth,
-    identityNumber,
-    isLoyaltyMember,
-  ];
-}
+import 'package:patron_mobile_app/features/auth/data/repositories/mock_auth_repository.dart';
+import 'package:patron_mobile_app/features/auth/domain/entities/patron.dart';
+import 'package:patron_mobile_app/features/auth/domain/repositories/auth_repository.dart';
 
 sealed class AuthEvent extends Equatable {
   const AuthEvent();
@@ -92,8 +62,8 @@ final class AuthLogoutRequested extends AuthEvent {
   const AuthLogoutRequested();
 }
 
-final class LoyaltyLinked extends AuthEvent {
-  const LoyaltyLinked();
+final class _AuthSessionExpired extends AuthEvent {
+  const _AuthSessionExpired();
 }
 
 enum AuthStatus {
@@ -114,7 +84,7 @@ class AuthState extends Equatable {
       error = '';
 
   final AuthStatus status;
-  final MockPatron? patron;
+  final Patron? patron;
   final String error;
 
   bool get hasAppAccess =>
@@ -127,29 +97,44 @@ class AuthState extends Equatable {
 
 class AuthBloc extends Bloc<AuthEvent, AuthState> {
   factory AuthBloc({
+    AuthRepository? repository,
     AuthSessionStore sessionStore = const NoopAuthSessionStore(),
     AuthSessionData? restoredSession,
-  }) => AuthBloc._(sessionStore, restoredSession);
+    SessionExpiryNotifier? sessionExpiryNotifier,
+  }) => AuthBloc._(
+    repository ?? const MockAuthRepository(),
+    sessionStore,
+    restoredSession,
+    sessionExpiryNotifier,
+  );
 
-  AuthBloc._(this._sessionStore, AuthSessionData? restoredSession)
-    : super(_stateFromSession(restoredSession)) {
+  AuthBloc._(
+    this._repository,
+    this._sessionStore,
+    this._sessionData,
+    SessionExpiryNotifier? sessionExpiryNotifier,
+  ) : super(_stateFromSession(_sessionData)) {
     on<AuthLoginRequested>(_onLoginRequested);
     on<AuthGuestRequested>(_onGuestRequested);
     on<AuthRegistrationRequested>(_onRegistrationRequested);
     on<AuthLogoutRequested>(_onLogoutRequested);
-    on<LoyaltyLinked>(_onLoyaltyLinked);
+    on<_AuthSessionExpired>(_onSessionExpired);
+    _expirySubscription = sessionExpiryNotifier?.stream.listen(
+      (_) => add(const _AuthSessionExpired()),
+    );
   }
 
+  final AuthRepository _repository;
   final AuthSessionStore _sessionStore;
+  AuthSessionData? _sessionData;
+  StreamSubscription<void>? _expirySubscription;
 
   Future<void> _onLoginRequested(
     AuthLoginRequested event,
     Emitter<AuthState> emit,
   ) async {
     emit(const AuthState(status: AuthStatus.submitting));
-    await Future<void>.delayed(const Duration(milliseconds: 650));
-
-    if (!_isValidEmail(event.email) || !isValidPassword(event.password)) {
+    if (!_isValidEmail(event.email) || event.password.isEmpty) {
       emit(
         const AuthState(
           status: AuthStatus.failure,
@@ -159,12 +144,45 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       return;
     }
 
-    final patron = MockPatron(
-      name: _nameFromEmail(event.email),
-      email: event.email.trim(),
-    );
-    await _saveSession(patron);
-    emit(AuthState(status: AuthStatus.authenticated, patron: patron));
+    try {
+      final result = await _repository.login(
+        email: event.email,
+        password: event.password,
+      );
+      _sessionData = AuthSessionData.fromAuthenticated(result);
+      await _sessionStore.save(_sessionData!);
+      var patron = result.patron;
+      try {
+        final profile = await _repository.getPatron(result.patron.id!);
+        patron = result.patron.copyWith(
+          name: profile.name.isEmpty ? result.patron.name : profile.name,
+          email: profile.email.isEmpty ? result.patron.email : profile.email,
+          phone: profile.phone,
+          dateOfBirth: profile.dateOfBirth,
+          identityNumber: profile.identityNumber,
+          isLoyaltyMember: profile.isLoyaltyMember,
+          loyaltyCardNumber: profile.loyaltyCardNumber,
+        );
+        await _savePatron(patron);
+      } on ApiException {
+        // Authentication succeeded. Profile enrichment should not turn a
+        // valid login into a misleading connectivity failure.
+      }
+      emit(AuthState(status: AuthStatus.authenticated, patron: patron));
+    } on ApiException catch (error) {
+      await _clearSession();
+      emit(
+        AuthState(
+          status: AuthStatus.failure,
+          error: switch (error.type) {
+            ApiFailureType.accountLocked => 'accountLocked',
+            ApiFailureType.unauthenticated ||
+            ApiFailureType.validation => 'invalidCredentials',
+            _ => 'networkError',
+          },
+        ),
+      );
+    }
   }
 
   Future<void> _onGuestRequested(
@@ -183,16 +201,17 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     emit(const AuthState.anonymous());
   }
 
-  Future<void> _onLoyaltyLinked(
-    LoyaltyLinked event,
+  Future<void> _onSessionExpired(
+    _AuthSessionExpired event,
     Emitter<AuthState> emit,
   ) async {
-    final patron = state.patron;
-    if (patron == null) return;
-
-    final updatedPatron = patron.copyWith(isLoyaltyMember: true);
-    await _saveSession(updatedPatron);
-    emit(AuthState(status: AuthStatus.authenticated, patron: updatedPatron));
+    _sessionData = null;
+    if (state.status == AuthStatus.authenticated) {
+      emit(
+        const AuthState(status: AuthStatus.failure, error: 'sessionExpired'),
+      );
+      emit(const AuthState.anonymous());
+    }
   }
 
   Future<void> _onRegistrationRequested(
@@ -200,8 +219,6 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     Emitter<AuthState> emit,
   ) async {
     emit(const AuthState(status: AuthStatus.submitting));
-    await Future<void>.delayed(const Duration(milliseconds: 750));
-
     if (event.name.trim().isEmpty ||
         !_isValidEmail(event.email) ||
         event.phone.trim().isEmpty ||
@@ -216,48 +233,52 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       return;
     }
 
-    emit(
-      AuthState(
-        status: AuthStatus.registrationSuccess,
-        patron: MockPatron(
-          name: event.name.trim(),
-          email: event.email.trim(),
-          phone: event.phone.trim(),
-          dateOfBirth: event.dateOfBirth,
-          identityNumber: event.identityNumber.trim(),
+    try {
+      final patron = await _repository.register(
+        name: event.name,
+        email: event.email,
+        phone: event.phone,
+        dateOfBirth: event.dateOfBirth,
+        identityNumber: event.identityNumber,
+        password: event.password,
+      );
+      emit(AuthState(status: AuthStatus.registrationSuccess, patron: patron));
+    } on ApiException catch (error) {
+      emit(
+        AuthState(
+          status: AuthStatus.failure,
+          error: switch (error.type) {
+            ApiFailureType.conflict => 'emailAlreadyRegistered',
+            ApiFailureType.validation => 'invalidRegistration',
+            _ => 'networkError',
+          },
         ),
-      ),
-    );
+      );
+    }
   }
 
-  Future<void> _saveSession(MockPatron patron) =>
-      _sessionStore.save(_sessionFromPatron(patron));
+  Future<void> _savePatron(Patron patron) async {
+    final session = _sessionData;
+    if (session == null) return;
+    _sessionData = session.copyWith(patron: patron);
+    await _sessionStore.save(_sessionData!);
+  }
 
-  Future<void> _clearSession() => _sessionStore.clear();
+  Future<void> _clearSession() async {
+    _sessionData = null;
+    await _sessionStore.clear();
+  }
+
+  @override
+  Future<void> close() async {
+    await _expirySubscription?.cancel();
+    return super.close();
+  }
 }
 
 AuthState _stateFromSession(AuthSessionData? session) => session == null
     ? const AuthState.anonymous()
-    : AuthState(
-        status: AuthStatus.authenticated,
-        patron: MockPatron(
-          name: session.name,
-          email: session.email,
-          phone: session.phone,
-          dateOfBirth: session.dateOfBirth,
-          identityNumber: session.identityNumber,
-          isLoyaltyMember: session.isLoyaltyMember,
-        ),
-      );
-
-AuthSessionData _sessionFromPatron(MockPatron patron) => AuthSessionData(
-  name: patron.name,
-  email: patron.email,
-  phone: patron.phone,
-  dateOfBirth: patron.dateOfBirth,
-  identityNumber: patron.identityNumber,
-  isLoyaltyMember: patron.isLoyaltyMember,
-);
+    : AuthState(status: AuthStatus.authenticated, patron: session.toPatron());
 
 bool isValidPassword(String value) =>
     value.length >= 12 &&
@@ -268,12 +289,3 @@ bool isValidPassword(String value) =>
 
 bool _isValidEmail(String value) =>
     RegExp(r'^[^\s@]+@[^\s@]+\.[^\s@]+$').hasMatch(value.trim());
-
-String _nameFromEmail(String email) {
-  final localPart = email.split('@').first.replaceAll(RegExp(r'[._-]+'), ' ');
-  return localPart
-      .split(' ')
-      .where((word) => word.isNotEmpty)
-      .map((word) => '${word[0].toUpperCase()}${word.substring(1)}')
-      .join(' ');
-}

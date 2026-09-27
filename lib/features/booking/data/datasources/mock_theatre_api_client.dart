@@ -13,6 +13,26 @@ class MockTheatreApiClient implements TheatreApiClient {
   }
 
   @override
+  Future<List<PerformanceDto>> getPerformances(String productionId) async {
+    final productions = await getProductions();
+    return productions
+        .where((production) => production.id == productionId)
+        .expand((production) => production.performances)
+        .toList(growable: false);
+  }
+
+  @override
+  Future<PerformanceDto> getPerformance(String performanceId) async {
+    final productions = await getProductions();
+    return productions
+        .expand((production) => production.performances)
+        .firstWhere((performance) => performance.id == performanceId);
+  }
+
+  @override
+  Future<List<SeatZoneDto>> getSeatZones() async => const [];
+
+  @override
   Future<List<SeatDto>> getSeatMap(String performanceId) async {
     await Future<void>.delayed(_delay);
     final result = <SeatDto>[];
@@ -45,6 +65,22 @@ class MockTheatreApiClient implements TheatreApiClient {
     }
     return result;
   }
+
+  @override
+  Future<BookingDto> createBooking(BookingRequestDto request) =>
+      throw UnsupportedError('Mock bookings are handled by the repository.');
+
+  @override
+  Future<List<BookingSummaryDto>> getBookings(String patronId) async =>
+      const [];
+
+  @override
+  Future<BookingDto> getBooking(String reference) =>
+      throw UnsupportedError('Mock bookings are handled by the repository.');
+
+  @override
+  Future<BookingDto> cancelBooking(String bookingId) =>
+      throw UnsupportedError('Mock bookings are handled by the repository.');
 }
 
 final List<Map<String, Object?>> _productionJson = [
@@ -61,21 +97,23 @@ final List<Map<String, Object?>> _productionJson = [
     'language': 'sinhala',
     'genre': 'Drama',
     'baseTicketCost': 800,
-    'posterSeed': 0,
+    'releaseDate': '2026-09-01',
+    'posterImageUrl': null,
     'performances': [
+      {
+        'id': 'sk-20260925',
+        'dateTime': '2026-09-25T14:30:00',
+        'session': 'matinee',
+      },
       {
         'id': 'sk-01',
         'dateTime': '2026-10-09T14:30:00',
         'session': 'matinee',
-        'earlyAccessOnly': false,
-        'isPoyaDay': false,
       },
       {
         'id': 'sk-02',
         'dateTime': '2026-10-09T18:30:00',
         'session': 'evening',
-        'earlyAccessOnly': false,
-        'isPoyaDay': false,
       },
     ],
   },
@@ -95,21 +133,23 @@ final List<Map<String, Object?>> _productionJson = [
     'language': 'tamil',
     'genre': 'Drama',
     'baseTicketCost': 900,
-    'posterSeed': 1,
+    'releaseDate': '2026-09-01',
+    'posterImageUrl': null,
     'performances': [
+      {
+        'id': 'yo-20260925',
+        'dateTime': '2026-09-25T18:00:00',
+        'session': 'evening',
+      },
       {
         'id': 'yo-01',
         'dateTime': '2026-10-16T15:00:00',
         'session': 'matinee',
-        'earlyAccessOnly': false,
-        'isPoyaDay': false,
       },
       {
         'id': 'yo-02',
         'dateTime': '2026-10-16T19:00:00',
         'session': 'evening',
-        'earlyAccessOnly': true,
-        'isPoyaDay': false,
       },
     ],
   },
@@ -130,21 +170,23 @@ final List<Map<String, Object?>> _productionJson = [
     'language': 'english',
     'genre': 'Classic',
     'baseTicketCost': 1000,
-    'posterSeed': 2,
+    'releaseDate': '2026-09-01',
+    'posterImageUrl': null,
     'performances': [
+      {
+        'id': 'mv-20260925',
+        'dateTime': '2026-09-25T20:00:00',
+        'session': 'evening',
+      },
       {
         'id': 'mv-01',
         'dateTime': '2026-10-23T18:30:00',
         'session': 'evening',
-        'earlyAccessOnly': false,
-        'isPoyaDay': false,
       },
       {
         'id': 'mv-poya',
         'dateTime': '2026-10-25T18:30:00',
         'session': 'evening',
-        'earlyAccessOnly': false,
-        'isPoyaDay': true,
       },
     ],
   },

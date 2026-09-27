@@ -10,7 +10,15 @@ enum SeatStatus { available, held, booked, unavailable }
 
 enum ConcessionType { none, under16, over70, largeParty }
 
-enum BookingStatus { confirmed, past, cancelled }
+enum BookingStatus {
+  pending,
+  confirmed,
+  cancelledPatron,
+  cancelledAdmin,
+  expired,
+}
+
+enum PaymentStatus { unpaid, paid, refunded, failed }
 
 class LocalizedText extends Equatable {
   const LocalizedText({required this.en, required this.si, required this.ta});
@@ -34,24 +42,14 @@ class Performance extends Equatable {
     required this.id,
     required this.dateTime,
     required this.session,
-    this.earlyAccessOnly = false,
-    this.isPoyaDay = false,
   });
 
   final String id;
   final DateTime dateTime;
   final PerformanceSession session;
-  final bool earlyAccessOnly;
-  final bool isPoyaDay;
 
   @override
-  List<Object?> get props => [
-    id,
-    dateTime,
-    session,
-    earlyAccessOnly,
-    isPoyaDay,
-  ];
+  List<Object?> get props => [id, dateTime, session];
 }
 
 class Production extends Equatable {
@@ -63,7 +61,8 @@ class Production extends Equatable {
     required this.genre,
     required this.baseTicketCost,
     required this.performances,
-    required this.posterSeed,
+    this.posterImageUrl,
+    this.releaseDate,
   });
 
   final String id;
@@ -73,9 +72,27 @@ class Production extends Equatable {
   final String genre;
   final int baseTicketCost;
   final List<Performance> performances;
-  final int posterSeed;
+  final String? posterImageUrl;
+  final DateTime? releaseDate;
 
   int get startingPrice => baseTicketCost ~/ 2;
+
+  DateTime? get loyaltyAccessDate =>
+      releaseDate?.subtract(const Duration(days: 7));
+
+  bool isReleasedAt(DateTime moment) =>
+      releaseDate == null || !_day(moment).isBefore(_day(releaseDate!));
+
+  bool isLoyaltyEarlyAccessAt(DateTime moment) {
+    final earlyAccess = loyaltyAccessDate;
+    return earlyAccess != null &&
+        !_day(moment).isBefore(_day(earlyAccess)) &&
+        !isReleasedAt(moment);
+  }
+
+  bool canBookAt(DateTime moment, {required bool isLoyaltyMember}) =>
+      isReleasedAt(moment) ||
+      (isLoyaltyMember && isLoyaltyEarlyAccessAt(moment));
 
   @override
   List<Object?> get props => [
@@ -86,9 +103,12 @@ class Production extends Equatable {
     genre,
     baseTicketCost,
     performances,
-    posterSeed,
+    posterImageUrl,
+    releaseDate,
   ];
 }
+
+DateTime _day(DateTime value) => DateTime(value.year, value.month, value.day);
 
 class Seat extends Equatable {
   const Seat({
@@ -101,6 +121,7 @@ class Seat extends Equatable {
     required this.netPrice,
     required this.status,
     this.isAccessible = false,
+    this.bookingSeatId,
   });
 
   final String id;
@@ -112,6 +133,7 @@ class Seat extends Equatable {
   final int netPrice;
   final SeatStatus status;
   final bool isAccessible;
+  final String? bookingSeatId;
 
   String get label => '${section.name} $row$number';
 
@@ -126,6 +148,7 @@ class Seat extends Equatable {
     netPrice,
     status,
     isAccessible,
+    bookingSeatId,
   ];
 }
 
@@ -202,35 +225,59 @@ class PatronDetails extends Equatable {
 
 class Booking extends Equatable {
   const Booking({
+    required this.id,
     required this.reference,
     required this.production,
     required this.performance,
     required this.seats,
-    required this.quote,
+    this.quote,
+    required this.total,
     required this.status,
+    required this.paymentStatus,
+    required this.createdAt,
     required this.patronEmail,
     required this.isFlagged,
+    this.ticketType,
+    this.cardLast4,
+    this.qrCode,
   });
 
+  final String id;
   final String reference;
   final Production production;
   final Performance performance;
   final List<Seat> seats;
-  final BookingQuote quote;
+  final BookingQuote? quote;
+  final int total;
   final BookingStatus status;
+  final PaymentStatus paymentStatus;
+  final DateTime createdAt;
   final String patronEmail;
   final bool isFlagged;
+  final String? ticketType;
+  final String? cardLast4;
+  final String? qrCode;
+
+  bool get canCancel =>
+      status == BookingStatus.pending || status == BookingStatus.confirmed;
 
   @override
   List<Object?> get props => [
+    id,
     reference,
     production,
     performance,
     seats,
     quote,
+    total,
     status,
+    paymentStatus,
+    createdAt,
     patronEmail,
     isFlagged,
+    ticketType,
+    cardLast4,
+    qrCode,
   ];
 }
 

@@ -253,9 +253,11 @@ class _RegistrationPageState extends State<RegistrationPage> {
             prefixIcon: Icon(Icons.phone_outlined),
           ),
           validator: (value) {
-            final normalized = (value ?? '').replaceAll(RegExp(r'[^0-9+]'), '');
-            if (normalized.isEmpty) return 'Enter your phone number.';
-            if (normalized.length < 9) return 'Enter a valid phone number.';
+            final input = value?.trim() ?? '';
+            if (input.isEmpty) return 'Enter your phone number.';
+            if (!RegExp(r'^[0-9+()\-\s]{7,20}$').hasMatch(input)) {
+              return 'Enter a valid phone number.';
+            }
             return null;
           },
         ),
@@ -299,7 +301,11 @@ class _RegistrationPageState extends State<RegistrationPage> {
           validator: (value) {
             final input = value?.trim() ?? '';
             if (input.isEmpty) return 'Enter your NIC or passport number.';
-            if (input.length < 6) return 'Enter a valid identity number.';
+            if (!RegExp(
+              r'^([0-9]{9}[vVxX]|[0-9]{12}|[A-Za-z0-9]{6,15})$',
+            ).hasMatch(input)) {
+              return 'Enter a valid identity number.';
+            }
             return null;
           },
         ),
@@ -405,6 +411,27 @@ class _RegistrationPageState extends State<RegistrationPage> {
         ),
         const SizedBox(height: 12),
         BlocBuilder<AuthBloc, AuthState>(
+          buildWhen: (previous, current) =>
+              previous.status != current.status ||
+              previous.error != current.error,
+          builder: (context, state) {
+            if (state.status != AuthStatus.failure) {
+              return const SizedBox.shrink();
+            }
+            return Padding(
+              padding: const EdgeInsets.only(bottom: 12),
+              child: Text(
+                state.error == 'emailAlreadyRegistered'
+                    ? 'An account already exists for this email address.'
+                    : state.error == 'networkError'
+                    ? 'Unable to reach the server. Please try again.'
+                    : 'Check the registration details and try again.',
+                style: TextStyle(color: Theme.of(context).colorScheme.error),
+              ),
+            );
+          },
+        ),
+        BlocBuilder<AuthBloc, AuthState>(
           builder: (context, state) {
             final loading = state.status == AuthStatus.submitting;
             return FilledButton(
@@ -420,14 +447,6 @@ class _RegistrationPageState extends State<RegistrationPage> {
                   : const Text('Create account'),
             );
           },
-        ),
-        const SizedBox(height: 12),
-        Text(
-          'No API call is made in this build. Registration is simulated locally.',
-          textAlign: TextAlign.center,
-          style: Theme.of(context).textTheme.bodySmall?.copyWith(
-            color: Theme.of(context).colorScheme.onSurfaceVariant,
-          ),
         ),
       ],
     ),

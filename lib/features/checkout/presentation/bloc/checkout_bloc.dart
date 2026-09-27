@@ -1,5 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:patron_mobile_app/core/network/api_exception.dart';
 import 'package:patron_mobile_app/features/booking/domain/entities/theatre_models.dart';
 import 'package:patron_mobile_app/features/booking/domain/repositories/theatre_repository.dart';
 import 'package:patron_mobile_app/features/booking/domain/services/ticket_pricing_service.dart';
@@ -61,6 +62,7 @@ class CheckoutState extends Equatable {
     this.booking,
     this.isLoyaltyMember = false,
     this.consentAccepted = false,
+    this.error = '',
   });
 
   final CheckoutStatus status;
@@ -70,6 +72,7 @@ class CheckoutState extends Equatable {
   final Booking? booking;
   final bool isLoyaltyMember;
   final bool consentAccepted;
+  final String error;
 
   CheckoutState copyWith({
     CheckoutStatus? status,
@@ -79,6 +82,7 @@ class CheckoutState extends Equatable {
     Booking? booking,
     bool? isLoyaltyMember,
     bool? consentAccepted,
+    String? error,
   }) => CheckoutState(
     status: status ?? this.status,
     draft: draft ?? this.draft,
@@ -87,6 +91,7 @@ class CheckoutState extends Equatable {
     booking: booking ?? this.booking,
     isLoyaltyMember: isLoyaltyMember ?? this.isLoyaltyMember,
     consentAccepted: consentAccepted ?? this.consentAccepted,
+    error: error ?? this.error,
   );
 
   @override
@@ -98,6 +103,7 @@ class CheckoutState extends Equatable {
     booking,
     isLoyaltyMember,
     consentAccepted,
+    error,
   ];
 }
 
@@ -136,12 +142,36 @@ class CheckoutBloc extends Bloc<CheckoutEvent, CheckoutState> {
         emit(state.copyWith(status: CheckoutStatus.paymentFailure));
         return;
       }
-      final booking = await _repository.confirmBooking(
-        draft: state.draft!,
-        patron: state.patron!,
-        quote: state.quote!,
-      );
-      emit(state.copyWith(status: CheckoutStatus.confirmed, booking: booking));
+      try {
+        final booking = await _repository.confirmBooking(
+          draft: state.draft!,
+          patron: state.patron!,
+          quote: state.quote!,
+        );
+        emit(
+          state.copyWith(
+            status: CheckoutStatus.confirmed,
+            booking: booking,
+            error: '',
+          ),
+        );
+      } on ApiException catch (error) {
+        emit(
+          state.copyWith(
+            status: CheckoutStatus.paymentFailure,
+            error: error.type == ApiFailureType.conflict
+                ? 'seatsUnavailable'
+                : 'bookingFailed',
+          ),
+        );
+      } on Object {
+        emit(
+          state.copyWith(
+            status: CheckoutStatus.paymentFailure,
+            error: 'bookingFailed',
+          ),
+        );
+      }
     });
     on<CheckoutReset>((event, emit) => emit(const CheckoutState()));
   }

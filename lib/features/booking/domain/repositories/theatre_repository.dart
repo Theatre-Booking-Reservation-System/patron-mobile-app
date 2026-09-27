@@ -9,5 +9,6 @@ abstract interface class TheatreRepository {
     required BookingQuote quote,
   });
   Future<List<Booking>> getBookings();
-  Future<Booking?> findBooking(String reference, String email);
+  Future<Booking> getBooking(String reference);
+  Future<Booking> cancelBooking(Booking booking);
 }

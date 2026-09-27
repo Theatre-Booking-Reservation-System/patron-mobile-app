@@ -75,9 +75,6 @@ class AppLocalizationsTa extends AppLocalizations {
   String get evening => 'மாலை காட்சி';
 
   @override
-  String get poyaDay => 'போயா நாள் - மூடப்பட்டுள்ளது';
-
-  @override
   String get earlyAccess =>
       'உறுப்பினர்கள் ஏழு நாட்களுக்கு முன் முன்பதிவு செய்யலாம்.';
 
@@ -131,11 +128,6 @@ class AppLocalizationsTa extends AppLocalizations {
 
   @override
   String get continueLabel => 'தொடரவும்';
-
-  @override
-  String holdTime(String time) {
-    return 'ஒதுக்கீடு $time இல் முடியும்';
-  }
 
   @override
   String get passengerDetails => 'பயணி விவரங்கள்';
@@ -398,10 +390,6 @@ class AppLocalizationsTa extends AppLocalizations {
   @override
   String get invalidIdentity =>
       'செல்லுபடியாகும் NIC அல்லது கடவுச்சீட்டு எண்ணை உள்ளிடவும்.';
-
-  @override
-  String get seatHoldExpired =>
-      'இருக்கை ஒதுக்கீடு முடிந்தது. மீண்டும் தேர்ந்தெடுக்கவும்.';
 
   @override
   String get prototypeContent =>

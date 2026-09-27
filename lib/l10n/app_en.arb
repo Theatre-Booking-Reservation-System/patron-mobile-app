@@ -22,7 +22,6 @@
   "selectSeats": "Select Seats",
   "matinee": "Matinee",
   "evening": "Evening",
-  "poyaDay": "Poya day - closed",
   "earlyAccess": "Loyalty members can book seven days early.",
   "loyaltyOnly": "This performance is currently available to loyalty members only.",
   "venue": "Sapumal Theatre - Colombo 07",
@@ -41,8 +40,6 @@
   "seatsSelected": "{count} seats selected",
   "@seatsSelected": {"placeholders": {"count": {"type": "int"}}},
   "continueLabel": "Continue",
-  "holdTime": "Hold expires in {time}",
-  "@holdTime": {"placeholders": {"time": {"type": "String"}}},
   "passengerDetails": "Passenger Details",
   "contactInfo": "Contact information",
   "fullName": "Full name",
@@ -127,7 +124,6 @@
   "requiredField": "This field is required.",
   "invalidEmail": "Enter a valid email address.",
   "invalidIdentity": "Enter a valid NIC or passport number.",
-  "seatHoldExpired": "Your seat hold expired. Please select seats again."
-  ,"prototypeContent": "Prototype content - pending approved copy",
+  "prototypeContent": "Prototype content - pending approved copy",
   "invalidLargeParty": "Large-party concessions require at least 11 selected seats."
 }

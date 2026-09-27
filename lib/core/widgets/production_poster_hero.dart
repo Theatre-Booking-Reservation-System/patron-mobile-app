@@ -23,7 +23,8 @@ class ProductionPosterHero extends StatelessWidget {
     createRectTween: (begin, end) => RectTween(begin: begin, end: end),
     child: ProductionPoster(
       title: production.title.resolve(locale),
-      seed: production.posterSeed,
+      imageUrl: production.posterImageUrl,
+      seed: production.id.hashCode,
       height: height,
       borderRadius: borderRadius,
       showLabel: false,

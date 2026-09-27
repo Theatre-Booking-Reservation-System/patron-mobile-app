@@ -13,12 +13,18 @@ final class BookingsRequested extends BookingsEvent {
   const BookingsRequested();
 }
 
-final class BookingLookupRequested extends BookingsEvent {
-  const BookingLookupRequested(this.reference, this.email);
+final class BookingDetailsRequested extends BookingsEvent {
+  const BookingDetailsRequested(this.reference);
   final String reference;
-  final String email;
   @override
-  List<Object?> get props => [reference, email];
+  List<Object?> get props => [reference];
+}
+
+final class BookingCancellationRequested extends BookingsEvent {
+  const BookingCancellationRequested(this.booking);
+  final Booking booking;
+  @override
+  List<Object?> get props => [booking];
 }
 
 enum BookingsStatus { initial, loading, success, failure, notFound }
@@ -53,23 +59,57 @@ class BookingsBloc extends Bloc<BookingsEvent, BookingsState> {
         emit(const BookingsState(status: BookingsStatus.failure));
       }
     });
-    on<BookingLookupRequested>((event, emit) async {
+    on<BookingDetailsRequested>((event, emit) async {
       emit(
         BookingsState(status: BookingsStatus.loading, bookings: state.bookings),
       );
-      final result = await _repository.findBooking(
-        event.reference,
-        event.email,
-      );
+      try {
+        final result = await _repository.getBooking(event.reference);
+        emit(
+          BookingsState(
+            status: BookingsStatus.success,
+            bookings: state.bookings,
+            lookupResult: result,
+          ),
+        );
+      } on Object {
+        emit(
+          BookingsState(
+            status: BookingsStatus.notFound,
+            bookings: state.bookings,
+          ),
+        );
+      }
+    });
+    on<BookingCancellationRequested>((event, emit) async {
       emit(
         BookingsState(
-          status: result == null
-              ? BookingsStatus.notFound
-              : BookingsStatus.success,
+          status: BookingsStatus.loading,
           bookings: state.bookings,
-          lookupResult: result,
+          lookupResult: state.lookupResult,
         ),
       );
+      try {
+        final cancelled = await _repository.cancelBooking(event.booking);
+        final updated = state.bookings
+            .map((item) => item.id == cancelled.id ? cancelled : item)
+            .toList(growable: false);
+        emit(
+          BookingsState(
+            status: BookingsStatus.success,
+            bookings: updated,
+            lookupResult: cancelled,
+          ),
+        );
+      } on Object {
+        emit(
+          BookingsState(
+            status: BookingsStatus.failure,
+            bookings: state.bookings,
+            lookupResult: state.lookupResult,
+          ),
+        );
+      }
     });
   }
 

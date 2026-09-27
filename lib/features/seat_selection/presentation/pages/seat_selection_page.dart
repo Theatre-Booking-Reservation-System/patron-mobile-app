@@ -38,227 +38,332 @@ class _SeatSelectionView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocListener<SeatSelectionBloc, SeatSelectionState>(
-      listenWhen: (previous, current) => previous.status != current.status,
-      listener: (context, state) {
-        if (state.status == SeatSelectionStatus.expired) {
-          ScaffoldMessenger.of(
-            context,
-          ).showSnackBar(SnackBar(content: Text(context.l10n.seatHoldExpired)));
-        }
-      },
-      child: Scaffold(
-        appBar: AppBar(title: Text(context.l10n.seatSelection)),
-        body: BlocBuilder<SeatSelectionBloc, SeatSelectionState>(
-          builder: (context, state) {
-            if (state.status == SeatSelectionStatus.loading ||
-                state.status == SeatSelectionStatus.initial) {
-              return const Center(child: CircularProgressIndicator());
-            }
-            if (state.status == SeatSelectionStatus.failure) {
-              return Center(child: Text(context.l10n.error));
-            }
-            final grouped = <String, List<Seat>>{};
-            for (final seat in state.visibleSeats) {
-              grouped.putIfAbsent(seat.row, () => []).add(seat);
-            }
-            return Column(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(16, 12, 16, 8),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        state.production!.title.resolve(
-                          Localizations.localeOf(context).languageCode,
-                        ),
-                        style: Theme.of(context).textTheme.titleMedium
-                            ?.copyWith(fontWeight: FontWeight.w600),
+    return Scaffold(
+      appBar: AppBar(title: Text(context.l10n.seatSelection)),
+      body: BlocBuilder<SeatSelectionBloc, SeatSelectionState>(
+        builder: (context, state) {
+          if (state.status == SeatSelectionStatus.loading ||
+              state.status == SeatSelectionStatus.initial) {
+            return const Center(child: CircularProgressIndicator());
+          }
+          if (state.status == SeatSelectionStatus.failure) {
+            return _SeatLoadFailure(state: state);
+          }
+          if (state.seats.isEmpty) {
+            return _EmptySeatInventory(state: state);
+          }
+          final grouped = <String, List<Seat>>{};
+          for (final seat in state.visibleSeats) {
+            grouped.putIfAbsent(seat.row, () => []).add(seat);
+          }
+          return Column(
+            children: [
+              Padding(
+                padding: const EdgeInsets.fromLTRB(16, 12, 16, 8),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      state.production!.title.resolve(
+                        Localizations.localeOf(context).languageCode,
                       ),
-                      const SizedBox(height: 8),
-                      const _Legend(),
-                      const SizedBox(height: 12),
-                      SingleChildScrollView(
-                        scrollDirection: Axis.horizontal,
-                        child: SegmentedButton<SeatSection>(
-                          showSelectedIcon: false,
-                          segments: [
-                            ButtonSegment(
-                              value: SeatSection.stalls,
-                              label: Text(context.l10n.stalls),
-                            ),
-                            ButtonSegment(
-                              value: SeatSection.circle,
-                              label: Text(context.l10n.circle),
-                            ),
-                            ButtonSegment(
-                              value: SeatSection.upperCircle,
-                              label: Text(context.l10n.upperCircle),
-                            ),
-                          ],
-                          selected: {state.section},
-                          onSelectionChanged: (value) => context
-                              .read<SeatSelectionBloc>()
-                              .add(SeatSectionChanged(value.single)),
-                        ),
+                      style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                        fontWeight: FontWeight.w600,
                       ),
-                    ],
-                  ),
-                ),
-                Expanded(
-                  child: ListView(
-                    padding: const EdgeInsets.symmetric(horizontal: 16),
-                    children: [
-                      Container(
-                        margin: const EdgeInsets.symmetric(
-                          vertical: 12,
-                          horizontal: 28,
-                        ),
-                        padding: const EdgeInsets.symmetric(vertical: 7),
-                        decoration: BoxDecoration(
-                          color: Theme.of(context).colorScheme.onSurface,
-                          borderRadius: BorderRadius.circular(4),
-                        ),
-                        child: Text(
-                          context.l10n.stage,
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            color: Theme.of(context).colorScheme.surface,
-                            fontWeight: FontWeight.w600,
-                          ),
-                        ),
-                      ),
-                      for (final entry in grouped.entries)
-                        Padding(
-                          padding: const EdgeInsets.only(bottom: 14),
-                          child: Row(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              SizedBox(
-                                width: 30,
-                                child: Padding(
-                                  padding: const EdgeInsets.only(top: 10),
-                                  child: Text(
-                                    entry.key,
-                                    style: const TextStyle(
-                                      fontWeight: FontWeight.w600,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              Expanded(
-                                child: Wrap(
-                                  spacing: 6,
-                                  runSpacing: 7,
-                                  children: [
-                                    for (final seat in entry.value)
-                                      _SeatButton(
-                                        seat: seat,
-                                        isSelected: state.selected.any(
-                                          (item) => item.id == seat.id,
-                                        ),
-                                      ),
-                                  ],
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                    ],
-                  ),
-                ),
-                SafeArea(
-                  top: false,
-                  child: Container(
-                    padding: const EdgeInsets.fromLTRB(16, 12, 16, 12),
-                    decoration: BoxDecoration(
-                      color: Theme.of(
-                        context,
-                      ).colorScheme.surfaceContainerLowest,
-                      boxShadow: const [
-                        BoxShadow(color: Colors.black12, blurRadius: 8),
-                      ],
                     ),
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    const SizedBox(height: 8),
+                    const _Legend(),
+                    const SizedBox(height: 12),
+                    SingleChildScrollView(
+                      scrollDirection: Axis.horizontal,
+                      child: SegmentedButton<SeatSection>(
+                        showSelectedIcon: false,
+                        segments: [
+                          ButtonSegment(
+                            value: SeatSection.stalls,
+                            label: Text(context.l10n.stalls),
+                            enabled: state.seats.any(
+                              (seat) => seat.section == SeatSection.stalls,
+                            ),
+                          ),
+                          ButtonSegment(
+                            value: SeatSection.circle,
+                            label: Text(context.l10n.circle),
+                            enabled: state.seats.any(
+                              (seat) => seat.section == SeatSection.circle,
+                            ),
+                          ),
+                          ButtonSegment(
+                            value: SeatSection.upperCircle,
+                            label: Text(context.l10n.upperCircle),
+                            enabled: state.seats.any(
+                              (seat) => seat.section == SeatSection.upperCircle,
+                            ),
+                          ),
+                        ],
+                        selected: {state.section},
+                        onSelectionChanged: (value) => context
+                            .read<SeatSelectionBloc>()
+                            .add(SeatSectionChanged(value.single)),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Expanded(
+                child: ListView(
+                  padding: const EdgeInsets.symmetric(horizontal: 16),
+                  children: [
+                    Container(
+                      margin: const EdgeInsets.symmetric(
+                        vertical: 12,
+                        horizontal: 28,
+                      ),
+                      padding: const EdgeInsets.symmetric(vertical: 7),
+                      decoration: BoxDecoration(
+                        color: Theme.of(context).colorScheme.onSurface,
+                        borderRadius: BorderRadius.circular(4),
+                      ),
+                      child: Text(
+                        context.l10n.stage,
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          color: Theme.of(context).colorScheme.surface,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                    ),
+                    for (final entry in grouped.entries)
+                      Padding(
+                        padding: const EdgeInsets.only(bottom: 14),
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Expanded(
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    context.l10n.seatsSelected(
-                                      state.selected.length,
-                                    ),
-                                    style: const TextStyle(
-                                      fontWeight: FontWeight.w600,
-                                    ),
+                            SizedBox(
+                              width: 30,
+                              child: Padding(
+                                padding: const EdgeInsets.only(top: 10),
+                                child: Text(
+                                  entry.key,
+                                  style: const TextStyle(
+                                    fontWeight: FontWeight.w600,
                                   ),
-                                  if (state.selected.isNotEmpty)
-                                    Text(
-                                      context.l10n.holdTime(
-                                        _duration(state.secondsRemaining),
+                                ),
+                              ),
+                            ),
+                            Expanded(
+                              child: Wrap(
+                                spacing: 6,
+                                runSpacing: 7,
+                                children: [
+                                  for (final seat in entry.value)
+                                    _SeatButton(
+                                      seat: seat,
+                                      isSelected: state.selected.any(
+                                        (item) => item.id == seat.id,
                                       ),
-                                      maxLines: 2,
-                                      overflow: TextOverflow.ellipsis,
-                                      style: Theme.of(
-                                        context,
-                                      ).textTheme.bodySmall,
                                     ),
                                 ],
                               ),
                             ),
-                            const SizedBox(width: 10),
-                            Text(
-                              AppFormatters.money(state.vatInclusiveTotal),
-                              style: Theme.of(context).textTheme.titleMedium
-                                  ?.copyWith(fontWeight: FontWeight.w600),
-                            ),
                           ],
                         ),
-                        const SizedBox(height: 10),
-                        FilledButton(
-                          onPressed: state.selected.isEmpty
-                              ? null
-                              : () {
-                                  final loyalty =
-                                      context
-                                          .read<AuthBloc>()
-                                          .state
-                                          .patron
-                                          ?.isLoyaltyMember ==
-                                      true;
-                                  context.read<CheckoutBloc>().add(
-                                    CheckoutStarted(
-                                      state.draft,
-                                      isLoyaltyMember: loyalty,
-                                    ),
-                                  );
-                                  context.push('/checkout', extra: state.draft);
-                                },
-                          child: Text(context.l10n.continueLabel),
-                        ),
-                      ],
-                    ),
+                      ),
+                  ],
+                ),
+              ),
+              SafeArea(
+                top: false,
+                child: Container(
+                  padding: const EdgeInsets.fromLTRB(16, 12, 16, 12),
+                  decoration: BoxDecoration(
+                    color: Theme.of(context).colorScheme.surfaceContainerLowest,
+                    boxShadow: const [
+                      BoxShadow(color: Colors.black12, blurRadius: 8),
+                    ],
+                  ),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Expanded(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  context.l10n.seatsSelected(
+                                    state.selected.length,
+                                  ),
+                                  style: const TextStyle(
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                ),
+                                if (state.selected.isNotEmpty)
+                                  Text(
+                                    'Availability is checked again at checkout.',
+                                    maxLines: 2,
+                                    overflow: TextOverflow.ellipsis,
+                                    style: Theme.of(
+                                      context,
+                                    ).textTheme.bodySmall,
+                                  ),
+                              ],
+                            ),
+                          ),
+                          const SizedBox(width: 10),
+                          Text(
+                            AppFormatters.money(state.vatInclusiveTotal),
+                            style: Theme.of(context).textTheme.titleMedium
+                                ?.copyWith(fontWeight: FontWeight.w600),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: 10),
+                      FilledButton(
+                        onPressed: state.selected.isEmpty
+                            ? null
+                            : () {
+                                final loyalty =
+                                    context
+                                        .read<AuthBloc>()
+                                        .state
+                                        .patron
+                                        ?.isLoyaltyMember ==
+                                    true;
+                                context.read<CheckoutBloc>().add(
+                                  CheckoutStarted(
+                                    state.draft,
+                                    isLoyaltyMember: loyalty,
+                                  ),
+                                );
+                                context.push('/checkout', extra: state.draft);
+                              },
+                        child: Text(context.l10n.continueLabel),
+                      ),
+                    ],
                   ),
                 ),
-              ],
-            );
-          },
-        ),
+              ),
+            ],
+          );
+        },
       ),
     );
   }
+}
 
-  static String _duration(int seconds) {
-    final minutes = (seconds ~/ 60).toString().padLeft(2, '0');
-    final remainder = (seconds % 60).toString().padLeft(2, '0');
-    return '$minutes:$remainder';
+class _SeatLoadFailure extends StatelessWidget {
+  const _SeatLoadFailure({required this.state});
+
+  final SeatSelectionState state;
+
+  @override
+  Widget build(BuildContext context) {
+    final message = switch (state.failure) {
+      SeatSelectionFailure.unauthenticated =>
+        'Your session has expired. Please sign in again.',
+      SeatSelectionFailure.forbidden =>
+        'Seat availability is not accessible with this account.',
+      SeatSelectionFailure.notFound =>
+        'No seat inventory exists for this performance yet.',
+      SeatSelectionFailure.noConnection =>
+        'Could not connect to the Seat Service. Check your connection and try again.',
+      SeatSelectionFailure.timeout =>
+        'The Seat Service took too long to respond. Please try again.',
+      SeatSelectionFailure.server =>
+        'The Seat Service is temporarily unavailable. Please try again.',
+      SeatSelectionFailure.invalidResponse =>
+        'The Seat Service returned seat data that could not be read.',
+      _ => context.l10n.error,
+    };
+    return _SeatStatusMessage(
+      icon: Icons.event_seat_outlined,
+      title: 'Seats could not be loaded',
+      message: message,
+      buttonLabel: context.l10n.retry,
+      onPressed: () => _retry(context, state),
+    );
   }
+}
+
+class _EmptySeatInventory extends StatelessWidget {
+  const _EmptySeatInventory({required this.state});
+
+  final SeatSelectionState state;
+
+  @override
+  Widget build(BuildContext context) => _SeatStatusMessage(
+    icon: Icons.event_busy_outlined,
+    title: 'No seats released yet',
+    message:
+        'The Seat Service returned an empty inventory for this performance.',
+    buttonLabel: context.l10n.retry,
+    onPressed: () => _retry(context, state),
+  );
+}
+
+class _SeatStatusMessage extends StatelessWidget {
+  const _SeatStatusMessage({
+    required this.icon,
+    required this.title,
+    required this.message,
+    required this.buttonLabel,
+    required this.onPressed,
+  });
+
+  final IconData icon;
+  final String title;
+  final String message;
+  final String buttonLabel;
+  final VoidCallback onPressed;
+
+  @override
+  Widget build(BuildContext context) => Center(
+    child: SingleChildScrollView(
+      padding: const EdgeInsets.all(32),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Icon(
+            icon,
+            size: 52,
+            color: Theme.of(context).colorScheme.onSurfaceVariant,
+          ),
+          const SizedBox(height: 16),
+          Text(
+            title,
+            textAlign: TextAlign.center,
+            style: Theme.of(context).textTheme.titleLarge,
+          ),
+          const SizedBox(height: 8),
+          Text(
+            message,
+            textAlign: TextAlign.center,
+            style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+              color: Theme.of(context).colorScheme.onSurfaceVariant,
+            ),
+          ),
+          const SizedBox(height: 20),
+          FilledButton.tonalIcon(
+            onPressed: onPressed,
+            icon: const Icon(Icons.refresh_rounded),
+            label: Text(buttonLabel),
+          ),
+        ],
+      ),
+    ),
+  );
+}
+
+void _retry(BuildContext context, SeatSelectionState state) {
+  final production = state.production;
+  final performance = state.performance;
+  if (production == null || performance == null) return;
+  context.read<SeatSelectionBloc>().add(
+    SeatMapRequested(production, performance),
+  );
 }
 
 class _SeatButton extends StatelessWidget {

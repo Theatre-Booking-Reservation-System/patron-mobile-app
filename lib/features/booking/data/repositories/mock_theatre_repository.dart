@@ -30,6 +30,7 @@ class MockTheatreRepository implements TheatreRepository {
           final multiplier = zone.multiplier(performance.session);
           return Seat(
             id: dto.id,
+            bookingSeatId: dto.bookingSeatId,
             section: section,
             row: dto.row,
             number: dto.number,
@@ -52,12 +53,16 @@ class MockTheatreRepository implements TheatreRepository {
     await Future<void>.delayed(const Duration(milliseconds: 650));
     final reference = 'ST-${DateTime.now().year}-${_referenceCounter++}';
     final booking = Booking(
+      id: reference,
       reference: reference,
       production: draft.production,
       performance: draft.performance,
       seats: draft.seats,
       quote: quote,
+      total: quote.total,
       status: BookingStatus.confirmed,
+      paymentStatus: PaymentStatus.paid,
+      createdAt: DateTime.now(),
       patronEmail: patron.email,
       isFlagged: patron.isFlagged,
     );
@@ -72,15 +77,40 @@ class MockTheatreRepository implements TheatreRepository {
   }
 
   @override
-  Future<Booking?> findBooking(String reference, String email) async {
+  Future<Booking> getBooking(String reference) async {
     await Future<void>.delayed(const Duration(milliseconds: 220));
     for (final booking in _bookings) {
-      if (booking.reference.toLowerCase() == reference.toLowerCase() &&
-          booking.patronEmail.toLowerCase() == email.toLowerCase()) {
+      if (booking.reference.toLowerCase() == reference.toLowerCase()) {
         return booking;
       }
     }
-    return null;
+    throw StateError('Booking not found.');
+  }
+
+  @override
+  Future<Booking> cancelBooking(Booking booking) async {
+    final cancelled = Booking(
+      id: booking.id,
+      reference: booking.reference,
+      production: booking.production,
+      performance: booking.performance,
+      seats: booking.seats,
+      quote: booking.quote,
+      total: booking.total,
+      status: BookingStatus.cancelledPatron,
+      paymentStatus: booking.paymentStatus == PaymentStatus.paid
+          ? PaymentStatus.refunded
+          : booking.paymentStatus,
+      createdAt: booking.createdAt,
+      patronEmail: booking.patronEmail,
+      isFlagged: booking.isFlagged,
+      ticketType: booking.ticketType,
+      cardLast4: booking.cardLast4,
+      qrCode: booking.qrCode,
+    );
+    final index = _bookings.indexWhere((item) => item.id == booking.id);
+    if (index >= 0) _bookings[index] = cancelled;
+    return cancelled;
   }
 
   Production _mapProduction(ProductionDto dto) => Production(
@@ -98,7 +128,8 @@ class MockTheatreRepository implements TheatreRepository {
     language: ProductionLanguage.values.byName(dto.language),
     genre: dto.genre,
     baseTicketCost: dto.baseTicketCost,
-    posterSeed: dto.posterSeed,
+    posterImageUrl: dto.posterImageUrl,
+    releaseDate: dto.releaseDate,
     performances: dto.performances.map(_mapPerformance).toList(growable: false),
   );
 
@@ -106,7 +137,5 @@ class MockTheatreRepository implements TheatreRepository {
     id: dto.id,
     dateTime: dto.dateTime,
     session: PerformanceSession.values.byName(dto.session),
-    earlyAccessOnly: dto.earlyAccessOnly,
-    isPoyaDay: dto.isPoyaDay,
   );
 }

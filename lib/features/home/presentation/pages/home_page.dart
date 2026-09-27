@@ -649,9 +649,10 @@ class _UpcomingCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final locale = Localizations.localeOf(context).languageCode;
-    final performance = production.performances.first;
+    final performance = production.performances.firstOrNull;
     final scheme = Theme.of(context).colorScheme;
     return SizedBox(
+      key: Key('upcomingShow-${production.id}'),
       width: 184,
       child: Material(
         color: scheme.surfaceContainerLow,
@@ -698,8 +699,10 @@ class _UpcomingCard extends StatelessWidget {
                         const SizedBox(width: 5),
                         Expanded(
                           child: Text(
-                            '${AppFormatters.date(performance.dateTime, locale)} · '
-                            '${AppFormatters.time(performance.dateTime, locale)}',
+                            performance == null
+                                ? 'No performances scheduled'
+                                : '${AppFormatters.date(performance.dateTime, locale)} · '
+                                      '${AppFormatters.time(performance.dateTime, locale)}',
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
                             style: Theme.of(context).textTheme.bodySmall

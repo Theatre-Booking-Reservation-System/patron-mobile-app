@@ -74,9 +74,6 @@ class AppLocalizationsSi extends AppLocalizations {
   String get evening => 'සන්ධ්‍යා දර්ශනය';
 
   @override
-  String get poyaDay => 'පෝය දිනය - වසා ඇත';
-
-  @override
   String get earlyAccess => 'සාමාජිකයින්ට දින හතකට පෙර වෙන්කර ගත හැක.';
 
   @override
@@ -128,11 +125,6 @@ class AppLocalizationsSi extends AppLocalizations {
 
   @override
   String get continueLabel => 'ඉදිරියට';
-
-  @override
-  String holdTime(String time) {
-    return 'රඳවා තැබීම අවසන් වන්නේ $time කින්';
-  }
 
   @override
   String get passengerDetails => 'මගී විස්තර';
@@ -393,9 +385,6 @@ class AppLocalizationsSi extends AppLocalizations {
   @override
   String get invalidIdentity =>
       'වලංගු හැඳුනුම්පත් හෝ ගමන් බලපත්‍ර අංකයක් ඇතුළත් කරන්න.';
-
-  @override
-  String get seatHoldExpired => 'ආසන රඳවා තැබීම අවසන් විය. නැවත ආසන තෝරන්න.';
 
   @override
   String get prototypeContent => 'අනුමත අන්තර්ගතය ලැබෙන තුරු ආදර්ශ පාඨයකි';

@@ -128,9 +128,14 @@ class _LoginPageState extends State<LoginPage> {
                     return Padding(
                       padding: const EdgeInsets.only(top: 16, bottom: 8),
                       child: _InlineError(
-                        message:
-                            'Those details do not match. Check your email and '
-                            'password, then try again.',
+                        message: switch (state.error) {
+                          'accountLocked' =>
+                            'This account is temporarily locked. Try again later.',
+                          'networkError' =>
+                            'Unable to reach the server. Check your connection and try again.',
+                          _ =>
+                            'Those details do not match. Check your email and password, then try again.',
+                        },
                       ),
                     );
                   },

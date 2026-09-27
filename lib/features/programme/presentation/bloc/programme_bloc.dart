@@ -98,11 +98,13 @@ class ProgrammeBloc extends Bloc<ProgrammeEvent, ProgrammeState> {
       emit(state.copyWith(status: ProgrammeStatus.loading));
       try {
         final productions = await _repository.getProductions();
-        productions.sort(
-          (a, b) => a.performances.first.dateTime.compareTo(
-            b.performances.first.dateTime,
-          ),
-        );
+        productions.sort((a, b) {
+          final aDate = a.performances.firstOrNull?.dateTime;
+          final bDate = b.performances.firstOrNull?.dateTime;
+          if (aDate == null) return bDate == null ? 0 : 1;
+          if (bDate == null) return -1;
+          return aDate.compareTo(bDate);
+        });
         emit(
           state.copyWith(
             status: ProgrammeStatus.success,
