@@ -11,7 +11,9 @@ class ProductionDto {
     required this.performances,
     this.posterImageUrl,
     this.releaseDate,
+    this.duration,
     this.status = 1,
+    this.castCrew = const [],
   });
 
   factory ProductionDto.fromJson(Map<String, Object?> json) {
@@ -50,7 +52,11 @@ class ProductionDto {
       baseTicketCost: _number(json, 'baseTicketCost').round(),
       posterImageUrl: _nullableNonEmptyString(json, 'posterImageUrl'),
       releaseDate: _optionalDate(json, 'releaseDate'),
+      duration: _nullableNonEmptyString(json, 'duration'),
       status: _int(json, 'status') ?? 1,
+      castCrew: [
+        for (final entry in _list(json['castCrew'])) ?_castCrew(entry),
+      ],
       performances: rawPerformances
           .map(PerformanceDto.fromJson)
           .toList(growable: false),
@@ -65,7 +71,9 @@ class ProductionDto {
   final int baseTicketCost;
   final String? posterImageUrl;
   final DateTime? releaseDate;
+  final String? duration;
   final int status;
+  final List<CastCrewDto> castCrew;
   final List<PerformanceDto> performances;
 
   ProductionDto withPerformances(List<PerformanceDto> value) => ProductionDto(
@@ -77,9 +85,25 @@ class ProductionDto {
     baseTicketCost: baseTicketCost,
     posterImageUrl: posterImageUrl,
     releaseDate: releaseDate,
+    duration: duration,
     status: status,
+    castCrew: castCrew,
     performances: value,
   );
+}
+
+class CastCrewDto {
+  const CastCrewDto({required this.role, required this.name});
+
+  final String role;
+  final String name;
+}
+
+CastCrewDto? _castCrew(Map<String, Object?> json) {
+  final role = (_string(json, 'key') ?? '').trim();
+  final name = (_string(json, 'value') ?? '').trim();
+  if (role.isEmpty || name.isEmpty) return null;
+  return CastCrewDto(role: role, name: name);
 }
 
 class PerformanceDto {

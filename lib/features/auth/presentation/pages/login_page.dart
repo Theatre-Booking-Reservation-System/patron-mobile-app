@@ -45,7 +45,13 @@ class _LoginPageState extends State<LoginPage> {
       },
       child: AuthScaffold(
         showBackButton: true,
-        onBack: () => context.go('/welcome'),
+        onBack: () {
+          if (context.canPop()) {
+            context.pop();
+          } else {
+            context.go('/welcome');
+          }
+        },
         child: AutofillGroup(
           child: Form(
             key: _formKey,

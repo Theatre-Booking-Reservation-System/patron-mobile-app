@@ -75,6 +75,18 @@ void main() {
     await tester.tap(find.text('Proceed to Checkout'));
     await tester.pumpAndSettle();
     expect(tester.takeException(), isNull, reason: 'payment');
+    expect(find.text('Card details'), findsOneWidget);
+    await tester.enterText(
+      find.byKey(const Key('cardHolderField')),
+      'Nimal Perera',
+    );
+    await tester.enterText(
+      find.byKey(const Key('cardNumberField')),
+      '4111111111111111',
+    );
+    await tester.enterText(find.byKey(const Key('cardExpiryField')), '1230');
+    await tester.enterText(find.byKey(const Key('cardCvvField')), '123');
+    await tester.ensureVisible(find.text('Pay Now'));
     await tester.tap(find.text('Pay Now'));
     await tester.pump(const Duration(seconds: 2));
     await tester.pumpAndSettle();

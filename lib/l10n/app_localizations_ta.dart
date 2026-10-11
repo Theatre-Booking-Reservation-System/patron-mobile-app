@@ -209,6 +209,33 @@ class AppLocalizationsTa extends AppLocalizations {
   String get cardPayment => 'அட்டை கட்டணம்';
 
   @override
+  String get cardDetails => 'அட்டை விவரங்கள்';
+
+  @override
+  String get cardHolderName => 'அட்டையில் உள்ள பெயர்';
+
+  @override
+  String get cardNumber => 'அட்டை எண்';
+
+  @override
+  String get cardExpiry => 'காலாவதி';
+
+  @override
+  String get cardCvv => 'CVV';
+
+  @override
+  String get invalidCardNumber => '13 முதல் 19 இலக்க அட்டை எண்ணை உள்ளிடவும்.';
+
+  @override
+  String get invalidCardExpiry => 'MM/YY அல்லது MM/YYYY வடிவத்தில் உள்ளிடவும்.';
+
+  @override
+  String get invalidCardMonth => '01 முதல் 12 வரையிலான மாதத்தை உள்ளிடவும்.';
+
+  @override
+  String get invalidCardCvv => '3 அல்லது 4 இலக்க CVV ஐ உள்ளிடவும்.';
+
+  @override
   String get mobilePayment => 'மொபைல் கட்டணம்';
 
   @override
@@ -222,11 +249,7 @@ class AppLocalizationsTa extends AppLocalizations {
   String get payNow => 'இப்போது செலுத்தவும்';
 
   @override
-  String get simulateFailure => 'தோல்வியடைந்த கட்டணத்தைச் சோதிக்கவும்';
-
-  @override
-  String get paymentFailed =>
-      'கட்டணம் மறுக்கப்பட்டது. இருக்கைகள் மேலும் ஐந்து நிமிடங்கள் ஒதுக்கப்படும்.';
+  String get paymentFailed => 'கட்டணம் மறுக்கப்பட்டது.';
 
   @override
   String get retry => 'மீண்டும் முயற்சி';
@@ -369,6 +392,61 @@ class AppLocalizationsTa extends AppLocalizations {
 
   @override
   String get favourite => 'விருப்பம்';
+
+  @override
+  String get shareProduction => 'நிகழ்ச்சியைப் பகிர்';
+
+  @override
+  String get shareWithContact => 'ஒரு தொடர்புடன் பகிரவும்';
+
+  @override
+  String get contactsPermissionNeeded =>
+      'உங்களுக்குத் தெரிந்த ஒருவருடன் இந்த நிகழ்ச்சியைப் பகிர தொடர்புகளுக்கான அணுகலை அனுமதிக்கவும்.';
+
+  @override
+  String get contactsPermissionDenied =>
+      'தொடர்பு அணுகல் அணைக்கப்பட்டுள்ளது. இந்த நிகழ்ச்சியைப் பகிர அமைப்புகளில் அனுமதிக்கவும்.';
+
+  @override
+  String get openSettings => 'அமைப்புகளைத் திற';
+
+  @override
+  String get notNow => 'இப்போது வேண்டாம்';
+
+  @override
+  String get noContacts => 'தொடர்புகள் இல்லை.';
+
+  @override
+  String get unnamedContact => 'பெயர் இல்லை';
+
+  @override
+  String get contactHasNoDetails =>
+      'இந்தத் தொடர்பில் தொலைபேசி எண் அல்லது மின்னஞ்சல் இல்லை.';
+
+  @override
+  String get sendMessage => 'செய்தி அனுப்பு';
+
+  @override
+  String get sendEmail => 'மின்னஞ்சல் அனுப்பு';
+
+  @override
+  String get searchContacts => 'தொடர்புகளைத் தேடு';
+
+  @override
+  String get shareFailed =>
+      'இந்தத் தொடர்புக்கு செய்தி அல்லது மின்னஞ்சலைத் திறக்க முடியவில்லை.';
+
+  @override
+  String get shareProductionCta =>
+      'Sapumal Theatre செயலியில் டிக்கெட் பதிவு செய்யுங்கள்.';
+
+  @override
+  String shareChooseChannel(String title) {
+    return '$title அனுப்பும் முறையைத் தேர்ந்தெடுக்கவும்.';
+  }
+
+  @override
+  String get tryAgain => 'மீண்டும் முயற்சிக்கவும்';
 
   @override
   String get bookNow => 'இப்போது முன்பதிவு';

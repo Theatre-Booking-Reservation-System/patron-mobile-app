@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="390" height="844" viewBox="0 0 390 844">
+<rect width="390" height="844" fill="#FFFFFF"/>
+<text x="24.0" y="29.0" font-family="Inter, Arial, sans-serif" font-size="12.0" font-weight="700" text-anchor="start" fill="#111827">9:41</text>
+<text x="362.0" y="29.0" font-family="Inter, Arial, sans-serif" font-size="10.0" font-weight="400" text-anchor="end" fill="#111827">● )))  ▰</text>
+<text x="22.0" y="76.0" font-family="Inter, Arial, sans-serif" font-size="32.0" font-weight="400" text-anchor="start" fill="#111827">‹</text>
+<text x="52.0" y="72.0" font-family="Inter, Arial, sans-serif" font-size="20.0" font-weight="700" text-anchor="start" fill="#111827">Booking summary</text>
+<line x1="0.0" y1="96.0" x2="390.0" y2="96.0" stroke="#1F2937" stroke-width="1.0" stroke-linecap="round"/>
+<rect x="24.0" y="116.0" width="342.0" height="86.0" rx="16.0" fill="#F9FAFB" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="40.0" y="143.0" font-family="Inter, Arial, sans-serif" font-size="17.0" font-weight="700" text-anchor="start" fill="#111827">Hamlet</text>
+<text x="40.0" y="169.0" font-family="Inter, Arial, sans-serif" font-size="12.0" font-weight="400" text-anchor="start" fill="#111827">Sun 27 Sep 2026 · 7:30 PM</text>
+<text x="350.0" y="169.0" font-family="Inter, Arial, sans-serif" font-size="12.0" font-weight="400" text-anchor="end" fill="#111827">2 tickets</text>
+<text x="24.0" y="240.0" font-family="Inter, Arial, sans-serif" font-size="18.0" font-weight="700" text-anchor="start" fill="#111827">Seats</text>
+<rect x="24.0" y="256.0" width="342.0" height="62.0" rx="16.0" fill="#F9FAFB" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="42.0" y="293.0" font-family="Inter, Arial, sans-serif" font-size="20.0" font-weight="600" text-anchor="middle" fill="#111827">▱</text>
+<text x="65.0" y="281.0" font-family="Inter, Arial, sans-serif" font-size="14.0" font-weight="600" text-anchor="start" fill="#111827">C4 · Circle Mid</text>
+<text x="65.0" y="301.0" font-family="Inter, Arial, sans-serif" font-size="11.0" font-weight="400" text-anchor="start" fill="#6B7280">Regular ticket</text>
+<rect x="24.0" y="328.0" width="342.0" height="62.0" rx="16.0" fill="#F9FAFB" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="42.0" y="365.0" font-family="Inter, Arial, sans-serif" font-size="20.0" font-weight="600" text-anchor="middle" fill="#111827">▱</text>
+<text x="65.0" y="353.0" font-family="Inter, Arial, sans-serif" font-size="14.0" font-weight="600" text-anchor="start" fill="#111827">C5 · Circle Mid</text>
+<text x="65.0" y="373.0" font-family="Inter, Arial, sans-serif" font-size="11.0" font-weight="400" text-anchor="start" fill="#6B7280">Regular ticket</text>
+<rect x="24.0" y="420.0" width="342.0" height="150.0" rx="16.0" fill="#F9FAFB" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="40.0" y="449.0" font-family="Inter, Arial, sans-serif" font-size="13.0" font-weight="400" text-anchor="start" fill="#111827">Subtotal</text>
+<text x="350.0" y="449.0" font-family="Inter, Arial, sans-serif" font-size="13.0" font-weight="400" text-anchor="end" fill="#111827">LKR 2,288</text>
+<text x="40.0" y="480.0" font-family="Inter, Arial, sans-serif" font-size="13.0" font-weight="400" text-anchor="start" fill="#111827">VAT</text>
+<text x="350.0" y="480.0" font-family="Inter, Arial, sans-serif" font-size="13.0" font-weight="400" text-anchor="end" fill="#111827">LKR 412</text>
+<line x1="24.0" y1="500.0" x2="366.0" y2="500.0" stroke="#1F2937" stroke-width="1.0" stroke-linecap="round"/>
+<text x="40.0" y="535.0" font-family="Inter, Arial, sans-serif" font-size="16.0" font-weight="700" text-anchor="start" fill="#111827">Total</text>
+<text x="350.0" y="535.0" font-family="Inter, Arial, sans-serif" font-size="16.0" font-weight="700" text-anchor="end" fill="#111827">LKR 2,700</text>
+<rect x="24.0" y="606.0" width="20.0" height="20.0" rx="4.0" fill="#1F2937" stroke="#1F2937" stroke-width="1.5"/>
+<text x="34.0" y="621.0" font-family="Inter, Arial, sans-serif" font-size="13.0" font-weight="400" text-anchor="middle" fill="#FFFFFF">✓</text>
+<text x="54.0" y="621.0" font-family="Inter, Arial, sans-serif" font-size="12.0" font-weight="400" text-anchor="start" fill="#111827">I accept the booking terms and conditions.</text>
+<rect x="24.0" y="662.0" width="342.0" height="48.0" rx="24.0" fill="#1F2937" stroke="#1F2937" stroke-width="1.5"/>
+<text x="195.0" y="692.0" font-family="Inter, Arial, sans-serif" font-size="14.0" font-weight="700" text-anchor="middle" fill="#FFFFFF">Proceed to payment</text>
+</svg>

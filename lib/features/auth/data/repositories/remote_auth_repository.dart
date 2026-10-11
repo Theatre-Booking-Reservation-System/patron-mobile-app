@@ -36,6 +36,30 @@ class RemoteAuthRepository implements AuthRepository {
   }
 
   @override
+  Future<LoyaltyEnrollment> enrollLoyalty(String patronId) async {
+    try {
+      final response = await _dio.post<Object?>(
+        '${ApiConfig.identityService}/patron/${Uri.encodeComponent(patronId)}/loyalty',
+      );
+      return LoyaltyEnrollResponseDto.fromJson(
+        _jsonObject(response.data),
+      ).toDomain();
+    } on DioException catch (error) {
+      throw ApiException.fromDio(error);
+    } on FormatException catch (error) {
+      throw ApiException(
+        ApiFailureType.invalidResponse,
+        message: error.message,
+      );
+    } on TypeError catch (error) {
+      throw ApiException(
+        ApiFailureType.invalidResponse,
+        message: error.toString(),
+      );
+    }
+  }
+
+  @override
   Future<AuthenticatedPatron> login({
     required String email,
     required String password,

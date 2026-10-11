@@ -34,10 +34,10 @@ final class CheckoutConsentChanged extends CheckoutEvent {
 }
 
 final class PaymentRequested extends CheckoutEvent {
-  const PaymentRequested({this.simulateFailure = false});
-  final bool simulateFailure;
+  const PaymentRequested({required this.card});
+  final CardPaymentDetails card;
   @override
-  List<Object?> get props => [simulateFailure];
+  List<Object?> get props => [card];
 }
 
 final class CheckoutReset extends CheckoutEvent {
@@ -138,15 +138,12 @@ class CheckoutBloc extends Bloc<CheckoutEvent, CheckoutState> {
     on<PaymentRequested>((event, emit) async {
       emit(state.copyWith(status: CheckoutStatus.paying));
       await Future<void>.delayed(const Duration(milliseconds: 850));
-      if (event.simulateFailure) {
-        emit(state.copyWith(status: CheckoutStatus.paymentFailure));
-        return;
-      }
       try {
         final booking = await _repository.confirmBooking(
           draft: state.draft!,
           patron: state.patron!,
           quote: state.quote!,
+          card: event.card,
         );
         emit(
           state.copyWith(

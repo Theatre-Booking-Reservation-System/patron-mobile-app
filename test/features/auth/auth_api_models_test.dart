@@ -32,6 +32,18 @@ void main() {
     expect(response.email, 'nimal@example.com');
   });
 
+  test('maps the loyalty enrolment response', () {
+    final enrollment = LoyaltyEnrollResponseDto.fromJson({
+      'statusCode': '200',
+      'statusDescription': 'Patron enrolled',
+      'patronId': 'patron-id',
+      'loyaltyCardNo': 'LOY-0001',
+    }).toDomain();
+
+    expect(enrollment.patronId, 'patron-id');
+    expect(enrollment.cardNumber, 'LOY-0001');
+  });
+
   test('maps loyalty status from the patron detail response', () {
     final patron = PatronDetailResponseDto.fromJson({
       'patron': {

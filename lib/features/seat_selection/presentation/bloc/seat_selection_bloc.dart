@@ -12,11 +12,18 @@ sealed class SeatSelectionEvent extends Equatable {
 }
 
 final class SeatMapRequested extends SeatSelectionEvent {
-  const SeatMapRequested(this.production, this.performance);
+  const SeatMapRequested(
+    this.production,
+    this.performance, {
+    this.guest = false,
+  });
   final Production production;
   final Performance performance;
+
+  /// Guests have no access token, and the seat service requires one.
+  final bool guest;
   @override
-  List<Object?> get props => [production, performance];
+  List<Object?> get props => [production, performance, guest];
 }
 
 final class SeatToggled extends SeatSelectionEvent {
@@ -133,6 +140,17 @@ class SeatSelectionBloc extends Bloc<SeatSelectionEvent, SeatSelectionState> {
         clearFailure: true,
       ),
     );
+    if (event.guest) {
+      emit(
+        state.copyWith(
+          status: SeatSelectionStatus.success,
+          seats: const [],
+          selected: const [],
+          clearFailure: true,
+        ),
+      );
+      return;
+    }
     try {
       final seats = await _repository.getSeats(
         event.production,

@@ -478,6 +478,60 @@ abstract class AppLocalizations {
   /// **'Card payment'**
   String get cardPayment;
 
+  /// No description provided for @cardDetails.
+  ///
+  /// In en, this message translates to:
+  /// **'Card details'**
+  String get cardDetails;
+
+  /// No description provided for @cardHolderName.
+  ///
+  /// In en, this message translates to:
+  /// **'Name on card'**
+  String get cardHolderName;
+
+  /// No description provided for @cardNumber.
+  ///
+  /// In en, this message translates to:
+  /// **'Card number'**
+  String get cardNumber;
+
+  /// No description provided for @cardExpiry.
+  ///
+  /// In en, this message translates to:
+  /// **'Expiry'**
+  String get cardExpiry;
+
+  /// No description provided for @cardCvv.
+  ///
+  /// In en, this message translates to:
+  /// **'CVV'**
+  String get cardCvv;
+
+  /// No description provided for @invalidCardNumber.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter a card number of 13 to 19 digits.'**
+  String get invalidCardNumber;
+
+  /// No description provided for @invalidCardExpiry.
+  ///
+  /// In en, this message translates to:
+  /// **'Use MM/YY or MM/YYYY.'**
+  String get invalidCardExpiry;
+
+  /// No description provided for @invalidCardMonth.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter a month from 01 to 12.'**
+  String get invalidCardMonth;
+
+  /// No description provided for @invalidCardCvv.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter a 3 or 4 digit CVV.'**
+  String get invalidCardCvv;
+
   /// No description provided for @mobilePayment.
   ///
   /// In en, this message translates to:
@@ -502,16 +556,10 @@ abstract class AppLocalizations {
   /// **'Pay Now'**
   String get payNow;
 
-  /// No description provided for @simulateFailure.
-  ///
-  /// In en, this message translates to:
-  /// **'Simulate declined payment'**
-  String get simulateFailure;
-
   /// No description provided for @paymentFailed.
   ///
   /// In en, this message translates to:
-  /// **'Payment was declined. Your seats remain held for five minutes.'**
+  /// **'Payment was declined.'**
   String get paymentFailed;
 
   /// No description provided for @retry.
@@ -789,6 +837,102 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Favourite'**
   String get favourite;
+
+  /// No description provided for @shareProduction.
+  ///
+  /// In en, this message translates to:
+  /// **'Share production'**
+  String get shareProduction;
+
+  /// No description provided for @shareWithContact.
+  ///
+  /// In en, this message translates to:
+  /// **'Share with a contact'**
+  String get shareWithContact;
+
+  /// No description provided for @contactsPermissionNeeded.
+  ///
+  /// In en, this message translates to:
+  /// **'Allow contacts access to share this production with someone you know.'**
+  String get contactsPermissionNeeded;
+
+  /// No description provided for @contactsPermissionDenied.
+  ///
+  /// In en, this message translates to:
+  /// **'Contacts access is turned off. Allow it in Settings to share this production.'**
+  String get contactsPermissionDenied;
+
+  /// No description provided for @openSettings.
+  ///
+  /// In en, this message translates to:
+  /// **'Open Settings'**
+  String get openSettings;
+
+  /// No description provided for @notNow.
+  ///
+  /// In en, this message translates to:
+  /// **'Not now'**
+  String get notNow;
+
+  /// No description provided for @noContacts.
+  ///
+  /// In en, this message translates to:
+  /// **'No contacts found.'**
+  String get noContacts;
+
+  /// No description provided for @unnamedContact.
+  ///
+  /// In en, this message translates to:
+  /// **'No name'**
+  String get unnamedContact;
+
+  /// No description provided for @contactHasNoDetails.
+  ///
+  /// In en, this message translates to:
+  /// **'This contact has no phone number or email address.'**
+  String get contactHasNoDetails;
+
+  /// No description provided for @sendMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Send a message'**
+  String get sendMessage;
+
+  /// No description provided for @sendEmail.
+  ///
+  /// In en, this message translates to:
+  /// **'Send an email'**
+  String get sendEmail;
+
+  /// No description provided for @searchContacts.
+  ///
+  /// In en, this message translates to:
+  /// **'Search contacts'**
+  String get searchContacts;
+
+  /// No description provided for @shareFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Couldn\'t open a message or email for this contact.'**
+  String get shareFailed;
+
+  /// No description provided for @shareProductionCta.
+  ///
+  /// In en, this message translates to:
+  /// **'Book tickets in the Sapumal Theatre app.'**
+  String get shareProductionCta;
+
+  /// No description provided for @shareChooseChannel.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose how to send {title}.'**
+  String shareChooseChannel(String title);
+
+  /// No description provided for @tryAgain.
+  ///
+  /// In en, this message translates to:
+  /// **'Try again'**
+  String get tryAgain;
 
   /// No description provided for @bookNow.
   ///

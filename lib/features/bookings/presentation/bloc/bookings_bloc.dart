@@ -91,9 +91,20 @@ class BookingsBloc extends Bloc<BookingsEvent, BookingsState> {
       );
       try {
         final cancelled = await _repository.cancelBooking(event.booking);
-        final updated = state.bookings
-            .map((item) => item.id == cancelled.id ? cancelled : item)
-            .toList(growable: false);
+        final known = state.bookings.any(
+          (item) =>
+              item.id == cancelled.id || item.reference == cancelled.reference,
+        );
+        final updated = known
+            ? [
+                for (final item in state.bookings)
+                  if (item.id == cancelled.id ||
+                      item.reference == cancelled.reference)
+                    cancelled
+                  else
+                    item,
+              ]
+            : [...state.bookings, cancelled];
         emit(
           BookingsState(
             status: BookingsStatus.success,

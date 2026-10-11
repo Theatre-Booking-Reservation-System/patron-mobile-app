@@ -79,6 +79,7 @@ class RemoteTheatreRepository implements TheatreRepository {
     required BookingDraft draft,
     required PatronDetails patron,
     required BookingQuote quote,
+    required CardPaymentDetails card,
   }) async {
     final session = await _requireSession();
     final currentSeats = await getSeats(draft.production, draft.performance);
@@ -118,10 +119,10 @@ class RemoteTheatreRepository implements TheatreRepository {
           : 'REGULAR',
       paymentMethod: 'CREDIT_CARD',
       paymentDetails: PaymentDetailsDto(
-        cardNumber: '4111111111111111',
-        expiry: '12/30',
-        cvv: '123',
-        cardHolderName: patron.name,
+        cardNumber: card.number,
+        expiry: card.expiry,
+        cvv: card.cvv,
+        cardHolderName: card.holderName,
       ),
     );
     final response = await _client.createBooking(request);
@@ -324,6 +325,11 @@ class RemoteTheatreRepository implements TheatreRepository {
     baseTicketCost: dto.baseTicketCost,
     posterImageUrl: dto.posterImageUrl,
     releaseDate: dto.releaseDate,
+    duration: parseProductionDuration(dto.duration),
+    castCrew: [
+      for (final member in dto.castCrew)
+        CastMember(role: member.role, name: member.name),
+    ],
     performances: dto.performances.map(_mapPerformance).toList(growable: false),
   );
 

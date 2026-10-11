@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="390" height="844" viewBox="0 0 390 844">
+<rect width="390" height="844" fill="#FFFFFF"/>
+<text x="24.0" y="29.0" font-family="Inter, Arial, sans-serif" font-size="12.0" font-weight="700" text-anchor="start" fill="#111827">9:41</text>
+<text x="362.0" y="29.0" font-family="Inter, Arial, sans-serif" font-size="10.0" font-weight="400" text-anchor="end" fill="#111827">● )))  ▰</text>
+<circle cx="195.0" cy="245.0" r="58.0" fill="#F3F4F6" stroke="#1F2937" stroke-width="1.5"/>
+<text x="195.0" y="266.0" font-family="Inter, Arial, sans-serif" font-size="56.0" font-weight="700" text-anchor="middle" fill="#111827">✓</text>
+<text x="195.0" y="346.0" font-family="Inter, Arial, sans-serif" font-size="28.0" font-weight="700" text-anchor="middle" fill="#111827">Account created</text>
+<text x="195.0" y="377.0" font-family="Inter, Arial, sans-serif" font-size="14.0" font-weight="400" text-anchor="middle" fill="#4B5563">Your theatre account is ready.</text>
+<text x="195.0" y="399.0" font-family="Inter, Arial, sans-serif" font-size="14.0" font-weight="400" text-anchor="middle" fill="#4B5563">Sign in to continue.</text>
+<rect x="24.0" y="474.0" width="342.0" height="48.0" rx="24.0" fill="#1F2937" stroke="#1F2937" stroke-width="1.5"/>
+<text x="195.0" y="504.0" font-family="Inter, Arial, sans-serif" font-size="14.0" font-weight="700" text-anchor="middle" fill="#FFFFFF">Return to login</text>
+</svg>

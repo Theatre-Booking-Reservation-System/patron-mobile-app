@@ -105,16 +105,8 @@ final List<Map<String, Object?>> _productionJson = [
         'dateTime': '2026-09-25T14:30:00',
         'session': 'matinee',
       },
-      {
-        'id': 'sk-01',
-        'dateTime': '2026-10-09T14:30:00',
-        'session': 'matinee',
-      },
-      {
-        'id': 'sk-02',
-        'dateTime': '2026-10-09T18:30:00',
-        'session': 'evening',
-      },
+      {'id': 'sk-01', 'dateTime': '2026-10-09T14:30:00', 'session': 'matinee'},
+      {'id': 'sk-02', 'dateTime': '2026-10-09T18:30:00', 'session': 'evening'},
     ],
   },
   {
@@ -141,16 +133,8 @@ final List<Map<String, Object?>> _productionJson = [
         'dateTime': '2026-09-25T18:00:00',
         'session': 'evening',
       },
-      {
-        'id': 'yo-01',
-        'dateTime': '2026-10-16T15:00:00',
-        'session': 'matinee',
-      },
-      {
-        'id': 'yo-02',
-        'dateTime': '2026-10-16T19:00:00',
-        'session': 'evening',
-      },
+      {'id': 'yo-01', 'dateTime': '2026-10-16T15:00:00', 'session': 'matinee'},
+      {'id': 'yo-02', 'dateTime': '2026-10-16T19:00:00', 'session': 'evening'},
     ],
   },
   {
@@ -178,11 +162,7 @@ final List<Map<String, Object?>> _productionJson = [
         'dateTime': '2026-09-25T20:00:00',
         'session': 'evening',
       },
-      {
-        'id': 'mv-01',
-        'dateTime': '2026-10-23T18:30:00',
-        'session': 'evening',
-      },
+      {'id': 'mv-01', 'dateTime': '2026-10-23T18:30:00', 'session': 'evening'},
       {
         'id': 'mv-poya',
         'dateTime': '2026-10-25T18:30:00',

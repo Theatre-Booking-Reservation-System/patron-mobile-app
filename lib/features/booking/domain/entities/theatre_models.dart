@@ -52,6 +52,16 @@ class Performance extends Equatable {
   List<Object?> get props => [id, dateTime, session];
 }
 
+class CastMember extends Equatable {
+  const CastMember({required this.role, required this.name});
+
+  final String role;
+  final String name;
+
+  @override
+  List<Object?> get props => [role, name];
+}
+
 class Production extends Equatable {
   const Production({
     required this.id,
@@ -63,6 +73,8 @@ class Production extends Equatable {
     required this.performances,
     this.posterImageUrl,
     this.releaseDate,
+    this.duration,
+    this.castCrew = const [],
   });
 
   final String id;
@@ -74,6 +86,18 @@ class Production extends Equatable {
   final List<Performance> performances;
   final String? posterImageUrl;
   final DateTime? releaseDate;
+  final Duration? duration;
+  final List<CastMember> castCrew;
+
+  String? get durationLabel {
+    final value = duration;
+    if (value == null || value <= Duration.zero) return null;
+    final hours = value.inHours;
+    final minutes = value.inMinutes.remainder(60);
+    if (hours == 0) return '${minutes}m';
+    if (minutes == 0) return '${hours}h';
+    return '${hours}h ${minutes}m';
+  }
 
   int get startingPrice => baseTicketCost ~/ 2;
 
@@ -105,7 +129,34 @@ class Production extends Equatable {
     performances,
     posterImageUrl,
     releaseDate,
+    duration,
+    castCrew,
   ];
+}
+
+Duration? parseProductionDuration(String? raw) {
+  final value = raw?.trim();
+  if (value == null || value.isEmpty) return null;
+  final clock = RegExp(
+    r'^(\d+)\s*h(?:\s*(\d+)\s*m)?$',
+    caseSensitive: false,
+  ).firstMatch(value);
+  if (clock != null) {
+    return Duration(
+      hours: int.parse(clock.group(1)!),
+      minutes: int.parse(clock.group(2) ?? '0'),
+    );
+  }
+  final minutesOnly = RegExp(
+    r'^(\d+)\s*m$',
+    caseSensitive: false,
+  ).firstMatch(value);
+  if (minutesOnly != null) {
+    return Duration(minutes: int.parse(minutesOnly.group(1)!));
+  }
+  final minutes = int.tryParse(value);
+  if (minutes == null || minutes <= 0) return null;
+  return Duration(minutes: minutes);
 }
 
 DateTime _day(DateTime value) => DateTime(value.year, value.month, value.day);
@@ -221,6 +272,23 @@ class PatronDetails extends Equatable {
 
   @override
   List<Object?> get props => [name, email, phone, concession, identityDocument];
+}
+
+class CardPaymentDetails extends Equatable {
+  const CardPaymentDetails({
+    required this.holderName,
+    required this.number,
+    required this.expiry,
+    required this.cvv,
+  });
+
+  final String holderName;
+  final String number;
+  final String expiry;
+  final String cvv;
+
+  @override
+  List<Object?> get props => [holderName, number, expiry, cvv];
 }
 
 class Booking extends Equatable {
