@@ -16,6 +16,7 @@ import 'package:patron_mobile_app/features/checkout/presentation/pages/booking_s
 import 'package:patron_mobile_app/features/checkout/presentation/pages/passenger_details_page.dart';
 import 'package:patron_mobile_app/features/checkout/presentation/pages/payment_page.dart';
 import 'package:patron_mobile_app/features/more/presentation/pages/more_page.dart';
+import 'package:patron_mobile_app/features/profile/presentation/pages/about_page.dart';
 import 'package:patron_mobile_app/features/profile/presentation/pages/language_page.dart';
 import 'package:patron_mobile_app/features/profile/presentation/pages/loyalty_page.dart';
 import 'package:patron_mobile_app/features/profile/presentation/pages/theme_page.dart';
@@ -37,6 +38,10 @@ GoRouter createRouter() {
       }.contains(path);
 
       if (authBloc.state.hasAppAccess) {
+        final guestSigningIn =
+            authBloc.state.isGuest &&
+            (path == '/login' || path == '/register');
+        if (guestSigningIn) return null;
         return isPublic ? '/home' : null;
       }
       return isPublic ? null : '/welcome';
@@ -136,6 +141,7 @@ GoRouter createRouter() {
         path: '/language',
         builder: (context, state) => const LanguagePage(),
       ),
+      GoRoute(path: '/about', builder: (context, state) => const AboutPage()),
     ],
     errorBuilder: (context, state) =>
         Scaffold(body: Center(child: Text(state.error.toString()))),

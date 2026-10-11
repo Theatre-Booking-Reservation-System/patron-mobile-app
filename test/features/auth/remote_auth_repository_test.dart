@@ -79,4 +79,26 @@ void main() {
     expect(patron.isLoyaltyMember, isTrue);
     expect(patron.loyaltyCardNumber, 'LOY-0001');
   });
+
+  test('enrols a patron in the loyalty programme', () async {
+    when(() => dio.post<Object?>(any())).thenAnswer(
+      (_) async => Response<Object?>(
+        requestOptions: RequestOptions(),
+        data: {
+          'statusCode': '200',
+          'statusDescription': 'Patron enrolled',
+          'patronId': 'patron/id',
+          'loyaltyCardNo': 'LOY-0001',
+        },
+      ),
+    );
+
+    final enrollment = await repository.enrollLoyalty('patron/id');
+
+    verify(
+      () => dio.post<Object?>('/identity-service/patron/patron%2Fid/loyalty'),
+    ).called(1);
+    expect(enrollment.patronId, 'patron/id');
+    expect(enrollment.cardNumber, 'LOY-0001');
+  });
 }

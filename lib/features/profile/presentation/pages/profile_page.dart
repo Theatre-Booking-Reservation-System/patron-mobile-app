@@ -210,6 +210,7 @@ class ProfilePage extends StatelessWidget {
                 _ProfileTile(
                   icon: Icons.info_outline,
                   label: context.l10n.aboutUs,
+                  onTap: () => context.push('/about'),
                 ),
                 ListTile(
                   leading: Icon(

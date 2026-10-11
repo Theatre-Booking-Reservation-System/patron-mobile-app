@@ -47,6 +47,23 @@ void main() {
     },
   );
 
+  test(
+    'loads no seats for a guest and does not call the seat service',
+    () async {
+      final bloc = SeatSelectionBloc(repository);
+      addTearDown(bloc.close);
+
+      bloc.add(SeatMapRequested(_production, _performance, guest: true));
+      await bloc.stream.firstWhere(
+        (state) => state.status == SeatSelectionStatus.success,
+      );
+
+      expect(bloc.state.seats, isEmpty);
+      expect(bloc.state.selected, isEmpty);
+      verifyNever(() => repository.getSeats(_production, _performance));
+    },
+  );
+
   test('preserves a useful failure reason from the Seat Service', () async {
     when(
       () => repository.getSeats(_production, _performance),

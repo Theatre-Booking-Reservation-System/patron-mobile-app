@@ -62,6 +62,10 @@ final class AuthLogoutRequested extends AuthEvent {
   const AuthLogoutRequested();
 }
 
+final class AuthLoyaltyEnrollmentRequested extends AuthEvent {
+  const AuthLoyaltyEnrollmentRequested();
+}
+
 final class _AuthSessionExpired extends AuthEvent {
   const _AuthSessionExpired();
 }
@@ -75,24 +79,42 @@ enum AuthStatus {
   failure,
 }
 
+enum LoyaltyEnrollmentStatus { idle, submitting, failure }
+
 class AuthState extends Equatable {
-  const AuthState({required this.status, this.patron, this.error = ''});
+  const AuthState({
+    required this.status,
+    this.patron,
+    this.error = '',
+    this.loyaltyEnrollment = LoyaltyEnrollmentStatus.idle,
+    this.loyaltyError = '',
+  });
 
   const AuthState.anonymous()
     : status = AuthStatus.anonymous,
       patron = null,
-      error = '';
+      error = '',
+      loyaltyEnrollment = LoyaltyEnrollmentStatus.idle,
+      loyaltyError = '';
 
   final AuthStatus status;
   final Patron? patron;
   final String error;
+  final LoyaltyEnrollmentStatus loyaltyEnrollment;
+  final String loyaltyError;
 
   bool get hasAppAccess =>
       status == AuthStatus.authenticated || status == AuthStatus.guest;
   bool get isGuest => status == AuthStatus.guest;
 
   @override
-  List<Object?> get props => [status, patron, error];
+  List<Object?> get props => [
+    status,
+    patron,
+    error,
+    loyaltyEnrollment,
+    loyaltyError,
+  ];
 }
 
 class AuthBloc extends Bloc<AuthEvent, AuthState> {
@@ -118,6 +140,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     on<AuthGuestRequested>(_onGuestRequested);
     on<AuthRegistrationRequested>(_onRegistrationRequested);
     on<AuthLogoutRequested>(_onLogoutRequested);
+    on<AuthLoyaltyEnrollmentRequested>(_onLoyaltyEnrollmentRequested);
     on<_AuthSessionExpired>(_onSessionExpired);
     _expirySubscription = sessionExpiryNotifier?.stream.listen(
       (_) => add(const _AuthSessionExpired()),
@@ -211,6 +234,88 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         const AuthState(status: AuthStatus.failure, error: 'sessionExpired'),
       );
       emit(const AuthState.anonymous());
+    }
+  }
+
+  Future<void> _onLoyaltyEnrollmentRequested(
+    AuthLoyaltyEnrollmentRequested event,
+    Emitter<AuthState> emit,
+  ) async {
+    final patron = state.patron;
+    final patronId = patron?.id;
+    if (state.status != AuthStatus.authenticated ||
+        patron == null ||
+        patronId == null ||
+        patronId.isEmpty) {
+      emit(
+        AuthState(
+          status: state.status,
+          patron: patron,
+          loyaltyEnrollment: LoyaltyEnrollmentStatus.failure,
+          loyaltyError: 'signInRequired',
+        ),
+      );
+      return;
+    }
+    if (patron.isLoyaltyMember ||
+        state.loyaltyEnrollment == LoyaltyEnrollmentStatus.submitting) {
+      return;
+    }
+
+    emit(
+      AuthState(
+        status: AuthStatus.authenticated,
+        patron: patron,
+        loyaltyEnrollment: LoyaltyEnrollmentStatus.submitting,
+      ),
+    );
+
+    try {
+      final enrollment = await _repository.enrollLoyalty(patronId);
+      final updated = patron.copyWith(
+        isLoyaltyMember: true,
+        loyaltyCardNumber: enrollment.cardNumber,
+      );
+      await _savePatron(updated);
+      emit(AuthState(status: AuthStatus.authenticated, patron: updated));
+    } on ApiException catch (error) {
+      if (error.type == ApiFailureType.conflict) {
+        final refreshed = await _loyaltyProfileAfterConflict(patron, patronId);
+        if (refreshed != null) {
+          await _savePatron(refreshed);
+          emit(AuthState(status: AuthStatus.authenticated, patron: refreshed));
+          return;
+        }
+      }
+      emit(
+        AuthState(
+          status: AuthStatus.authenticated,
+          patron: patron,
+          loyaltyEnrollment: LoyaltyEnrollmentStatus.failure,
+          loyaltyError: switch (error.type) {
+            ApiFailureType.conflict => 'alreadyEnrolled',
+            ApiFailureType.unauthenticated => 'sessionExpired',
+            ApiFailureType.notFound => 'patronNotFound',
+            _ => 'networkError',
+          },
+        ),
+      );
+    }
+  }
+
+  Future<Patron?> _loyaltyProfileAfterConflict(
+    Patron patron,
+    String patronId,
+  ) async {
+    try {
+      final profile = await _repository.getPatron(patronId);
+      if (!profile.isLoyaltyMember) return null;
+      return patron.copyWith(
+        isLoyaltyMember: true,
+        loyaltyCardNumber: profile.loyaltyCardNumber,
+      );
+    } on ApiException {
+      return null;
     }
   }
 

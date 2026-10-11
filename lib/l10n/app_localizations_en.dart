@@ -207,6 +207,33 @@ class AppLocalizationsEn extends AppLocalizations {
   String get cardPayment => 'Card payment';
 
   @override
+  String get cardDetails => 'Card details';
+
+  @override
+  String get cardHolderName => 'Name on card';
+
+  @override
+  String get cardNumber => 'Card number';
+
+  @override
+  String get cardExpiry => 'Expiry';
+
+  @override
+  String get cardCvv => 'CVV';
+
+  @override
+  String get invalidCardNumber => 'Enter a card number of 13 to 19 digits.';
+
+  @override
+  String get invalidCardExpiry => 'Use MM/YY or MM/YYYY.';
+
+  @override
+  String get invalidCardMonth => 'Enter a month from 01 to 12.';
+
+  @override
+  String get invalidCardCvv => 'Enter a 3 or 4 digit CVV.';
+
+  @override
   String get mobilePayment => 'Mobile payment';
 
   @override
@@ -220,11 +247,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get payNow => 'Pay Now';
 
   @override
-  String get simulateFailure => 'Simulate declined payment';
-
-  @override
-  String get paymentFailed =>
-      'Payment was declined. Your seats remain held for five minutes.';
+  String get paymentFailed => 'Payment was declined.';
 
   @override
   String get retry => 'Retry';
@@ -368,6 +391,60 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get favourite => 'Favourite';
+
+  @override
+  String get shareProduction => 'Share production';
+
+  @override
+  String get shareWithContact => 'Share with a contact';
+
+  @override
+  String get contactsPermissionNeeded =>
+      'Allow contacts access to share this production with someone you know.';
+
+  @override
+  String get contactsPermissionDenied =>
+      'Contacts access is turned off. Allow it in Settings to share this production.';
+
+  @override
+  String get openSettings => 'Open Settings';
+
+  @override
+  String get notNow => 'Not now';
+
+  @override
+  String get noContacts => 'No contacts found.';
+
+  @override
+  String get unnamedContact => 'No name';
+
+  @override
+  String get contactHasNoDetails =>
+      'This contact has no phone number or email address.';
+
+  @override
+  String get sendMessage => 'Send a message';
+
+  @override
+  String get sendEmail => 'Send an email';
+
+  @override
+  String get searchContacts => 'Search contacts';
+
+  @override
+  String get shareFailed =>
+      'Couldn\'t open a message or email for this contact.';
+
+  @override
+  String get shareProductionCta => 'Book tickets in the Sapumal Theatre app.';
+
+  @override
+  String shareChooseChannel(String title) {
+    return 'Choose how to send $title.';
+  }
+
+  @override
+  String get tryAgain => 'Try again';
 
   @override
   String get bookNow => 'Book now';

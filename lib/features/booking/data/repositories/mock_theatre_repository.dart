@@ -49,6 +49,7 @@ class MockTheatreRepository implements TheatreRepository {
     required BookingDraft draft,
     required PatronDetails patron,
     required BookingQuote quote,
+    required CardPaymentDetails card,
   }) async {
     await Future<void>.delayed(const Duration(milliseconds: 650));
     final reference = 'ST-${DateTime.now().year}-${_referenceCounter++}';
@@ -65,6 +66,9 @@ class MockTheatreRepository implements TheatreRepository {
       createdAt: DateTime.now(),
       patronEmail: patron.email,
       isFlagged: patron.isFlagged,
+      cardLast4: card.number.length >= 4
+          ? card.number.substring(card.number.length - 4)
+          : null,
     );
     _bookings.insert(0, booking);
     return booking;
@@ -130,6 +134,11 @@ class MockTheatreRepository implements TheatreRepository {
     baseTicketCost: dto.baseTicketCost,
     posterImageUrl: dto.posterImageUrl,
     releaseDate: dto.releaseDate,
+    duration: parseProductionDuration(dto.duration),
+    castCrew: [
+      for (final member in dto.castCrew)
+        CastMember(role: member.role, name: member.name),
+    ],
     performances: dto.performances.map(_mapPerformance).toList(growable: false),
   );
 

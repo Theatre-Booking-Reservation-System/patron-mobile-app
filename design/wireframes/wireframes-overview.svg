@@ -1,0 +1,708 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760.0" height="1950.0" viewBox="0 0 760.0 1950.0">
+<rect width="100%" height="100%" fill="#E5E7EB"/>
+<text x="10.0" y="20.0" font-family="Inter, Arial" font-size="12" font-weight="700" fill="#111827">1. Welcome</text>
+<g transform="translate(13.0 30.0) scale(0.42)">
+<rect width="390" height="844" rx="22" fill="#FFFFFF" stroke="#111827" stroke-width="2"/>
+<text x="24.0" y="29.0" font-family="Inter, Arial, sans-serif" font-size="12.0" font-weight="700" text-anchor="start" fill="#111827">9:41</text>
+<text x="362.0" y="29.0" font-family="Inter, Arial, sans-serif" font-size="10.0" font-weight="400" text-anchor="end" fill="#111827">● )))  ▰</text>
+<text x="195.0" y="76.0" font-family="Inter, Arial, sans-serif" font-size="14.0" font-weight="800" text-anchor="middle" fill="#111827">THEATRE</text>
+<rect x="32.0" y="105.0" width="326.0" height="290.0" rx="12.0" fill="#E5E7EB" stroke="#9CA3AF" stroke-width="1.5"/>
+<line x1="44.0" y1="383.0" x2="168.92" y2="250.0" stroke="#1F2937" stroke-width="1.5" stroke-linecap="round"/>
+<line x1="168.92" y1="250.0" x2="234.12" y2="308.0" stroke="#1F2937" stroke-width="1.5" stroke-linecap="round"/>
+<line x1="234.12" y1="308.0" x2="346.0" y2="197.8" stroke="#1F2937" stroke-width="1.5" stroke-linecap="round"/>
+<text x="195.0" y="242.0" font-family="Inter, Arial, sans-serif" font-size="10.0" font-weight="600" text-anchor="middle" fill="#6B7280">ONBOARDING ARTWORK</text>
+<text x="24.0" y="445.0" font-family="Inter, Arial, sans-serif" font-size="25.0" font-weight="700" text-anchor="start" fill="#111827">Discover remarkable theatre.</text>
+<text x="24.0" y="478.0" font-family="Inter, Arial, sans-serif" font-size="13.0" font-weight="400" text-anchor="start" fill="#4B5563">Browse productions, choose your seats and</text>
+<text x="24.0" y="499.0" font-family="Inter, Arial, sans-serif" font-size="13.0" font-weight="400" text-anchor="start" fill="#4B5563">keep every ticket close at hand.</text>
+<text x="195.0" y="545.0" font-family="Inter, Arial, sans-serif" font-size="16.0" font-weight="400" text-anchor="middle" fill="#111827">●  ○  ○</text>
+<rect x="24.0" y="606.0" width="342.0" height="48.0" rx="24.0" fill="#1F2937" stroke="#1F2937" stroke-width="1.5"/>
+<text x="195.0" y="636.0" font-family="Inter, Arial, sans-serif" font-size="14.0" font-weight="700" text-anchor="middle" fill="#FFFFFF">Get started</text>
+<rect x="24.0" y="668.0" width="342.0" height="48.0" rx="24.0" fill="#FFFFFF" stroke="#1F2937" stroke-width="1.5"/>
+<text x="195.0" y="698.0" font-family="Inter, Arial, sans-serif" font-size="14.0" font-weight="700" text-anchor="middle" fill="#111827">I already have an account</text>
+
+</g>
+<text x="200.0" y="20.0" font-family="Inter, Arial" font-size="12" font-weight="700" fill="#111827">2. Login</text>
+<g transform="translate(203.0 30.0) scale(0.42)">
+<rect width="390" height="844" rx="22" fill="#FFFFFF" stroke="#111827" stroke-width="2"/>
+<text x="24.0" y="29.0" font-family="Inter, Arial, sans-serif" font-size="12.0" font-weight="700" text-anchor="start" fill="#111827">9:41</text>
+<text x="362.0" y="29.0" font-family="Inter, Arial, sans-serif" font-size="10.0" font-weight="400" text-anchor="end" fill="#111827">● )))  ▰</text>
+<text x="22.0" y="76.0" font-family="Inter, Arial, sans-serif" font-size="32.0" font-weight="400" text-anchor="start" fill="#111827">‹</text>
+<text x="52.0" y="72.0" font-family="Inter, Arial, sans-serif" font-size="20.0" font-weight="700" text-anchor="start" fill="#111827">Sign in</text>
+<line x1="0.0" y1="96.0" x2="390.0" y2="96.0" stroke="#1F2937" stroke-width="1.0" stroke-linecap="round"/>
+<text x="24.0" y="142.0" font-family="Inter, Arial, sans-serif" font-size="28.0" font-weight="700" text-anchor="start" fill="#111827">Welcome back</text>
+<text x="24.0" y="168.0" font-family="Inter, Arial, sans-serif" font-size="13.0" font-weight="400" text-anchor="start" fill="#4B5563">Sign in to manage bookings and tickets.</text>
+<text x="24.0" y="205.0" font-family="Inter, Arial, sans-serif" font-size="11.0" font-weight="600" text-anchor="start" fill="#4B5563">EMAIL</text>
+<rect x="24.0" y="214.0" width="342.0" height="48.0" rx="10.0" fill="#FFFFFF" stroke="#6B7280" stroke-width="1.5"/>
+<text x="38.0" y="244.0" font-family="Inter, Arial, sans-serif" font-size="13.0" font-weight="400" text-anchor="start" fill="#6B7280">name@example.com</text>
+<text x="24.0" y="286.0" font-family="Inter, Arial, sans-serif" font-size="11.0" font-weight="600" text-anchor="start" fill="#4B5563">PASSWORD</text>
+<rect x="24.0" y="295.0" width="342.0" height="48.0" rx="10.0" fill="#FFFFFF" stroke="#6B7280" stroke-width="1.5"/>
+<text x="38.0" y="325.0" font-family="Inter, Arial, sans-serif" font-size="13.0" font-weight="400" text-anchor="start" fill="#6B7280">••••••••</text>
+<text x="366.0" y="372.0" font-family="Inter, Arial, sans-serif" font-size="12.0" font-weight="600" text-anchor="end" fill="#111827">Forgot password?</text>
+<rect x="24.0" y="410.0" width="342.0" height="48.0" rx="24.0" fill="#1F2937" stroke="#1F2937" stroke-width="1.5"/>
+<text x="195.0" y="440.0" font-family="Inter, Arial, sans-serif" font-size="14.0" font-weight="700" text-anchor="middle" fill="#FFFFFF">Sign in</text>
+<rect x="24.0" y="472.0" width="342.0" height="48.0" rx="24.0" fill="#FFFFFF" stroke="#1F2937" stroke-width="1.5"/>
+<text x="195.0" y="502.0" font-family="Inter, Arial, sans-serif" font-size="14.0" font-weight="700" text-anchor="middle" fill="#111827">Create an account</text>
+<text x="195.0" y="556.0" font-family="Inter, Arial, sans-serif" font-size="11.0" font-weight="400" text-anchor="middle" fill="#6B7280">────────  OR  ────────</text>
+<rect x="24.0" y="586.0" width="342.0" height="48.0" rx="24.0" fill="#FFFFFF" stroke="#1F2937" stroke-width="1.5"/>
+<text x="195.0" y="616.0" font-family="Inter, Arial, sans-serif" font-size="14.0" font-weight="700" text-anchor="middle" fill="#111827">Continue as guest</text>
+<text x="195.0" y="660.0" font-family="Inter, Arial, sans-serif" font-size="11.0" font-weight="400" text-anchor="middle" fill="#6B7280">Guest access includes shows and seat availability.</text>
+
+</g>
+<text x="390.0" y="20.0" font-family="Inter, Arial" font-size="12" font-weight="700" fill="#111827">3. Registration</text>
+<g transform="translate(393.0 30.0) scale(0.42)">
+<rect width="390" height="844" rx="22" fill="#FFFFFF" stroke="#111827" stroke-width="2"/>
+<text x="24.0" y="29.0" font-family="Inter, Arial, sans-serif" font-size="12.0" font-weight="700" text-anchor="start" fill="#111827">9:41</text>
+<text x="362.0" y="29.0" font-family="Inter, Arial, sans-serif" font-size="10.0" font-weight="400" text-anchor="end" fill="#111827">● )))  ▰</text>
+<text x="22.0" y="76.0" font-family="Inter, Arial, sans-serif" font-size="32.0" font-weight="400" text-anchor="start" fill="#111827">‹</text>
+<text x="52.0" y="72.0" font-family="Inter, Arial, sans-serif" font-size="20.0" font-weight="700" text-anchor="start" fill="#111827">Create account</text>
+<line x1="0.0" y1="96.0" x2="390.0" y2="96.0" stroke="#1F2937" stroke-width="1.0" stroke-linecap="round"/>
+<text x="24.0" y="128.0" font-family="Inter, Arial, sans-serif" font-size="21.0" font-weight="700" text-anchor="start" fill="#111827">Your details</text>
+<text x="24.0" y="150.0" font-family="Inter, Arial, sans-serif" font-size="11.0" font-weight="600" text-anchor="start" fill="#4B5563">FULL NAME</text>
+<rect x="24.0" y="159.0" width="342.0" height="48.0" rx="10.0" fill="#FFFFFF" stroke="#6B7280" stroke-width="1.5"/>
+<text x="38.0" y="189.0" font-family="Inter, Arial, sans-serif" font-size="13.0" font-weight="400" text-anchor="start" fill="#6B7280">Name as shown on ID</text>
+<text x="24.0" y="221.0" font-family="Inter, Arial, sans-serif" font-size="11.0" font-weight="600" text-anchor="start" fill="#4B5563">DATE OF BIRTH</text>
+<rect x="24.0" y="230.0" width="342.0" height="48.0" rx="10.0" fill="#FFFFFF" stroke="#6B7280" stroke-width="1.5"/>
+<text x="38.0" y="260.0" font-family="Inter, Arial, sans-serif" font-size="13.0" font-weight="400" text-anchor="start" fill="#6B7280">DD / MM / YYYY</text>
+<text x="24.0" y="292.0" font-family="Inter, Arial, sans-serif" font-size="11.0" font-weight="600" text-anchor="start" fill="#4B5563">NIC / PASSPORT</text>
+<rect x="24.0" y="301.0" width="342.0" height="48.0" rx="10.0" fill="#FFFFFF" stroke="#6B7280" stroke-width="1.5"/>
+<text x="38.0" y="331.0" font-family="Inter, Arial, sans-serif" font-size="13.0" font-weight="400" text-anchor="start" fill="#6B7280">Identity number</text>
+<text x="24.0" y="363.0" font-family="Inter, Arial, sans-serif" font-size="11.0" font-weight="600" text-anchor="start" fill="#4B5563">EMAIL</text>
+<rect x="24.0" y="372.0" width="342.0" height="48.0" rx="10.0" fill="#FFFFFF" stroke="#6B7280" stroke-width="1.5"/>
+<text x="38.0" y="402.0" font-family="Inter, Arial, sans-serif" font-size="13.0" font-weight="400" text-anchor="start" fill="#6B7280">name@example.com</text>
+<text x="24.0" y="434.0" font-family="Inter, Arial, sans-serif" font-size="11.0" font-weight="600" text-anchor="start" fill="#4B5563">MOBILE NUMBER</text>
+<rect x="24.0" y="443.0" width="342.0" height="48.0" rx="10.0" fill="#FFFFFF" stroke="#6B7280" stroke-width="1.5"/>
+<text x="38.0" y="473.0" font-family="Inter, Arial, sans-serif" font-size="13.0" font-weight="400" text-anchor="start" fill="#6B7280">+94</text>
+<text x="24.0" y="505.0" font-family="Inter, Arial, sans-serif" font-size="11.0" font-weight="600" text-anchor="start" fill="#4B5563">PASSWORD</text>
+<rect x="24.0" y="514.0" width="342.0" height="48.0" rx="10.0" fill="#FFFFFF" stroke="#6B7280" stroke-width="1.5"/>
+<text x="38.0" y="544.0" font-family="Inter, Arial, sans-serif" font-size="13.0" font-weight="400" text-anchor="start" fill="#6B7280">Minimum 8 characters</text>
+<rect x="24.0" y="588.0" width="20.0" height="20.0" rx="4.0" fill="#1F2937" stroke="#1F2937" stroke-width="1.5"/>
+<text x="34.0" y="603.0" font-family="Inter, Arial, sans-serif" font-size="13.0" font-weight="400" text-anchor="middle" fill="#FFFFFF">✓</text>
+<text x="54.0" y="603.0" font-family="Inter, Arial, sans-serif" font-size="12.0" font-weight="400" text-anchor="start" fill="#111827">I accept the Terms &amp; Conditions.</text>
+<rect x="24.0" y="620.0" width="20.0" height="20.0" rx="4.0" fill="#1F2937" stroke="#1F2937" stroke-width="1.5"/>
+<text x="34.0" y="635.0" font-family="Inter, Arial, sans-serif" font-size="13.0" font-weight="400" text-anchor="middle" fill="#FFFFFF">✓</text>
+<text x="54.0" y="635.0" font-family="Inter, Arial, sans-serif" font-size="12.0" font-weight="400" text-anchor="start" fill="#111827">I acknowledge the Privacy Notice.</text>
+<rect x="24.0" y="666.0" width="342.0" height="48.0" rx="24.0" fill="#1F2937" stroke="#1F2937" stroke-width="1.5"/>
+<text x="195.0" y="696.0" font-family="Inter, Arial, sans-serif" font-size="14.0" font-weight="700" text-anchor="middle" fill="#FFFFFF">Create account</text>
+<text x="195.0" y="744.0" font-family="Inter, Arial, sans-serif" font-size="12.0" font-weight="600" text-anchor="middle" fill="#111827">Already registered? Sign in</text>
+
+</g>
+<text x="580.0" y="20.0" font-family="Inter, Arial" font-size="12" font-weight="700" fill="#111827">4. Registration success</text>
+<g transform="translate(583.0 30.0) scale(0.42)">
+<rect width="390" height="844" rx="22" fill="#FFFFFF" stroke="#111827" stroke-width="2"/>
+<text x="24.0" y="29.0" font-family="Inter, Arial, sans-serif" font-size="12.0" font-weight="700" text-anchor="start" fill="#111827">9:41</text>
+<text x="362.0" y="29.0" font-family="Inter, Arial, sans-serif" font-size="10.0" font-weight="400" text-anchor="end" fill="#111827">● )))  ▰</text>
+<circle cx="195.0" cy="245.0" r="58.0" fill="#F3F4F6" stroke="#1F2937" stroke-width="1.5"/>
+<text x="195.0" y="266.0" font-family="Inter, Arial, sans-serif" font-size="56.0" font-weight="700" text-anchor="middle" fill="#111827">✓</text>
+<text x="195.0" y="346.0" font-family="Inter, Arial, sans-serif" font-size="28.0" font-weight="700" text-anchor="middle" fill="#111827">Account created</text>
+<text x="195.0" y="377.0" font-family="Inter, Arial, sans-serif" font-size="14.0" font-weight="400" text-anchor="middle" fill="#4B5563">Your theatre account is ready.</text>
+<text x="195.0" y="399.0" font-family="Inter, Arial, sans-serif" font-size="14.0" font-weight="400" text-anchor="middle" fill="#4B5563">Sign in to continue.</text>
+<rect x="24.0" y="474.0" width="342.0" height="48.0" rx="24.0" fill="#1F2937" stroke="#1F2937" stroke-width="1.5"/>
+<text x="195.0" y="504.0" font-family="Inter, Arial, sans-serif" font-size="14.0" font-weight="700" text-anchor="middle" fill="#FFFFFF">Return to login</text>
+
+</g>
+<text x="10.0" y="410.0" font-family="Inter, Arial" font-size="12" font-weight="700" fill="#111827">5. Home dashboard</text>
+<g transform="translate(13.0 420.0) scale(0.42)">
+<rect width="390" height="844" rx="22" fill="#FFFFFF" stroke="#111827" stroke-width="2"/>
+<text x="24.0" y="29.0" font-family="Inter, Arial, sans-serif" font-size="12.0" font-weight="700" text-anchor="start" fill="#111827">9:41</text>
+<text x="362.0" y="29.0" font-family="Inter, Arial, sans-serif" font-size="10.0" font-weight="400" text-anchor="end" fill="#111827">● )))  ▰</text>
+<text x="24.0" y="72.0" font-family="Inter, Arial, sans-serif" font-size="20.0" font-weight="700" text-anchor="start" fill="#111827">Good evening, Haritha</text>
+<rect x="280.0" y="50.0" width="86.0" height="32.0" rx="16.0" fill="#D1D5DB" stroke="#6B7280" stroke-width="1.5"/>
+<text x="323.0" y="71.0" font-family="Inter, Arial, sans-serif" font-size="11.0" font-weight="600" text-anchor="middle" fill="#111827">LOYALTY</text>
+<rect x="24.0" y="104.0" width="342.0" height="225.0" rx="16.0" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<rect x="38.0" y="120.0" width="112.0" height="150.0" rx="12.0" fill="#E5E7EB" stroke="#9CA3AF" stroke-width="1.5"/>
+<line x1="50.0" y1="258.0" x2="85.03999999999999" y2="195.0" stroke="#1F2937" stroke-width="1.5" stroke-linecap="round"/>
+<line x1="85.03999999999999" y1="195.0" x2="107.44" y2="225.0" stroke="#1F2937" stroke-width="1.5" stroke-linecap="round"/>
+<line x1="107.44" y1="225.0" x2="138.0" y2="168.0" stroke="#1F2937" stroke-width="1.5" stroke-linecap="round"/>
+<text x="94.0" y="187.0" font-family="Inter, Arial, sans-serif" font-size="10.0" font-weight="600" text-anchor="middle" fill="#6B7280">POSTER</text>
+<rect x="168.0" y="122.0" width="82.0" height="32.0" rx="16.0" fill="#FFFFFF" stroke="#6B7280" stroke-width="1.5"/>
+<text x="209.0" y="143.0" font-family="Inter, Arial, sans-serif" font-size="11.0" font-weight="600" text-anchor="middle" fill="#111827">FEATURED</text>
+<text x="168.0" y="172.0" font-family="Inter, Arial, sans-serif" font-size="25.0" font-weight="700" text-anchor="start" fill="#111827">Hamlet</text>
+<text x="168.0" y="200.0" font-family="Inter, Arial, sans-serif" font-size="13.0" font-weight="400" text-anchor="start" fill="#111827">Tonight · 7:30 PM</text>
+<text x="168.0" y="226.0" font-family="Inter, Arial, sans-serif" font-size="13.0" font-weight="600" text-anchor="start" fill="#111827">From LKR 1,350</text>
+<rect x="164.0" y="268.0" width="176.0" height="48.0" rx="24.0" fill="#1F2937" stroke="#1F2937" stroke-width="1.5"/>
+<text x="252.0" y="298.0" font-family="Inter, Arial, sans-serif" font-size="14.0" font-weight="700" text-anchor="middle" fill="#FFFFFF">Book tickets</text>
+<text x="24.0" y="372.0" font-family="Inter, Arial, sans-serif" font-size="20.0" font-weight="700" text-anchor="start" fill="#111827">Today's shows</text>
+<rect x="24.0" y="390.0" width="164.0" height="76.0" rx="16.0" fill="#F9FAFB" stroke="#9CA3AF" stroke-width="1.5"/>
+<rect x="202.0" y="390.0" width="164.0" height="76.0" rx="16.0" fill="#F9FAFB" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="38.0" y="418.0" font-family="Inter, Arial, sans-serif" font-size="13.0" font-weight="700" text-anchor="start" fill="#111827">10:00 AM</text>
+<text x="38.0" y="443.0" font-family="Inter, Arial, sans-serif" font-size="11.0" font-weight="400" text-anchor="start" fill="#111827">Production title</text>
+<text x="216.0" y="418.0" font-family="Inter, Arial, sans-serif" font-size="13.0" font-weight="700" text-anchor="start" fill="#111827">7:30 PM</text>
+<text x="216.0" y="443.0" font-family="Inter, Arial, sans-serif" font-size="11.0" font-weight="400" text-anchor="start" fill="#111827">Production title</text>
+<text x="24.0" y="507.0" font-family="Inter, Arial, sans-serif" font-size="20.0" font-weight="700" text-anchor="start" fill="#111827">Quick access</text>
+<rect x="24.0" y="524.0" width="342.0" height="62.0" rx="16.0" fill="#F9FAFB" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="42.0" y="561.0" font-family="Inter, Arial, sans-serif" font-size="20.0" font-weight="600" text-anchor="middle" fill="#111827">◈</text>
+<text x="65.0" y="549.0" font-family="Inter, Arial, sans-serif" font-size="14.0" font-weight="600" text-anchor="start" fill="#111827">Browse upcoming shows</text>
+<text x="65.0" y="569.0" font-family="Inter, Arial, sans-serif" font-size="11.0" font-weight="400" text-anchor="start" fill="#6B7280">Find your next performance</text>
+<text x="344.0" y="563.0" font-family="Inter, Arial, sans-serif" font-size="24.0" font-weight="400" text-anchor="start" fill="#6B7280">›</text>
+<text x="24.0" y="626.0" font-family="Inter, Arial, sans-serif" font-size="20.0" font-weight="700" text-anchor="start" fill="#111827">Coming up</text>
+<rect x="24.0" y="644.0" width="342.0" height="82.0" rx="16.0" fill="#F9FAFB" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="42.0" y="674.0" font-family="Inter, Arial, sans-serif" font-size="11.0" font-weight="700" text-anchor="start" fill="#111827">28 SEP</text>
+<text x="104.0" y="674.0" font-family="Inter, Arial, sans-serif" font-size="14.0" font-weight="600" text-anchor="start" fill="#111827">Next performance title</text>
+<text x="104.0" y="698.0" font-family="Inter, Arial, sans-serif" font-size="11.0" font-weight="400" text-anchor="start" fill="#6B7280">Matinee · 10:00 AM</text>
+<rect x="16.0" y="756.0" width="358.0" height="70.0" rx="28.0" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<rect x="22.0" y="763.0" width="80.0" height="56.0" rx="22.0" fill="#D1D5DB" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="62.0" y="787.0" font-family="Inter, Arial, sans-serif" font-size="19.0" font-weight="600" text-anchor="middle" fill="#111827">⌂</text>
+<text x="62.0" y="808.0" font-family="Inter, Arial, sans-serif" font-size="10.0" font-weight="700" text-anchor="middle" fill="#111827">Home</text>
+<text x="150.5" y="787.0" font-family="Inter, Arial, sans-serif" font-size="19.0" font-weight="600" text-anchor="middle" fill="#111827">◈</text>
+<text x="150.5" y="808.0" font-family="Inter, Arial, sans-serif" font-size="10.0" font-weight="500" text-anchor="middle" fill="#111827">Shows</text>
+<text x="239.0" y="787.0" font-family="Inter, Arial, sans-serif" font-size="19.0" font-weight="600" text-anchor="middle" fill="#111827">▱</text>
+<text x="239.0" y="808.0" font-family="Inter, Arial, sans-serif" font-size="10.0" font-weight="500" text-anchor="middle" fill="#111827">Bookings</text>
+<text x="327.5" y="787.0" font-family="Inter, Arial, sans-serif" font-size="19.0" font-weight="600" text-anchor="middle" fill="#111827">♙</text>
+<text x="327.5" y="808.0" font-family="Inter, Arial, sans-serif" font-size="10.0" font-weight="500" text-anchor="middle" fill="#111827">Profile</text>
+
+</g>
+<text x="200.0" y="410.0" font-family="Inter, Arial" font-size="12" font-weight="700" fill="#111827">6. Shows / productions</text>
+<g transform="translate(203.0 420.0) scale(0.42)">
+<rect width="390" height="844" rx="22" fill="#FFFFFF" stroke="#111827" stroke-width="2"/>
+<text x="24.0" y="29.0" font-family="Inter, Arial, sans-serif" font-size="12.0" font-weight="700" text-anchor="start" fill="#111827">9:41</text>
+<text x="362.0" y="29.0" font-family="Inter, Arial, sans-serif" font-size="10.0" font-weight="400" text-anchor="end" fill="#111827">● )))  ▰</text>
+<text x="24.0" y="92.0" font-family="Inter, Arial, sans-serif" font-size="28.0" font-weight="700" text-anchor="start" fill="#111827">Shows</text>
+<rect x="24.0" y="116.0" width="342.0" height="50.0" rx="25.0" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="45.0" y="149.0" font-family="Inter, Arial, sans-serif" font-size="24.0" font-weight="400" text-anchor="start" fill="#111827">⌕</text>
+<text x="76.0" y="147.0" font-family="Inter, Arial, sans-serif" font-size="14.0" font-weight="400" text-anchor="start" fill="#6B7280">Search productions</text>
+<rect x="24.0" y="184.0" width="58.0" height="32.0" rx="16.0" fill="#D1D5DB" stroke="#6B7280" stroke-width="1.5"/>
+<text x="53.0" y="205.0" font-family="Inter, Arial, sans-serif" font-size="11.0" font-weight="600" text-anchor="middle" fill="#111827">All</text>
+<rect x="91.0" y="184.0" width="75.0" height="32.0" rx="16.0" fill="#FFFFFF" stroke="#6B7280" stroke-width="1.5"/>
+<text x="128.5" y="205.0" font-family="Inter, Arial, sans-serif" font-size="11.0" font-weight="600" text-anchor="middle" fill="#111827">Sinhala</text>
+<rect x="175.0" y="184.0" width="66.0" height="32.0" rx="16.0" fill="#FFFFFF" stroke="#6B7280" stroke-width="1.5"/>
+<text x="208.0" y="205.0" font-family="Inter, Arial, sans-serif" font-size="11.0" font-weight="600" text-anchor="middle" fill="#111827">Tamil</text>
+<rect x="250.0" y="184.0" width="76.0" height="32.0" rx="16.0" fill="#FFFFFF" stroke="#6B7280" stroke-width="1.5"/>
+<text x="288.0" y="205.0" font-family="Inter, Arial, sans-serif" font-size="11.0" font-weight="600" text-anchor="middle" fill="#111827">English</text>
+<text x="24.0" y="253.0" font-family="Inter, Arial, sans-serif" font-size="20.0" font-weight="700" text-anchor="start" fill="#111827">Upcoming productions</text>
+<text x="366.0" y="251.0" font-family="Inter, Arial, sans-serif" font-size="12.0" font-weight="400" text-anchor="end" fill="#6B7280">7 found</text>
+<rect x="24.0" y="272.0" width="342.0" height="128.0" rx="16.0" fill="#F9FAFB" stroke="#9CA3AF" stroke-width="1.5"/>
+<rect x="36.0" y="284.0" width="88.0" height="104.0" rx="12.0" fill="#E5E7EB" stroke="#9CA3AF" stroke-width="1.5"/>
+<line x1="48.0" y1="376.0" x2="72.96000000000001" y2="336.0" stroke="#1F2937" stroke-width="1.5" stroke-linecap="round"/>
+<line x1="72.96000000000001" y1="336.0" x2="90.56" y2="356.8" stroke="#1F2937" stroke-width="1.5" stroke-linecap="round"/>
+<line x1="90.56" y1="356.8" x2="112.0" y2="317.28" stroke="#1F2937" stroke-width="1.5" stroke-linecap="round"/>
+<text x="80.0" y="328.0" font-family="Inter, Arial, sans-serif" font-size="10.0" font-weight="600" text-anchor="middle" fill="#6B7280">POSTER</text>
+<rect x="140.0" y="286.0" width="76.0" height="32.0" rx="16.0" fill="#FFFFFF" stroke="#6B7280" stroke-width="1.5"/>
+<text x="178.0" y="307.0" font-family="Inter, Arial, sans-serif" font-size="11.0" font-weight="600" text-anchor="middle" fill="#111827">ENGLISH</text>
+<text x="140.0" y="335.0" font-family="Inter, Arial, sans-serif" font-size="16.0" font-weight="700" text-anchor="start" fill="#111827">Production title</text>
+<text x="140.0" y="360.0" font-family="Inter, Arial, sans-serif" font-size="12.0" font-weight="400" text-anchor="start" fill="#111827">27/09/2026 · 7:30 PM</text>
+<text x="140.0" y="382.0" font-family="Inter, Arial, sans-serif" font-size="12.0" font-weight="600" text-anchor="start" fill="#111827">From LKR 1,350   →</text>
+<rect x="24.0" y="418.0" width="342.0" height="128.0" rx="16.0" fill="#F9FAFB" stroke="#9CA3AF" stroke-width="1.5"/>
+<rect x="36.0" y="430.0" width="88.0" height="104.0" rx="12.0" fill="#E5E7EB" stroke="#9CA3AF" stroke-width="1.5"/>
+<line x1="48.0" y1="522.0" x2="72.96000000000001" y2="482.0" stroke="#1F2937" stroke-width="1.5" stroke-linecap="round"/>
+<line x1="72.96000000000001" y1="482.0" x2="90.56" y2="502.8" stroke="#1F2937" stroke-width="1.5" stroke-linecap="round"/>
+<line x1="90.56" y1="502.8" x2="112.0" y2="463.28" stroke="#1F2937" stroke-width="1.5" stroke-linecap="round"/>
+<text x="80.0" y="474.0" font-family="Inter, Arial, sans-serif" font-size="10.0" font-weight="600" text-anchor="middle" fill="#6B7280">POSTER</text>
+<rect x="140.0" y="432.0" width="76.0" height="32.0" rx="16.0" fill="#FFFFFF" stroke="#6B7280" stroke-width="1.5"/>
+<text x="178.0" y="453.0" font-family="Inter, Arial, sans-serif" font-size="11.0" font-weight="600" text-anchor="middle" fill="#111827">TAMIL</text>
+<text x="140.0" y="481.0" font-family="Inter, Arial, sans-serif" font-size="16.0" font-weight="700" text-anchor="start" fill="#111827">Production title</text>
+<text x="140.0" y="506.0" font-family="Inter, Arial, sans-serif" font-size="12.0" font-weight="400" text-anchor="start" fill="#111827">28/09/2026 · 7:30 PM</text>
+<text x="140.0" y="528.0" font-family="Inter, Arial, sans-serif" font-size="12.0" font-weight="600" text-anchor="start" fill="#111827">From LKR 1,350   →</text>
+<rect x="24.0" y="564.0" width="342.0" height="128.0" rx="16.0" fill="#F9FAFB" stroke="#9CA3AF" stroke-width="1.5"/>
+<rect x="36.0" y="576.0" width="88.0" height="104.0" rx="12.0" fill="#E5E7EB" stroke="#9CA3AF" stroke-width="1.5"/>
+<line x1="48.0" y1="668.0" x2="72.96000000000001" y2="628.0" stroke="#1F2937" stroke-width="1.5" stroke-linecap="round"/>
+<line x1="72.96000000000001" y1="628.0" x2="90.56" y2="648.8" stroke="#1F2937" stroke-width="1.5" stroke-linecap="round"/>
+<line x1="90.56" y1="648.8" x2="112.0" y2="609.28" stroke="#1F2937" stroke-width="1.5" stroke-linecap="round"/>
+<text x="80.0" y="620.0" font-family="Inter, Arial, sans-serif" font-size="10.0" font-weight="600" text-anchor="middle" fill="#6B7280">POSTER</text>
+<rect x="140.0" y="578.0" width="76.0" height="32.0" rx="16.0" fill="#FFFFFF" stroke="#6B7280" stroke-width="1.5"/>
+<text x="178.0" y="599.0" font-family="Inter, Arial, sans-serif" font-size="11.0" font-weight="600" text-anchor="middle" fill="#111827">TAMIL</text>
+<text x="140.0" y="627.0" font-family="Inter, Arial, sans-serif" font-size="16.0" font-weight="700" text-anchor="start" fill="#111827">Production title</text>
+<text x="140.0" y="652.0" font-family="Inter, Arial, sans-serif" font-size="12.0" font-weight="400" text-anchor="start" fill="#111827">29/09/2026 · 7:30 PM</text>
+<text x="140.0" y="674.0" font-family="Inter, Arial, sans-serif" font-size="12.0" font-weight="600" text-anchor="start" fill="#111827">From LKR 1,350   →</text>
+<rect x="16.0" y="756.0" width="358.0" height="70.0" rx="28.0" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="62.0" y="787.0" font-family="Inter, Arial, sans-serif" font-size="19.0" font-weight="600" text-anchor="middle" fill="#111827">⌂</text>
+<text x="62.0" y="808.0" font-family="Inter, Arial, sans-serif" font-size="10.0" font-weight="500" text-anchor="middle" fill="#111827">Home</text>
+<rect x="110.5" y="763.0" width="80.0" height="56.0" rx="22.0" fill="#D1D5DB" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="150.5" y="787.0" font-family="Inter, Arial, sans-serif" font-size="19.0" font-weight="600" text-anchor="middle" fill="#111827">◈</text>
+<text x="150.5" y="808.0" font-family="Inter, Arial, sans-serif" font-size="10.0" font-weight="700" text-anchor="middle" fill="#111827">Shows</text>
+<text x="239.0" y="787.0" font-family="Inter, Arial, sans-serif" font-size="19.0" font-weight="600" text-anchor="middle" fill="#111827">▱</text>
+<text x="239.0" y="808.0" font-family="Inter, Arial, sans-serif" font-size="10.0" font-weight="500" text-anchor="middle" fill="#111827">Bookings</text>
+<text x="327.5" y="787.0" font-family="Inter, Arial, sans-serif" font-size="19.0" font-weight="600" text-anchor="middle" fill="#111827">♙</text>
+<text x="327.5" y="808.0" font-family="Inter, Arial, sans-serif" font-size="10.0" font-weight="500" text-anchor="middle" fill="#111827">Profile</text>
+
+</g>
+<text x="390.0" y="410.0" font-family="Inter, Arial" font-size="12" font-weight="700" fill="#111827">7. Production details</text>
+<g transform="translate(393.0 420.0) scale(0.42)">
+<rect width="390" height="844" rx="22" fill="#FFFFFF" stroke="#111827" stroke-width="2"/>
+<text x="24.0" y="29.0" font-family="Inter, Arial, sans-serif" font-size="12.0" font-weight="700" text-anchor="start" fill="#111827">9:41</text>
+<text x="362.0" y="29.0" font-family="Inter, Arial, sans-serif" font-size="10.0" font-weight="400" text-anchor="end" fill="#111827">● )))  ▰</text>
+<rect x="0.0" y="42.0" width="390.0" height="250.0" rx="12.0" fill="#E5E7EB" stroke="#9CA3AF" stroke-width="1.5"/>
+<line x1="12.0" y1="280.0" x2="163.79999999999998" y2="167.0" stroke="#1F2937" stroke-width="1.5" stroke-linecap="round"/>
+<line x1="163.79999999999998" y1="167.0" x2="241.8" y2="217.0" stroke="#1F2937" stroke-width="1.5" stroke-linecap="round"/>
+<line x1="241.8" y1="217.0" x2="378.0" y2="122.0" stroke="#1F2937" stroke-width="1.5" stroke-linecap="round"/>
+<text x="195.0" y="159.0" font-family="Inter, Arial, sans-serif" font-size="10.0" font-weight="600" text-anchor="middle" fill="#6B7280">PRODUCTION HERO</text>
+<circle cx="34.0" cy="72.0" r="18.0" fill="#FFFFFF" stroke="#1F2937" stroke-width="1.5"/>
+<text x="34.0" y="82.0" font-family="Inter, Arial, sans-serif" font-size="28.0" font-weight="400" text-anchor="middle" fill="#111827">‹</text>
+<rect x="24.0" y="314.0" width="82.0" height="32.0" rx="16.0" fill="#FFFFFF" stroke="#6B7280" stroke-width="1.5"/>
+<text x="65.0" y="335.0" font-family="Inter, Arial, sans-serif" font-size="11.0" font-weight="600" text-anchor="middle" fill="#111827">ENGLISH</text>
+<rect x="114.0" y="314.0" width="80.0" height="32.0" rx="16.0" fill="#FFFFFF" stroke="#6B7280" stroke-width="1.5"/>
+<text x="154.0" y="335.0" font-family="Inter, Arial, sans-serif" font-size="11.0" font-weight="600" text-anchor="middle" fill="#111827">TRAGEDY</text>
+<text x="24.0" y="382.0" font-family="Inter, Arial, sans-serif" font-size="30.0" font-weight="700" text-anchor="start" fill="#111827">Hamlet</text>
+<text x="24.0" y="412.0" font-family="Inter, Arial, sans-serif" font-size="13.0" font-weight="400" text-anchor="start" fill="#4B5563">A compelling production presented on the main</text>
+<text x="24.0" y="432.0" font-family="Inter, Arial, sans-serif" font-size="13.0" font-weight="400" text-anchor="start" fill="#4B5563">stage. Full synopsis continues here…</text>
+<rect x="24.0" y="456.0" width="342.0" height="80.0" rx="16.0" fill="#F9FAFB" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="40.0" y="482.0" font-family="Inter, Arial, sans-serif" font-size="11.0" font-weight="700" text-anchor="start" fill="#111827">EARLY ACCESS</text>
+<text x="40.0" y="509.0" font-family="Inter, Arial, sans-serif" font-size="12.0" font-weight="400" text-anchor="start" fill="#111827">Tickets available from the production release date.</text>
+<text x="24.0" y="580.0" font-family="Inter, Arial, sans-serif" font-size="20.0" font-weight="700" text-anchor="start" fill="#111827">Performances</text>
+<rect x="24.0" y="598.0" width="342.0" height="72.0" rx="16.0" fill="#F9FAFB" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="40.0" y="627.0" font-family="Inter, Arial, sans-serif" font-size="12.0" font-weight="700" text-anchor="start" fill="#111827">SUN 27 SEP</text>
+<text x="40.0" y="650.0" font-family="Inter, Arial, sans-serif" font-size="12.0" font-weight="400" text-anchor="start" fill="#111827">7:30 PM · Evening</text>
+<rect x="238.0" y="606.0" width="112.0" height="48.0" rx="24.0" fill="#1F2937" stroke="#1F2937" stroke-width="1.5"/>
+<text x="294.0" y="636.0" font-family="Inter, Arial, sans-serif" font-size="14.0" font-weight="700" text-anchor="middle" fill="#FFFFFF">Select seats</text>
+<rect x="24.0" y="684.0" width="342.0" height="54.0" rx="16.0" fill="#F9FAFB" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="40.0" y="716.0" font-family="Inter, Arial, sans-serif" font-size="12.0" font-weight="600" text-anchor="start" fill="#111827">MON 28 SEP   ·   10:00 AM   ·   Matinee</text>
+<rect x="24.0" y="768.0" width="342.0" height="48.0" rx="24.0" fill="#1F2937" stroke="#1F2937" stroke-width="1.5"/>
+<text x="195.0" y="798.0" font-family="Inter, Arial, sans-serif" font-size="14.0" font-weight="700" text-anchor="middle" fill="#FFFFFF">Choose performance</text>
+
+</g>
+<text x="580.0" y="410.0" font-family="Inter, Arial" font-size="12" font-weight="700" fill="#111827">8. Seat selection</text>
+<g transform="translate(583.0 420.0) scale(0.42)">
+<rect width="390" height="844" rx="22" fill="#FFFFFF" stroke="#111827" stroke-width="2"/>
+<text x="24.0" y="29.0" font-family="Inter, Arial, sans-serif" font-size="12.0" font-weight="700" text-anchor="start" fill="#111827">9:41</text>
+<text x="362.0" y="29.0" font-family="Inter, Arial, sans-serif" font-size="10.0" font-weight="400" text-anchor="end" fill="#111827">● )))  ▰</text>
+<text x="22.0" y="76.0" font-family="Inter, Arial, sans-serif" font-size="32.0" font-weight="400" text-anchor="start" fill="#111827">‹</text>
+<text x="52.0" y="72.0" font-family="Inter, Arial, sans-serif" font-size="20.0" font-weight="700" text-anchor="start" fill="#111827">Select seats</text>
+<line x1="0.0" y1="96.0" x2="390.0" y2="96.0" stroke="#1F2937" stroke-width="1.0" stroke-linecap="round"/>
+<text x="24.0" y="126.0" font-family="Inter, Arial, sans-serif" font-size="13.0" font-weight="600" text-anchor="start" fill="#111827">Hamlet · Sun 27 Sep · 7:30 PM</text>
+<rect x="24.0" y="150.0" width="96.0" height="32.0" rx="16.0" fill="#D1D5DB" stroke="#6B7280" stroke-width="1.5"/>
+<text x="72.0" y="171.0" font-family="Inter, Arial, sans-serif" font-size="11.0" font-weight="600" text-anchor="middle" fill="#111827">Stalls</text>
+<rect x="128.0" y="150.0" width="96.0" height="32.0" rx="16.0" fill="#FFFFFF" stroke="#6B7280" stroke-width="1.5"/>
+<text x="176.0" y="171.0" font-family="Inter, Arial, sans-serif" font-size="11.0" font-weight="600" text-anchor="middle" fill="#111827">Circle</text>
+<rect x="232.0" y="150.0" width="120.0" height="32.0" rx="16.0" fill="#FFFFFF" stroke="#6B7280" stroke-width="1.5"/>
+<text x="292.0" y="171.0" font-family="Inter, Arial, sans-serif" font-size="11.0" font-weight="600" text-anchor="middle" fill="#111827">Upper circle</text>
+<rect x="60.0" y="210.0" width="270.0" height="28.0" rx="14.0" fill="#E5E7EB" stroke="#6B7280" stroke-width="1.5"/>
+<text x="195.0" y="229.0" font-family="Inter, Arial, sans-serif" font-size="11.0" font-weight="700" text-anchor="middle" fill="#111827">STAGE</text>
+<text x="32.0" y="278.0" font-family="Inter, Arial, sans-serif" font-size="11.0" font-weight="700" text-anchor="start" fill="#111827">A</text>
+<rect x="56.0" y="260.0" width="26.0" height="26.0" rx="7.0" fill="#D1D5DB" stroke="#6B7280" stroke-width="1.5"/>
+<rect x="93.0" y="260.0" width="26.0" height="26.0" rx="7.0" fill="#FFFFFF" stroke="#6B7280" stroke-width="1.5"/>
+<rect x="130.0" y="260.0" width="26.0" height="26.0" rx="7.0" fill="#FFFFFF" stroke="#6B7280" stroke-width="1.5"/>
+<rect x="167.0" y="260.0" width="26.0" height="26.0" rx="7.0" fill="#FFFFFF" stroke="#6B7280" stroke-width="1.5"/>
+<rect x="204.0" y="260.0" width="26.0" height="26.0" rx="7.0" fill="#FFFFFF" stroke="#6B7280" stroke-width="1.5"/>
+<rect x="241.0" y="260.0" width="26.0" height="26.0" rx="7.0" fill="#FFFFFF" stroke="#6B7280" stroke-width="1.5"/>
+<rect x="278.0" y="260.0" width="26.0" height="26.0" rx="7.0" fill="#FFFFFF" stroke="#6B7280" stroke-width="1.5"/>
+<rect x="315.0" y="260.0" width="26.0" height="26.0" rx="7.0" fill="#D1D5DB" stroke="#6B7280" stroke-width="1.5"/>
+<text x="32.0" y="320.0" font-family="Inter, Arial, sans-serif" font-size="11.0" font-weight="700" text-anchor="start" fill="#111827">B</text>
+<rect x="56.0" y="302.0" width="26.0" height="26.0" rx="7.0" fill="#FFFFFF" stroke="#6B7280" stroke-width="1.5"/>
+<rect x="93.0" y="302.0" width="26.0" height="26.0" rx="7.0" fill="#FFFFFF" stroke="#6B7280" stroke-width="1.5"/>
+<rect x="130.0" y="302.0" width="26.0" height="26.0" rx="7.0" fill="#FFFFFF" stroke="#6B7280" stroke-width="1.5"/>
+<rect x="167.0" y="302.0" width="26.0" height="26.0" rx="7.0" fill="#FFFFFF" stroke="#6B7280" stroke-width="1.5"/>
+<rect x="204.0" y="302.0" width="26.0" height="26.0" rx="7.0" fill="#FFFFFF" stroke="#6B7280" stroke-width="1.5"/>
+<rect x="241.0" y="302.0" width="26.0" height="26.0" rx="7.0" fill="#FFFFFF" stroke="#6B7280" stroke-width="1.5"/>
+<rect x="278.0" y="302.0" width="26.0" height="26.0" rx="7.0" fill="#D1D5DB" stroke="#6B7280" stroke-width="1.5"/>
+<rect x="315.0" y="302.0" width="26.0" height="26.0" rx="7.0" fill="#FFFFFF" stroke="#6B7280" stroke-width="1.5"/>
+<text x="32.0" y="362.0" font-family="Inter, Arial, sans-serif" font-size="11.0" font-weight="700" text-anchor="start" fill="#111827">C</text>
+<rect x="56.0" y="344.0" width="26.0" height="26.0" rx="7.0" fill="#FFFFFF" stroke="#6B7280" stroke-width="1.5"/>
+<rect x="93.0" y="344.0" width="26.0" height="26.0" rx="7.0" fill="#FFFFFF" stroke="#6B7280" stroke-width="1.5"/>
+<rect x="130.0" y="344.0" width="26.0" height="26.0" rx="7.0" fill="#FFFFFF" stroke="#6B7280" stroke-width="1.5"/>
+<rect x="167.0" y="344.0" width="26.0" height="26.0" rx="7.0" fill="#4B5563" stroke="#6B7280" stroke-width="1.5"/>
+<rect x="204.0" y="344.0" width="26.0" height="26.0" rx="7.0" fill="#4B5563" stroke="#6B7280" stroke-width="1.5"/>
+<rect x="241.0" y="344.0" width="26.0" height="26.0" rx="7.0" fill="#D1D5DB" stroke="#6B7280" stroke-width="1.5"/>
+<rect x="278.0" y="344.0" width="26.0" height="26.0" rx="7.0" fill="#FFFFFF" stroke="#6B7280" stroke-width="1.5"/>
+<rect x="315.0" y="344.0" width="26.0" height="26.0" rx="7.0" fill="#FFFFFF" stroke="#6B7280" stroke-width="1.5"/>
+<text x="32.0" y="404.0" font-family="Inter, Arial, sans-serif" font-size="11.0" font-weight="700" text-anchor="start" fill="#111827">D</text>
+<rect x="56.0" y="386.0" width="26.0" height="26.0" rx="7.0" fill="#FFFFFF" stroke="#6B7280" stroke-width="1.5"/>
+<rect x="93.0" y="386.0" width="26.0" height="26.0" rx="7.0" fill="#FFFFFF" stroke="#6B7280" stroke-width="1.5"/>
+<rect x="130.0" y="386.0" width="26.0" height="26.0" rx="7.0" fill="#FFFFFF" stroke="#6B7280" stroke-width="1.5"/>
+<rect x="167.0" y="386.0" width="26.0" height="26.0" rx="7.0" fill="#FFFFFF" stroke="#6B7280" stroke-width="1.5"/>
+<rect x="204.0" y="386.0" width="26.0" height="26.0" rx="7.0" fill="#D1D5DB" stroke="#6B7280" stroke-width="1.5"/>
+<rect x="241.0" y="386.0" width="26.0" height="26.0" rx="7.0" fill="#FFFFFF" stroke="#6B7280" stroke-width="1.5"/>
+<rect x="278.0" y="386.0" width="26.0" height="26.0" rx="7.0" fill="#FFFFFF" stroke="#6B7280" stroke-width="1.5"/>
+<rect x="315.0" y="386.0" width="26.0" height="26.0" rx="7.0" fill="#FFFFFF" stroke="#6B7280" stroke-width="1.5"/>
+<text x="32.0" y="446.0" font-family="Inter, Arial, sans-serif" font-size="11.0" font-weight="700" text-anchor="start" fill="#111827">E</text>
+<rect x="56.0" y="428.0" width="26.0" height="26.0" rx="7.0" fill="#FFFFFF" stroke="#6B7280" stroke-width="1.5"/>
+<rect x="93.0" y="428.0" width="26.0" height="26.0" rx="7.0" fill="#FFFFFF" stroke="#6B7280" stroke-width="1.5"/>
+<rect x="130.0" y="428.0" width="26.0" height="26.0" rx="7.0" fill="#FFFFFF" stroke="#6B7280" stroke-width="1.5"/>
+<rect x="167.0" y="428.0" width="26.0" height="26.0" rx="7.0" fill="#D1D5DB" stroke="#6B7280" stroke-width="1.5"/>
+<rect x="204.0" y="428.0" width="26.0" height="26.0" rx="7.0" fill="#FFFFFF" stroke="#6B7280" stroke-width="1.5"/>
+<rect x="241.0" y="428.0" width="26.0" height="26.0" rx="7.0" fill="#FFFFFF" stroke="#6B7280" stroke-width="1.5"/>
+<rect x="278.0" y="428.0" width="26.0" height="26.0" rx="7.0" fill="#FFFFFF" stroke="#6B7280" stroke-width="1.5"/>
+<rect x="315.0" y="428.0" width="26.0" height="26.0" rx="7.0" fill="#FFFFFF" stroke="#6B7280" stroke-width="1.5"/>
+<text x="32.0" y="488.0" font-family="Inter, Arial, sans-serif" font-size="11.0" font-weight="700" text-anchor="start" fill="#111827">F</text>
+<rect x="56.0" y="470.0" width="26.0" height="26.0" rx="7.0" fill="#FFFFFF" stroke="#6B7280" stroke-width="1.5"/>
+<rect x="93.0" y="470.0" width="26.0" height="26.0" rx="7.0" fill="#FFFFFF" stroke="#6B7280" stroke-width="1.5"/>
+<rect x="130.0" y="470.0" width="26.0" height="26.0" rx="7.0" fill="#D1D5DB" stroke="#6B7280" stroke-width="1.5"/>
+<rect x="167.0" y="470.0" width="26.0" height="26.0" rx="7.0" fill="#FFFFFF" stroke="#6B7280" stroke-width="1.5"/>
+<rect x="204.0" y="470.0" width="26.0" height="26.0" rx="7.0" fill="#FFFFFF" stroke="#6B7280" stroke-width="1.5"/>
+<rect x="241.0" y="470.0" width="26.0" height="26.0" rx="7.0" fill="#FFFFFF" stroke="#6B7280" stroke-width="1.5"/>
+<rect x="278.0" y="470.0" width="26.0" height="26.0" rx="7.0" fill="#FFFFFF" stroke="#6B7280" stroke-width="1.5"/>
+<rect x="315.0" y="470.0" width="26.0" height="26.0" rx="7.0" fill="#FFFFFF" stroke="#6B7280" stroke-width="1.5"/>
+<text x="32.0" y="530.0" font-family="Inter, Arial, sans-serif" font-size="11.0" font-weight="700" text-anchor="start" fill="#111827">G</text>
+<rect x="56.0" y="512.0" width="26.0" height="26.0" rx="7.0" fill="#FFFFFF" stroke="#6B7280" stroke-width="1.5"/>
+<rect x="93.0" y="512.0" width="26.0" height="26.0" rx="7.0" fill="#D1D5DB" stroke="#6B7280" stroke-width="1.5"/>
+<rect x="130.0" y="512.0" width="26.0" height="26.0" rx="7.0" fill="#FFFFFF" stroke="#6B7280" stroke-width="1.5"/>
+<rect x="167.0" y="512.0" width="26.0" height="26.0" rx="7.0" fill="#FFFFFF" stroke="#6B7280" stroke-width="1.5"/>
+<rect x="204.0" y="512.0" width="26.0" height="26.0" rx="7.0" fill="#FFFFFF" stroke="#6B7280" stroke-width="1.5"/>
+<rect x="241.0" y="512.0" width="26.0" height="26.0" rx="7.0" fill="#FFFFFF" stroke="#6B7280" stroke-width="1.5"/>
+<rect x="278.0" y="512.0" width="26.0" height="26.0" rx="7.0" fill="#FFFFFF" stroke="#6B7280" stroke-width="1.5"/>
+<rect x="315.0" y="512.0" width="26.0" height="26.0" rx="7.0" fill="#FFFFFF" stroke="#6B7280" stroke-width="1.5"/>
+<circle cx="55.0" cy="584.0" r="7.0" fill="#FFFFFF" stroke="#1F2937" stroke-width="1.5"/>
+<text x="69.0" y="589.0" font-family="Inter, Arial, sans-serif" font-size="10.0" font-weight="400" text-anchor="start" fill="#111827">Available</text>
+<circle cx="145.0" cy="584.0" r="7.0" fill="#4B5563" stroke="#1F2937" stroke-width="1.5"/>
+<text x="159.0" y="589.0" font-family="Inter, Arial, sans-serif" font-size="10.0" font-weight="400" text-anchor="start" fill="#111827">Selected</text>
+<circle cx="235.0" cy="584.0" r="7.0" fill="#D1D5DB" stroke="#1F2937" stroke-width="1.5"/>
+<text x="249.0" y="589.0" font-family="Inter, Arial, sans-serif" font-size="10.0" font-weight="400" text-anchor="start" fill="#111827">Unavailable</text>
+<rect x="24.0" y="620.0" width="342.0" height="116.0" rx="16.0" fill="#F9FAFB" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="40.0" y="648.0" font-family="Inter, Arial, sans-serif" font-size="15.0" font-weight="700" text-anchor="start" fill="#111827">2 seats selected</text>
+<text x="40.0" y="675.0" font-family="Inter, Arial, sans-serif" font-size="12.0" font-weight="400" text-anchor="start" fill="#111827">C4, C5 · Circle Mid</text>
+<text x="350.0" y="675.0" font-family="Inter, Arial, sans-serif" font-size="14.0" font-weight="700" text-anchor="end" fill="#111827">LKR 2,700</text>
+<rect x="222.0" y="686.0" width="128.0" height="48.0" rx="24.0" fill="#1F2937" stroke="#1F2937" stroke-width="1.5"/>
+<text x="286.0" y="716.0" font-family="Inter, Arial, sans-serif" font-size="14.0" font-weight="700" text-anchor="middle" fill="#FFFFFF">Continue</text>
+
+</g>
+<text x="10.0" y="800.0" font-family="Inter, Arial" font-size="12" font-weight="700" fill="#111827">9. Patron details</text>
+<g transform="translate(13.0 810.0) scale(0.42)">
+<rect width="390" height="844" rx="22" fill="#FFFFFF" stroke="#111827" stroke-width="2"/>
+<text x="24.0" y="29.0" font-family="Inter, Arial, sans-serif" font-size="12.0" font-weight="700" text-anchor="start" fill="#111827">9:41</text>
+<text x="362.0" y="29.0" font-family="Inter, Arial, sans-serif" font-size="10.0" font-weight="400" text-anchor="end" fill="#111827">● )))  ▰</text>
+<text x="22.0" y="76.0" font-family="Inter, Arial, sans-serif" font-size="32.0" font-weight="400" text-anchor="start" fill="#111827">‹</text>
+<text x="52.0" y="72.0" font-family="Inter, Arial, sans-serif" font-size="20.0" font-weight="700" text-anchor="start" fill="#111827">Your details</text>
+<line x1="0.0" y1="96.0" x2="390.0" y2="96.0" stroke="#1F2937" stroke-width="1.0" stroke-linecap="round"/>
+<text x="24.0" y="132.0" font-family="Inter, Arial, sans-serif" font-size="20.0" font-weight="700" text-anchor="start" fill="#111827">Who is this booking for?</text>
+<text x="24.0" y="156.0" font-family="Inter, Arial, sans-serif" font-size="12.0" font-weight="400" text-anchor="start" fill="#4B5563">We use these details for the ticket and receipt.</text>
+<text x="24.0" y="186.0" font-family="Inter, Arial, sans-serif" font-size="11.0" font-weight="600" text-anchor="start" fill="#4B5563">FULL NAME</text>
+<rect x="24.0" y="195.0" width="342.0" height="48.0" rx="10.0" fill="#FFFFFF" stroke="#6B7280" stroke-width="1.5"/>
+<text x="38.0" y="225.0" font-family="Inter, Arial, sans-serif" font-size="13.0" font-weight="400" text-anchor="start" fill="#6B7280">Haritha</text>
+<text x="24.0" y="266.0" font-family="Inter, Arial, sans-serif" font-size="11.0" font-weight="600" text-anchor="start" fill="#4B5563">EMAIL</text>
+<rect x="24.0" y="275.0" width="342.0" height="48.0" rx="10.0" fill="#FFFFFF" stroke="#6B7280" stroke-width="1.5"/>
+<text x="38.0" y="305.0" font-family="Inter, Arial, sans-serif" font-size="13.0" font-weight="400" text-anchor="start" fill="#6B7280">name@example.com</text>
+<text x="24.0" y="346.0" font-family="Inter, Arial, sans-serif" font-size="11.0" font-weight="600" text-anchor="start" fill="#4B5563">MOBILE NUMBER</text>
+<rect x="24.0" y="355.0" width="342.0" height="48.0" rx="10.0" fill="#FFFFFF" stroke="#6B7280" stroke-width="1.5"/>
+<text x="38.0" y="385.0" font-family="Inter, Arial, sans-serif" font-size="13.0" font-weight="400" text-anchor="start" fill="#6B7280">+94 7X XXX XXXX</text>
+<text x="24.0" y="426.0" font-family="Inter, Arial, sans-serif" font-size="11.0" font-weight="600" text-anchor="start" fill="#4B5563">CONCESSION</text>
+<rect x="24.0" y="435.0" width="342.0" height="48.0" rx="10.0" fill="#FFFFFF" stroke="#6B7280" stroke-width="1.5"/>
+<text x="38.0" y="465.0" font-family="Inter, Arial, sans-serif" font-size="13.0" font-weight="400" text-anchor="start" fill="#6B7280">None                                      ▾</text>
+<rect x="24.0" y="520.0" width="342.0" height="82.0" rx="16.0" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="44.0" y="555.0" font-family="Inter, Arial, sans-serif" font-size="20.0" font-weight="400" text-anchor="middle" fill="#111827">ⓘ</text>
+<text x="68.0" y="548.0" font-family="Inter, Arial, sans-serif" font-size="12.0" font-weight="600" text-anchor="start" fill="#111827">Concession eligibility may be checked</text>
+<text x="68.0" y="571.0" font-family="Inter, Arial, sans-serif" font-size="12.0" font-weight="400" text-anchor="start" fill="#111827">at the theatre entrance.</text>
+<rect x="24.0" y="640.0" width="342.0" height="48.0" rx="24.0" fill="#1F2937" stroke="#1F2937" stroke-width="1.5"/>
+<text x="195.0" y="670.0" font-family="Inter, Arial, sans-serif" font-size="14.0" font-weight="700" text-anchor="middle" fill="#FFFFFF">Continue to summary</text>
+
+</g>
+<text x="200.0" y="800.0" font-family="Inter, Arial" font-size="12" font-weight="700" fill="#111827">10. Booking summary</text>
+<g transform="translate(203.0 810.0) scale(0.42)">
+<rect width="390" height="844" rx="22" fill="#FFFFFF" stroke="#111827" stroke-width="2"/>
+<text x="24.0" y="29.0" font-family="Inter, Arial, sans-serif" font-size="12.0" font-weight="700" text-anchor="start" fill="#111827">9:41</text>
+<text x="362.0" y="29.0" font-family="Inter, Arial, sans-serif" font-size="10.0" font-weight="400" text-anchor="end" fill="#111827">● )))  ▰</text>
+<text x="22.0" y="76.0" font-family="Inter, Arial, sans-serif" font-size="32.0" font-weight="400" text-anchor="start" fill="#111827">‹</text>
+<text x="52.0" y="72.0" font-family="Inter, Arial, sans-serif" font-size="20.0" font-weight="700" text-anchor="start" fill="#111827">Booking summary</text>
+<line x1="0.0" y1="96.0" x2="390.0" y2="96.0" stroke="#1F2937" stroke-width="1.0" stroke-linecap="round"/>
+<rect x="24.0" y="116.0" width="342.0" height="86.0" rx="16.0" fill="#F9FAFB" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="40.0" y="143.0" font-family="Inter, Arial, sans-serif" font-size="17.0" font-weight="700" text-anchor="start" fill="#111827">Hamlet</text>
+<text x="40.0" y="169.0" font-family="Inter, Arial, sans-serif" font-size="12.0" font-weight="400" text-anchor="start" fill="#111827">Sun 27 Sep 2026 · 7:30 PM</text>
+<text x="350.0" y="169.0" font-family="Inter, Arial, sans-serif" font-size="12.0" font-weight="400" text-anchor="end" fill="#111827">2 tickets</text>
+<text x="24.0" y="240.0" font-family="Inter, Arial, sans-serif" font-size="18.0" font-weight="700" text-anchor="start" fill="#111827">Seats</text>
+<rect x="24.0" y="256.0" width="342.0" height="62.0" rx="16.0" fill="#F9FAFB" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="42.0" y="293.0" font-family="Inter, Arial, sans-serif" font-size="20.0" font-weight="600" text-anchor="middle" fill="#111827">▱</text>
+<text x="65.0" y="281.0" font-family="Inter, Arial, sans-serif" font-size="14.0" font-weight="600" text-anchor="start" fill="#111827">C4 · Circle Mid</text>
+<text x="65.0" y="301.0" font-family="Inter, Arial, sans-serif" font-size="11.0" font-weight="400" text-anchor="start" fill="#6B7280">Regular ticket</text>
+<rect x="24.0" y="328.0" width="342.0" height="62.0" rx="16.0" fill="#F9FAFB" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="42.0" y="365.0" font-family="Inter, Arial, sans-serif" font-size="20.0" font-weight="600" text-anchor="middle" fill="#111827">▱</text>
+<text x="65.0" y="353.0" font-family="Inter, Arial, sans-serif" font-size="14.0" font-weight="600" text-anchor="start" fill="#111827">C5 · Circle Mid</text>
+<text x="65.0" y="373.0" font-family="Inter, Arial, sans-serif" font-size="11.0" font-weight="400" text-anchor="start" fill="#6B7280">Regular ticket</text>
+<rect x="24.0" y="420.0" width="342.0" height="150.0" rx="16.0" fill="#F9FAFB" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="40.0" y="449.0" font-family="Inter, Arial, sans-serif" font-size="13.0" font-weight="400" text-anchor="start" fill="#111827">Subtotal</text>
+<text x="350.0" y="449.0" font-family="Inter, Arial, sans-serif" font-size="13.0" font-weight="400" text-anchor="end" fill="#111827">LKR 2,288</text>
+<text x="40.0" y="480.0" font-family="Inter, Arial, sans-serif" font-size="13.0" font-weight="400" text-anchor="start" fill="#111827">VAT</text>
+<text x="350.0" y="480.0" font-family="Inter, Arial, sans-serif" font-size="13.0" font-weight="400" text-anchor="end" fill="#111827">LKR 412</text>
+<line x1="24.0" y1="500.0" x2="366.0" y2="500.0" stroke="#1F2937" stroke-width="1.0" stroke-linecap="round"/>
+<text x="40.0" y="535.0" font-family="Inter, Arial, sans-serif" font-size="16.0" font-weight="700" text-anchor="start" fill="#111827">Total</text>
+<text x="350.0" y="535.0" font-family="Inter, Arial, sans-serif" font-size="16.0" font-weight="700" text-anchor="end" fill="#111827">LKR 2,700</text>
+<rect x="24.0" y="606.0" width="20.0" height="20.0" rx="4.0" fill="#1F2937" stroke="#1F2937" stroke-width="1.5"/>
+<text x="34.0" y="621.0" font-family="Inter, Arial, sans-serif" font-size="13.0" font-weight="400" text-anchor="middle" fill="#FFFFFF">✓</text>
+<text x="54.0" y="621.0" font-family="Inter, Arial, sans-serif" font-size="12.0" font-weight="400" text-anchor="start" fill="#111827">I accept the booking terms and conditions.</text>
+<rect x="24.0" y="662.0" width="342.0" height="48.0" rx="24.0" fill="#1F2937" stroke="#1F2937" stroke-width="1.5"/>
+<text x="195.0" y="692.0" font-family="Inter, Arial, sans-serif" font-size="14.0" font-weight="700" text-anchor="middle" fill="#FFFFFF">Proceed to payment</text>
+
+</g>
+<text x="390.0" y="800.0" font-family="Inter, Arial" font-size="12" font-weight="700" fill="#111827">11. Payment</text>
+<g transform="translate(393.0 810.0) scale(0.42)">
+<rect width="390" height="844" rx="22" fill="#FFFFFF" stroke="#111827" stroke-width="2"/>
+<text x="24.0" y="29.0" font-family="Inter, Arial, sans-serif" font-size="12.0" font-weight="700" text-anchor="start" fill="#111827">9:41</text>
+<text x="362.0" y="29.0" font-family="Inter, Arial, sans-serif" font-size="10.0" font-weight="400" text-anchor="end" fill="#111827">● )))  ▰</text>
+<text x="22.0" y="76.0" font-family="Inter, Arial, sans-serif" font-size="32.0" font-weight="400" text-anchor="start" fill="#111827">‹</text>
+<text x="52.0" y="72.0" font-family="Inter, Arial, sans-serif" font-size="20.0" font-weight="700" text-anchor="start" fill="#111827">Payment</text>
+<line x1="0.0" y1="96.0" x2="390.0" y2="96.0" stroke="#1F2937" stroke-width="1.0" stroke-linecap="round"/>
+<text x="24.0" y="140.0" font-family="Inter, Arial, sans-serif" font-size="13.0" font-weight="400" text-anchor="start" fill="#4B5563">Amount to pay</text>
+<text x="24.0" y="178.0" font-family="Inter, Arial, sans-serif" font-size="30.0" font-weight="700" text-anchor="start" fill="#111827">LKR 2,700</text>
+<rect x="24.0" y="216.0" width="342.0" height="186.0" rx="16.0" fill="#F9FAFB" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="46.0" y="253.0" font-family="Inter, Arial, sans-serif" font-size="14.0" font-weight="400" text-anchor="start" fill="#111827">●</text>
+<text x="72.0" y="253.0" font-family="Inter, Arial, sans-serif" font-size="14.0" font-weight="600" text-anchor="start" fill="#111827">Card payment</text>
+<text x="344.0" y="253.0" font-family="Inter, Arial, sans-serif" font-size="18.0" font-weight="400" text-anchor="middle" fill="#111827">▰</text>
+<line x1="24.0" y1="278.0" x2="366.0" y2="278.0" stroke="#1F2937" stroke-width="1.0" stroke-linecap="round"/>
+<text x="46.0" y="316.0" font-family="Inter, Arial, sans-serif" font-size="14.0" font-weight="400" text-anchor="start" fill="#9CA3AF">○</text>
+<text x="72.0" y="316.0" font-family="Inter, Arial, sans-serif" font-size="14.0" font-weight="400" text-anchor="start" fill="#9CA3AF">Mobile payment</text>
+<line x1="24.0" y1="340.0" x2="366.0" y2="340.0" stroke="#1F2937" stroke-width="1.0" stroke-linecap="round"/>
+<text x="46.0" y="378.0" font-family="Inter, Arial, sans-serif" font-size="14.0" font-weight="400" text-anchor="start" fill="#9CA3AF">○</text>
+<text x="72.0" y="378.0" font-family="Inter, Arial, sans-serif" font-size="14.0" font-weight="400" text-anchor="start" fill="#9CA3AF">Internet banking</text>
+<rect x="24.0" y="428.0" width="342.0" height="90.0" rx="16.0" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="46.0" y="467.0" font-family="Inter, Arial, sans-serif" font-size="19.0" font-weight="400" text-anchor="middle" fill="#111827">⌾</text>
+<text x="72.0" y="457.0" font-family="Inter, Arial, sans-serif" font-size="13.0" font-weight="700" text-anchor="start" fill="#111827">Simulated payment</text>
+<text x="72.0" y="482.0" font-family="Inter, Arial, sans-serif" font-size="12.0" font-weight="400" text-anchor="start" fill="#111827">No real card will be charged.</text>
+<text x="24.0" y="568.0" font-family="Inter, Arial, sans-serif" font-size="13.0" font-weight="600" text-anchor="start" fill="#111827">Simulate payment failure</text>
+<rect x="310.0" y="548.0" width="52.0" height="30.0" rx="15.0" fill="#E5E7EB" stroke="#9CA3AF" stroke-width="1.5"/>
+<circle cx="326.0" cy="563.0" r="11.0" fill="#FFFFFF" stroke="#1F2937" stroke-width="1.5"/>
+<rect x="24.0" y="632.0" width="342.0" height="48.0" rx="24.0" fill="#1F2937" stroke="#1F2937" stroke-width="1.5"/>
+<text x="195.0" y="662.0" font-family="Inter, Arial, sans-serif" font-size="14.0" font-weight="700" text-anchor="middle" fill="#FFFFFF">Pay now</text>
+
+</g>
+<text x="580.0" y="800.0" font-family="Inter, Arial" font-size="12" font-weight="700" fill="#111827">12. Booking confirmation</text>
+<g transform="translate(583.0 810.0) scale(0.42)">
+<rect width="390" height="844" rx="22" fill="#FFFFFF" stroke="#111827" stroke-width="2"/>
+<text x="24.0" y="29.0" font-family="Inter, Arial, sans-serif" font-size="12.0" font-weight="700" text-anchor="start" fill="#111827">9:41</text>
+<text x="362.0" y="29.0" font-family="Inter, Arial, sans-serif" font-size="10.0" font-weight="400" text-anchor="end" fill="#111827">● )))  ▰</text>
+<circle cx="195.0" cy="112.0" r="34.0" fill="#F3F4F6" stroke="#1F2937" stroke-width="1.5"/>
+<text x="195.0" y="126.0" font-family="Inter, Arial, sans-serif" font-size="36.0" font-weight="700" text-anchor="middle" fill="#111827">✓</text>
+<text x="195.0" y="177.0" font-family="Inter, Arial, sans-serif" font-size="25.0" font-weight="700" text-anchor="middle" fill="#111827">Booking confirmed</text>
+<text x="195.0" y="205.0" font-family="Inter, Arial, sans-serif" font-size="13.0" font-weight="400" text-anchor="middle" fill="#4B5563">Your ticket is ready.</text>
+<rect x="105.0" y="230.0" width="180.0" height="180.0" rx="12.0" fill="#FFFFFF" stroke="#6B7280" stroke-width="1.5" stroke-dasharray="5 4"/>
+<text x="195.0" y="328.0" font-family="Inter, Arial, sans-serif" font-size="15.0" font-weight="700" text-anchor="middle" fill="#111827">QR CODE</text>
+<text x="195.0" y="439.0" font-family="Inter, Arial, sans-serif" font-size="11.0" font-weight="400" text-anchor="middle" fill="#111827">Show this code at the theatre entrance.</text>
+<rect x="24.0" y="468.0" width="342.0" height="156.0" rx="16.0" fill="#F9FAFB" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="40.0" y="494.0" font-family="Inter, Arial, sans-serif" font-size="11.0" font-weight="600" text-anchor="start" fill="#4B5563">BOOKING REFERENCE</text>
+<text x="40.0" y="520.0" font-family="Inter, Arial, sans-serif" font-size="16.0" font-weight="700" text-anchor="start" fill="#111827">STB-20260927-65044</text>
+<text x="40.0" y="555.0" font-family="Inter, Arial, sans-serif" font-size="12.0" font-weight="400" text-anchor="start" fill="#111827">Hamlet · Sun 27 Sep · 7:30 PM</text>
+<text x="40.0" y="580.0" font-family="Inter, Arial, sans-serif" font-size="12.0" font-weight="400" text-anchor="start" fill="#111827">Seats C4, C5</text>
+<text x="40.0" y="605.0" font-family="Inter, Arial, sans-serif" font-size="12.0" font-weight="400" text-anchor="start" fill="#111827">Paid with card ending 1111</text>
+<rect x="24.0" y="654.0" width="342.0" height="48.0" rx="24.0" fill="#1F2937" stroke="#1F2937" stroke-width="1.5"/>
+<text x="195.0" y="684.0" font-family="Inter, Arial, sans-serif" font-size="14.0" font-weight="700" text-anchor="middle" fill="#FFFFFF">View bookings</text>
+<rect x="24.0" y="714.0" width="342.0" height="48.0" rx="24.0" fill="#FFFFFF" stroke="#1F2937" stroke-width="1.5"/>
+<text x="195.0" y="744.0" font-family="Inter, Arial, sans-serif" font-size="14.0" font-weight="700" text-anchor="middle" fill="#111827">Back to home</text>
+
+</g>
+<text x="10.0" y="1190.0" font-family="Inter, Arial" font-size="12" font-weight="700" fill="#111827">13. Bookings</text>
+<g transform="translate(13.0 1200.0) scale(0.42)">
+<rect width="390" height="844" rx="22" fill="#FFFFFF" stroke="#111827" stroke-width="2"/>
+<text x="24.0" y="29.0" font-family="Inter, Arial, sans-serif" font-size="12.0" font-weight="700" text-anchor="start" fill="#111827">9:41</text>
+<text x="362.0" y="29.0" font-family="Inter, Arial, sans-serif" font-size="10.0" font-weight="400" text-anchor="end" fill="#111827">● )))  ▰</text>
+<text x="24.0" y="84.0" font-family="Inter, Arial, sans-serif" font-size="28.0" font-weight="700" text-anchor="start" fill="#111827">Bookings</text>
+<rect x="24.0" y="112.0" width="102.0" height="32.0" rx="16.0" fill="#D1D5DB" stroke="#6B7280" stroke-width="1.5"/>
+<text x="75.0" y="133.0" font-family="Inter, Arial, sans-serif" font-size="11.0" font-weight="600" text-anchor="middle" fill="#111827">Upcoming</text>
+<rect x="134.0" y="112.0" width="76.0" height="32.0" rx="16.0" fill="#FFFFFF" stroke="#6B7280" stroke-width="1.5"/>
+<text x="172.0" y="133.0" font-family="Inter, Arial, sans-serif" font-size="11.0" font-weight="600" text-anchor="middle" fill="#111827">Past</text>
+<rect x="218.0" y="112.0" width="100.0" height="32.0" rx="16.0" fill="#FFFFFF" stroke="#6B7280" stroke-width="1.5"/>
+<text x="268.0" y="133.0" font-family="Inter, Arial, sans-serif" font-size="11.0" font-weight="600" text-anchor="middle" fill="#111827">Cancelled</text>
+<rect x="24.0" y="168.0" width="342.0" height="206.0" rx="16.0" fill="#F9FAFB" stroke="#9CA3AF" stroke-width="1.5"/>
+<rect x="38.0" y="188.0" width="84.0" height="84.0" rx="8.0" fill="#FFFFFF" stroke="#6B7280" stroke-width="1.5" stroke-dasharray="4 3"/>
+<text x="80.0" y="237.0" font-family="Inter, Arial, sans-serif" font-size="14.0" font-weight="700" text-anchor="middle" fill="#111827">QR</text>
+<rect x="140.0" y="188.0" width="100.0" height="32.0" rx="16.0" fill="#D1D5DB" stroke="#6B7280" stroke-width="1.5"/>
+<text x="190.0" y="209.0" font-family="Inter, Arial, sans-serif" font-size="11.0" font-weight="600" text-anchor="middle" fill="#111827">CONFIRMED</text>
+<text x="140.0" y="240.0" font-family="Inter, Arial, sans-serif" font-size="19.0" font-weight="700" text-anchor="start" fill="#111827">Hamlet</text>
+<text x="140.0" y="266.0" font-family="Inter, Arial, sans-serif" font-size="12.0" font-weight="400" text-anchor="start" fill="#111827">27 Sep 2026 · 7:30 PM</text>
+<line x1="24.0" y1="292.0" x2="366.0" y2="292.0" stroke="#1F2937" stroke-width="1.0" stroke-linecap="round"/>
+<text x="40.0" y="318.0" font-family="Inter, Arial, sans-serif" font-size="11.0" font-weight="600" text-anchor="start" fill="#4B5563">BOOKING REF</text>
+<text x="40.0" y="343.0" font-family="Inter, Arial, sans-serif" font-size="12.0" font-weight="600" text-anchor="start" fill="#111827">STB-20260927-65044</text>
+<text x="350.0" y="343.0" font-family="Inter, Arial, sans-serif" font-size="12.0" font-weight="700" text-anchor="end" fill="#111827">LKR 2,700  ›</text>
+<rect x="24.0" y="398.0" width="342.0" height="206.0" rx="16.0" fill="#F9FAFB" stroke="#9CA3AF" stroke-width="1.5"/>
+<rect x="38.0" y="418.0" width="84.0" height="84.0" rx="8.0" fill="#FFFFFF" stroke="#6B7280" stroke-width="1.5" stroke-dasharray="4 3"/>
+<text x="80.0" y="467.0" font-family="Inter, Arial, sans-serif" font-size="14.0" font-weight="700" text-anchor="middle" fill="#111827">QR</text>
+<rect x="140.0" y="418.0" width="100.0" height="32.0" rx="16.0" fill="#D1D5DB" stroke="#6B7280" stroke-width="1.5"/>
+<text x="190.0" y="439.0" font-family="Inter, Arial, sans-serif" font-size="11.0" font-weight="600" text-anchor="middle" fill="#111827">CONFIRMED</text>
+<text x="140.0" y="470.0" font-family="Inter, Arial, sans-serif" font-size="19.0" font-weight="700" text-anchor="start" fill="#111827">Hamlet</text>
+<text x="140.0" y="496.0" font-family="Inter, Arial, sans-serif" font-size="12.0" font-weight="400" text-anchor="start" fill="#111827">27 Sep 2026 · 7:30 PM</text>
+<line x1="24.0" y1="522.0" x2="366.0" y2="522.0" stroke="#1F2937" stroke-width="1.0" stroke-linecap="round"/>
+<text x="40.0" y="548.0" font-family="Inter, Arial, sans-serif" font-size="11.0" font-weight="600" text-anchor="start" fill="#4B5563">BOOKING REF</text>
+<text x="40.0" y="573.0" font-family="Inter, Arial, sans-serif" font-size="12.0" font-weight="600" text-anchor="start" fill="#111827">STB-20260927-65044</text>
+<text x="350.0" y="573.0" font-family="Inter, Arial, sans-serif" font-size="12.0" font-weight="700" text-anchor="end" fill="#111827">LKR 2,700  ›</text>
+<rect x="16.0" y="756.0" width="358.0" height="70.0" rx="28.0" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="62.0" y="787.0" font-family="Inter, Arial, sans-serif" font-size="19.0" font-weight="600" text-anchor="middle" fill="#111827">⌂</text>
+<text x="62.0" y="808.0" font-family="Inter, Arial, sans-serif" font-size="10.0" font-weight="500" text-anchor="middle" fill="#111827">Home</text>
+<text x="150.5" y="787.0" font-family="Inter, Arial, sans-serif" font-size="19.0" font-weight="600" text-anchor="middle" fill="#111827">◈</text>
+<text x="150.5" y="808.0" font-family="Inter, Arial, sans-serif" font-size="10.0" font-weight="500" text-anchor="middle" fill="#111827">Shows</text>
+<rect x="199.0" y="763.0" width="80.0" height="56.0" rx="22.0" fill="#D1D5DB" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="239.0" y="787.0" font-family="Inter, Arial, sans-serif" font-size="19.0" font-weight="600" text-anchor="middle" fill="#111827">▱</text>
+<text x="239.0" y="808.0" font-family="Inter, Arial, sans-serif" font-size="10.0" font-weight="700" text-anchor="middle" fill="#111827">Bookings</text>
+<text x="327.5" y="787.0" font-family="Inter, Arial, sans-serif" font-size="19.0" font-weight="600" text-anchor="middle" fill="#111827">♙</text>
+<text x="327.5" y="808.0" font-family="Inter, Arial, sans-serif" font-size="10.0" font-weight="500" text-anchor="middle" fill="#111827">Profile</text>
+
+</g>
+<text x="200.0" y="1190.0" font-family="Inter, Arial" font-size="12" font-weight="700" fill="#111827">14. Ticket details</text>
+<g transform="translate(203.0 1200.0) scale(0.42)">
+<rect width="390" height="844" rx="22" fill="#FFFFFF" stroke="#111827" stroke-width="2"/>
+<text x="24.0" y="29.0" font-family="Inter, Arial, sans-serif" font-size="12.0" font-weight="700" text-anchor="start" fill="#111827">9:41</text>
+<text x="362.0" y="29.0" font-family="Inter, Arial, sans-serif" font-size="10.0" font-weight="400" text-anchor="end" fill="#111827">● )))  ▰</text>
+<text x="22.0" y="76.0" font-family="Inter, Arial, sans-serif" font-size="32.0" font-weight="400" text-anchor="start" fill="#111827">‹</text>
+<text x="52.0" y="72.0" font-family="Inter, Arial, sans-serif" font-size="20.0" font-weight="700" text-anchor="start" fill="#111827">Ticket details</text>
+<line x1="0.0" y1="96.0" x2="390.0" y2="96.0" stroke="#1F2937" stroke-width="1.0" stroke-linecap="round"/>
+<rect x="105.0" y="118.0" width="180.0" height="180.0" rx="12.0" fill="#FFFFFF" stroke="#6B7280" stroke-width="1.5" stroke-dasharray="5 4"/>
+<text x="195.0" y="217.0" font-family="Inter, Arial, sans-serif" font-size="15.0" font-weight="700" text-anchor="middle" fill="#111827">QR CODE</text>
+<text x="195.0" y="324.0" font-family="Inter, Arial, sans-serif" font-size="11.0" font-weight="400" text-anchor="middle" fill="#111827">Show this code at the entrance.</text>
+<rect x="24.0" y="352.0" width="342.0" height="142.0" rx="16.0" fill="#F9FAFB" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="40.0" y="382.0" font-family="Inter, Arial, sans-serif" font-size="20.0" font-weight="700" text-anchor="start" fill="#111827">Hamlet</text>
+<text x="40.0" y="409.0" font-family="Inter, Arial, sans-serif" font-size="12.0" font-weight="400" text-anchor="start" fill="#111827">Sun 27 Sep 2026 · 7:30 PM</text>
+<text x="40.0" y="443.0" font-family="Inter, Arial, sans-serif" font-size="11.0" font-weight="600" text-anchor="start" fill="#4B5563">BOOKING REFERENCE</text>
+<text x="40.0" y="470.0" font-family="Inter, Arial, sans-serif" font-size="14.0" font-weight="700" text-anchor="start" fill="#111827">STB-20260927-65044</text>
+<text x="24.0" y="535.0" font-family="Inter, Arial, sans-serif" font-size="18.0" font-weight="700" text-anchor="start" fill="#111827">Seats</text>
+<rect x="24.0" y="550.0" width="342.0" height="62.0" rx="16.0" fill="#F9FAFB" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="42.0" y="587.0" font-family="Inter, Arial, sans-serif" font-size="20.0" font-weight="600" text-anchor="middle" fill="#111827">▱</text>
+<text x="65.0" y="575.0" font-family="Inter, Arial, sans-serif" font-size="14.0" font-weight="600" text-anchor="start" fill="#111827">C4, C5</text>
+<text x="65.0" y="595.0" font-family="Inter, Arial, sans-serif" font-size="11.0" font-weight="400" text-anchor="start" fill="#6B7280">Circle Mid · 2 tickets</text>
+<text x="24.0" y="658.0" font-family="Inter, Arial, sans-serif" font-size="13.0" font-weight="400" text-anchor="start" fill="#111827">Total paid</text>
+<text x="366.0" y="658.0" font-family="Inter, Arial, sans-serif" font-size="16.0" font-weight="700" text-anchor="end" fill="#111827">LKR 2,700</text>
+<text x="24.0" y="684.0" font-family="Inter, Arial, sans-serif" font-size="12.0" font-weight="400" text-anchor="start" fill="#4B5563">Card ending 1111</text>
+<rect x="24.0" y="722.0" width="342.0" height="48.0" rx="24.0" fill="#FFFFFF" stroke="#1F2937" stroke-width="1.5"/>
+<text x="195.0" y="752.0" font-family="Inter, Arial, sans-serif" font-size="14.0" font-weight="700" text-anchor="middle" fill="#111827">Cancel booking</text>
+
+</g>
+<text x="390.0" y="1190.0" font-family="Inter, Arial" font-size="12" font-weight="700" fill="#111827">15. Profile</text>
+<g transform="translate(393.0 1200.0) scale(0.42)">
+<rect width="390" height="844" rx="22" fill="#FFFFFF" stroke="#111827" stroke-width="2"/>
+<text x="24.0" y="29.0" font-family="Inter, Arial, sans-serif" font-size="12.0" font-weight="700" text-anchor="start" fill="#111827">9:41</text>
+<text x="362.0" y="29.0" font-family="Inter, Arial, sans-serif" font-size="10.0" font-weight="400" text-anchor="end" fill="#111827">● )))  ▰</text>
+<text x="24.0" y="84.0" font-family="Inter, Arial, sans-serif" font-size="28.0" font-weight="700" text-anchor="start" fill="#111827">Profile</text>
+<rect x="24.0" y="110.0" width="342.0" height="120.0" rx="16.0" fill="#F9FAFB" stroke="#9CA3AF" stroke-width="1.5"/>
+<circle cx="68.0" cy="162.0" r="30.0" fill="#E5E7EB" stroke="#1F2937" stroke-width="1.5"/>
+<text x="68.0" y="171.0" font-family="Inter, Arial, sans-serif" font-size="24.0" font-weight="700" text-anchor="middle" fill="#111827">H</text>
+<text x="116.0" y="151.0" font-family="Inter, Arial, sans-serif" font-size="19.0" font-weight="700" text-anchor="start" fill="#111827">Haritha</text>
+<text x="116.0" y="176.0" font-family="Inter, Arial, sans-serif" font-size="12.0" font-weight="400" text-anchor="start" fill="#4B5563">name@example.com</text>
+<rect x="116.0" y="190.0" width="118.0" height="32.0" rx="16.0" fill="#D1D5DB" stroke="#6B7280" stroke-width="1.5"/>
+<text x="175.0" y="211.0" font-family="Inter, Arial, sans-serif" font-size="11.0" font-weight="600" text-anchor="middle" fill="#111827">LOYALTY MEMBER</text>
+<text x="24.0" y="273.0" font-family="Inter, Arial, sans-serif" font-size="13.0" font-weight="700" text-anchor="start" fill="#4B5563">Membership</text>
+<rect x="24.0" y="288.0" width="342.0" height="62.0" rx="16.0" fill="#F9FAFB" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="42.0" y="325.0" font-family="Inter, Arial, sans-serif" font-size="20.0" font-weight="600" text-anchor="middle" fill="#111827">★</text>
+<text x="65.0" y="313.0" font-family="Inter, Arial, sans-serif" font-size="14.0" font-weight="600" text-anchor="start" fill="#111827">Loyalty membership</text>
+<text x="65.0" y="333.0" font-family="Inter, Arial, sans-serif" font-size="11.0" font-weight="400" text-anchor="start" fill="#6B7280">Active · View benefits</text>
+<text x="344.0" y="327.0" font-family="Inter, Arial, sans-serif" font-size="24.0" font-weight="400" text-anchor="start" fill="#6B7280">›</text>
+<text x="24.0" y="385.0" font-family="Inter, Arial, sans-serif" font-size="13.0" font-weight="700" text-anchor="start" fill="#4B5563">Preferences</text>
+<rect x="24.0" y="400.0" width="342.0" height="62.0" rx="16.0" fill="#F9FAFB" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="42.0" y="437.0" font-family="Inter, Arial, sans-serif" font-size="20.0" font-weight="600" text-anchor="middle" fill="#111827">◐</text>
+<text x="65.0" y="425.0" font-family="Inter, Arial, sans-serif" font-size="14.0" font-weight="600" text-anchor="start" fill="#111827">Theme</text>
+<text x="65.0" y="445.0" font-family="Inter, Arial, sans-serif" font-size="11.0" font-weight="400" text-anchor="start" fill="#6B7280">System default</text>
+<text x="344.0" y="439.0" font-family="Inter, Arial, sans-serif" font-size="24.0" font-weight="400" text-anchor="start" fill="#6B7280">›</text>
+<rect x="24.0" y="472.0" width="342.0" height="62.0" rx="16.0" fill="#F9FAFB" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="42.0" y="509.0" font-family="Inter, Arial, sans-serif" font-size="20.0" font-weight="600" text-anchor="middle" fill="#111827">A</text>
+<text x="65.0" y="497.0" font-family="Inter, Arial, sans-serif" font-size="14.0" font-weight="600" text-anchor="start" fill="#111827">Language</text>
+<text x="65.0" y="517.0" font-family="Inter, Arial, sans-serif" font-size="11.0" font-weight="400" text-anchor="start" fill="#6B7280">English</text>
+<text x="344.0" y="511.0" font-family="Inter, Arial, sans-serif" font-size="24.0" font-weight="400" text-anchor="start" fill="#6B7280">›</text>
+<rect x="24.0" y="544.0" width="342.0" height="62.0" rx="16.0" fill="#F9FAFB" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="42.0" y="581.0" font-family="Inter, Arial, sans-serif" font-size="20.0" font-weight="600" text-anchor="middle" fill="#111827">⋯</text>
+<text x="65.0" y="569.0" font-family="Inter, Arial, sans-serif" font-size="14.0" font-weight="600" text-anchor="start" fill="#111827">More</text>
+<text x="65.0" y="589.0" font-family="Inter, Arial, sans-serif" font-size="11.0" font-weight="400" text-anchor="start" fill="#6B7280">Privacy, terms and support</text>
+<text x="344.0" y="583.0" font-family="Inter, Arial, sans-serif" font-size="24.0" font-weight="400" text-anchor="start" fill="#6B7280">›</text>
+<rect x="24.0" y="650.0" width="342.0" height="48.0" rx="24.0" fill="#FFFFFF" stroke="#1F2937" stroke-width="1.5"/>
+<text x="195.0" y="680.0" font-family="Inter, Arial, sans-serif" font-size="14.0" font-weight="700" text-anchor="middle" fill="#111827">Sign out</text>
+<rect x="16.0" y="756.0" width="358.0" height="70.0" rx="28.0" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="62.0" y="787.0" font-family="Inter, Arial, sans-serif" font-size="19.0" font-weight="600" text-anchor="middle" fill="#111827">⌂</text>
+<text x="62.0" y="808.0" font-family="Inter, Arial, sans-serif" font-size="10.0" font-weight="500" text-anchor="middle" fill="#111827">Home</text>
+<text x="150.5" y="787.0" font-family="Inter, Arial, sans-serif" font-size="19.0" font-weight="600" text-anchor="middle" fill="#111827">◈</text>
+<text x="150.5" y="808.0" font-family="Inter, Arial, sans-serif" font-size="10.0" font-weight="500" text-anchor="middle" fill="#111827">Shows</text>
+<text x="239.0" y="787.0" font-family="Inter, Arial, sans-serif" font-size="19.0" font-weight="600" text-anchor="middle" fill="#111827">▱</text>
+<text x="239.0" y="808.0" font-family="Inter, Arial, sans-serif" font-size="10.0" font-weight="500" text-anchor="middle" fill="#111827">Bookings</text>
+<rect x="287.5" y="763.0" width="80.0" height="56.0" rx="22.0" fill="#D1D5DB" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="327.5" y="787.0" font-family="Inter, Arial, sans-serif" font-size="19.0" font-weight="600" text-anchor="middle" fill="#111827">♙</text>
+<text x="327.5" y="808.0" font-family="Inter, Arial, sans-serif" font-size="10.0" font-weight="700" text-anchor="middle" fill="#111827">Profile</text>
+
+</g>
+<text x="580.0" y="1190.0" font-family="Inter, Arial" font-size="12" font-weight="700" fill="#111827">16. Loyalty membership</text>
+<g transform="translate(583.0 1200.0) scale(0.42)">
+<rect width="390" height="844" rx="22" fill="#FFFFFF" stroke="#111827" stroke-width="2"/>
+<text x="24.0" y="29.0" font-family="Inter, Arial, sans-serif" font-size="12.0" font-weight="700" text-anchor="start" fill="#111827">9:41</text>
+<text x="362.0" y="29.0" font-family="Inter, Arial, sans-serif" font-size="10.0" font-weight="400" text-anchor="end" fill="#111827">● )))  ▰</text>
+<text x="22.0" y="76.0" font-family="Inter, Arial, sans-serif" font-size="32.0" font-weight="400" text-anchor="start" fill="#111827">‹</text>
+<text x="52.0" y="72.0" font-family="Inter, Arial, sans-serif" font-size="20.0" font-weight="700" text-anchor="start" fill="#111827">Loyalty membership</text>
+<line x1="0.0" y1="96.0" x2="390.0" y2="96.0" stroke="#1F2937" stroke-width="1.0" stroke-linecap="round"/>
+<rect x="24.0" y="118.0" width="342.0" height="150.0" rx="16.0" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="48.0" y="158.0" font-family="Inter, Arial, sans-serif" font-size="30.0" font-weight="400" text-anchor="middle" fill="#111827">★</text>
+<text x="78.0" y="152.0" font-family="Inter, Arial, sans-serif" font-size="20.0" font-weight="700" text-anchor="start" fill="#111827">Theatre Loyalty</text>
+<rect x="78.0" y="170.0" width="108.0" height="32.0" rx="16.0" fill="#FFFFFF" stroke="#6B7280" stroke-width="1.5"/>
+<text x="132.0" y="191.0" font-family="Inter, Arial, sans-serif" font-size="11.0" font-weight="600" text-anchor="middle" fill="#111827">NOT ENROLLED</text>
+<text x="40.0" y="222.0" font-family="Inter, Arial, sans-serif" font-size="12.0" font-weight="400" text-anchor="start" fill="#111827">Join to unlock member pricing and</text>
+<text x="40.0" y="243.0" font-family="Inter, Arial, sans-serif" font-size="12.0" font-weight="400" text-anchor="start" fill="#111827">priority access to new productions.</text>
+<text x="24.0" y="314.0" font-family="Inter, Arial, sans-serif" font-size="20.0" font-weight="700" text-anchor="start" fill="#111827">Member benefits</text>
+<rect x="24.0" y="334.0" width="342.0" height="62.0" rx="16.0" fill="#F9FAFB" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="42.0" y="371.0" font-family="Inter, Arial, sans-serif" font-size="20.0" font-weight="600" text-anchor="middle" fill="#111827">%</text>
+<text x="65.0" y="359.0" font-family="Inter, Arial, sans-serif" font-size="14.0" font-weight="600" text-anchor="start" fill="#111827">10% off every ticket</text>
+<text x="65.0" y="379.0" font-family="Inter, Arial, sans-serif" font-size="11.0" font-weight="400" text-anchor="start" fill="#6B7280">Applied automatically at checkout</text>
+<rect x="24.0" y="408.0" width="342.0" height="62.0" rx="16.0" fill="#F9FAFB" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="42.0" y="445.0" font-family="Inter, Arial, sans-serif" font-size="20.0" font-weight="600" text-anchor="middle" fill="#111827">◷</text>
+<text x="65.0" y="433.0" font-family="Inter, Arial, sans-serif" font-size="14.0" font-weight="600" text-anchor="start" fill="#111827">Seven-day early access</text>
+<text x="65.0" y="453.0" font-family="Inter, Arial, sans-serif" font-size="11.0" font-weight="400" text-anchor="start" fill="#6B7280">Book before general release</text>
+<rect x="24.0" y="482.0" width="342.0" height="62.0" rx="16.0" fill="#F9FAFB" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="42.0" y="519.0" font-family="Inter, Arial, sans-serif" font-size="20.0" font-weight="600" text-anchor="middle" fill="#111827">★</text>
+<text x="65.0" y="507.0" font-family="Inter, Arial, sans-serif" font-size="14.0" font-weight="600" text-anchor="start" fill="#111827">Membership badge</text>
+<text x="65.0" y="527.0" font-family="Inter, Arial, sans-serif" font-size="11.0" font-weight="400" text-anchor="start" fill="#6B7280">Visible on your dashboard</text>
+<rect x="24.0" y="604.0" width="342.0" height="48.0" rx="24.0" fill="#1F2937" stroke="#1F2937" stroke-width="1.5"/>
+<text x="195.0" y="634.0" font-family="Inter, Arial, sans-serif" font-size="14.0" font-weight="700" text-anchor="middle" fill="#FFFFFF">Enroll as a loyalty member</text>
+<text x="195.0" y="676.0" font-family="Inter, Arial, sans-serif" font-size="11.0" font-weight="400" text-anchor="middle" fill="#6B7280">Enrollment will be available soon.</text>
+
+</g>
+<text x="10.0" y="1580.0" font-family="Inter, Arial" font-size="12" font-weight="700" fill="#111827">17. Theme settings</text>
+<g transform="translate(13.0 1590.0) scale(0.42)">
+<rect width="390" height="844" rx="22" fill="#FFFFFF" stroke="#111827" stroke-width="2"/>
+<text x="24.0" y="29.0" font-family="Inter, Arial, sans-serif" font-size="12.0" font-weight="700" text-anchor="start" fill="#111827">9:41</text>
+<text x="362.0" y="29.0" font-family="Inter, Arial, sans-serif" font-size="10.0" font-weight="400" text-anchor="end" fill="#111827">● )))  ▰</text>
+<text x="22.0" y="76.0" font-family="Inter, Arial, sans-serif" font-size="32.0" font-weight="400" text-anchor="start" fill="#111827">‹</text>
+<text x="52.0" y="72.0" font-family="Inter, Arial, sans-serif" font-size="20.0" font-weight="700" text-anchor="start" fill="#111827">Theme</text>
+<line x1="0.0" y1="96.0" x2="390.0" y2="96.0" stroke="#1F2937" stroke-width="1.0" stroke-linecap="round"/>
+<rect x="24.0" y="120.0" width="342.0" height="154.0" rx="16.0" fill="#F9FAFB" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="40.0" y="153.0" font-family="Inter, Arial, sans-serif" font-size="15.0" font-weight="700" text-anchor="start" fill="#111827">Theme mode</text>
+<text x="40.0" y="178.0" font-family="Inter, Arial, sans-serif" font-size="12.0" font-weight="400" text-anchor="start" fill="#4B5563">Follow system appearance</text>
+<rect x="294.0" y="137.0" width="54.0" height="30.0" rx="15.0" fill="#D1D5DB" stroke="#9CA3AF" stroke-width="1.5"/>
+<circle cx="331.0" cy="152.0" r="11.0" fill="#FFFFFF" stroke="#1F2937" stroke-width="1.5"/>
+<line x1="24.0" y1="202.0" x2="366.0" y2="202.0" stroke="#1F2937" stroke-width="1.0" stroke-linecap="round"/>
+<text x="40.0" y="236.0" font-family="Inter, Arial, sans-serif" font-size="15.0" font-weight="700" text-anchor="start" fill="#111827">Colour palette</text>
+<text x="40.0" y="259.0" font-family="Inter, Arial, sans-serif" font-size="12.0" font-weight="400" text-anchor="start" fill="#4B5563">Theatre rose</text>
+<text x="338.0" y="247.0" font-family="Inter, Arial, sans-serif" font-size="24.0" font-weight="400" text-anchor="start" fill="#6B7280">›</text>
+<text x="24.0" y="326.0" font-family="Inter, Arial, sans-serif" font-size="18.0" font-weight="700" text-anchor="start" fill="#111827">Preview</text>
+<rect x="24.0" y="348.0" width="342.0" height="190.0" rx="16.0" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="42.0" y="385.0" font-family="Inter, Arial, sans-serif" font-size="18.0" font-weight="700" text-anchor="start" fill="#111827">Sample production</text>
+<text x="42.0" y="412.0" font-family="Inter, Arial, sans-serif" font-size="12.0" font-weight="400" text-anchor="start" fill="#111827">This card previews your selected theme.</text>
+<rect x="42.0" y="456.0" width="160.0" height="48.0" rx="24.0" fill="#1F2937" stroke="#1F2937" stroke-width="1.5"/>
+<text x="122.0" y="486.0" font-family="Inter, Arial, sans-serif" font-size="14.0" font-weight="700" text-anchor="middle" fill="#FFFFFF">Primary action</text>
+<rect x="214.0" y="456.0" width="132.0" height="48.0" rx="24.0" fill="#FFFFFF" stroke="#1F2937" stroke-width="1.5"/>
+<text x="280.0" y="486.0" font-family="Inter, Arial, sans-serif" font-size="14.0" font-weight="700" text-anchor="middle" fill="#111827">Secondary</text>
+
+</g>
+<text x="200.0" y="1580.0" font-family="Inter, Arial" font-size="12" font-weight="700" fill="#111827">18. Language settings</text>
+<g transform="translate(203.0 1590.0) scale(0.42)">
+<rect width="390" height="844" rx="22" fill="#FFFFFF" stroke="#111827" stroke-width="2"/>
+<text x="24.0" y="29.0" font-family="Inter, Arial, sans-serif" font-size="12.0" font-weight="700" text-anchor="start" fill="#111827">9:41</text>
+<text x="362.0" y="29.0" font-family="Inter, Arial, sans-serif" font-size="10.0" font-weight="400" text-anchor="end" fill="#111827">● )))  ▰</text>
+<text x="22.0" y="76.0" font-family="Inter, Arial, sans-serif" font-size="32.0" font-weight="400" text-anchor="start" fill="#111827">‹</text>
+<text x="52.0" y="72.0" font-family="Inter, Arial, sans-serif" font-size="20.0" font-weight="700" text-anchor="start" fill="#111827">Language</text>
+<line x1="0.0" y1="96.0" x2="390.0" y2="96.0" stroke="#1F2937" stroke-width="1.0" stroke-linecap="round"/>
+<rect x="24.0" y="120.0" width="342.0" height="220.0" rx="16.0" fill="#F9FAFB" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="40.0" y="153.0" font-family="Inter, Arial, sans-serif" font-size="16.0" font-weight="700" text-anchor="start" fill="#111827">App language</text>
+<text x="48.0" y="205.0" font-family="Inter, Arial, sans-serif" font-size="14.0" font-weight="400" text-anchor="start" fill="#111827">●</text>
+<text x="76.0" y="205.0" font-family="Inter, Arial, sans-serif" font-size="14.0" font-weight="600" text-anchor="start" fill="#111827">English</text>
+<line x1="24.0" y1="226.0" x2="366.0" y2="226.0" stroke="#1F2937" stroke-width="1.0" stroke-linecap="round"/>
+<text x="48.0" y="267.0" font-family="Inter, Arial, sans-serif" font-size="14.0" font-weight="400" text-anchor="start" fill="#111827">○</text>
+<text x="76.0" y="267.0" font-family="Inter, Arial, sans-serif" font-size="14.0" font-weight="600" text-anchor="start" fill="#111827">සිංහල</text>
+<line x1="24.0" y1="288.0" x2="366.0" y2="288.0" stroke="#1F2937" stroke-width="1.0" stroke-linecap="round"/>
+<text x="48.0" y="329.0" font-family="Inter, Arial, sans-serif" font-size="14.0" font-weight="400" text-anchor="start" fill="#111827">○</text>
+<text x="76.0" y="329.0" font-family="Inter, Arial, sans-serif" font-size="14.0" font-weight="600" text-anchor="start" fill="#111827">தமிழ்</text>
+<text x="24.0" y="388.0" font-family="Inter, Arial, sans-serif" font-size="12.0" font-weight="400" text-anchor="start" fill="#4B5563">The interface updates immediately when you</text>
+<text x="24.0" y="410.0" font-family="Inter, Arial, sans-serif" font-size="12.0" font-weight="400" text-anchor="start" fill="#4B5563">select a language.</text>
+
+</g>
+<text x="390.0" y="1580.0" font-family="Inter, Arial" font-size="12" font-weight="700" fill="#111827">19. More</text>
+<g transform="translate(393.0 1590.0) scale(0.42)">
+<rect width="390" height="844" rx="22" fill="#FFFFFF" stroke="#111827" stroke-width="2"/>
+<text x="24.0" y="29.0" font-family="Inter, Arial, sans-serif" font-size="12.0" font-weight="700" text-anchor="start" fill="#111827">9:41</text>
+<text x="362.0" y="29.0" font-family="Inter, Arial, sans-serif" font-size="10.0" font-weight="400" text-anchor="end" fill="#111827">● )))  ▰</text>
+<text x="22.0" y="76.0" font-family="Inter, Arial, sans-serif" font-size="32.0" font-weight="400" text-anchor="start" fill="#111827">‹</text>
+<text x="52.0" y="72.0" font-family="Inter, Arial, sans-serif" font-size="20.0" font-weight="700" text-anchor="start" fill="#111827">More</text>
+<line x1="0.0" y1="96.0" x2="390.0" y2="96.0" stroke="#1F2937" stroke-width="1.0" stroke-linecap="round"/>
+<rect x="24.0" y="120.0" width="342.0" height="62.0" rx="16.0" fill="#F9FAFB" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="42.0" y="157.0" font-family="Inter, Arial, sans-serif" font-size="20.0" font-weight="600" text-anchor="middle" fill="#111827">◉</text>
+<text x="65.0" y="145.0" font-family="Inter, Arial, sans-serif" font-size="14.0" font-weight="600" text-anchor="start" fill="#111827">Privacy policy</text>
+<text x="65.0" y="165.0" font-family="Inter, Arial, sans-serif" font-size="11.0" font-weight="400" text-anchor="start" fill="#6B7280">Read how your information is handled</text>
+<text x="344.0" y="159.0" font-family="Inter, Arial, sans-serif" font-size="24.0" font-weight="400" text-anchor="start" fill="#6B7280">›</text>
+<rect x="24.0" y="194.0" width="342.0" height="62.0" rx="16.0" fill="#F9FAFB" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="42.0" y="231.0" font-family="Inter, Arial, sans-serif" font-size="20.0" font-weight="600" text-anchor="middle" fill="#111827">≡</text>
+<text x="65.0" y="219.0" font-family="Inter, Arial, sans-serif" font-size="14.0" font-weight="600" text-anchor="start" fill="#111827">Terms &amp; conditions</text>
+<text x="65.0" y="239.0" font-family="Inter, Arial, sans-serif" font-size="11.0" font-weight="400" text-anchor="start" fill="#6B7280">Review the platform terms</text>
+<text x="344.0" y="233.0" font-family="Inter, Arial, sans-serif" font-size="24.0" font-weight="400" text-anchor="start" fill="#6B7280">›</text>
+<rect x="24.0" y="268.0" width="342.0" height="62.0" rx="16.0" fill="#F9FAFB" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="42.0" y="305.0" font-family="Inter, Arial, sans-serif" font-size="20.0" font-weight="600" text-anchor="middle" fill="#111827">⌘</text>
+<text x="65.0" y="293.0" font-family="Inter, Arial, sans-serif" font-size="14.0" font-weight="600" text-anchor="start" fill="#111827">Manage my data</text>
+<text x="65.0" y="313.0" font-family="Inter, Arial, sans-serif" font-size="11.0" font-weight="400" text-anchor="start" fill="#6B7280">Account and privacy controls</text>
+<text x="344.0" y="307.0" font-family="Inter, Arial, sans-serif" font-size="24.0" font-weight="400" text-anchor="start" fill="#6B7280">›</text>
+<rect x="24.0" y="342.0" width="342.0" height="62.0" rx="16.0" fill="#F9FAFB" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="42.0" y="379.0" font-family="Inter, Arial, sans-serif" font-size="20.0" font-weight="600" text-anchor="middle" fill="#111827">?</text>
+<text x="65.0" y="367.0" font-family="Inter, Arial, sans-serif" font-size="14.0" font-weight="600" text-anchor="start" fill="#111827">Help &amp; support</text>
+<text x="65.0" y="387.0" font-family="Inter, Arial, sans-serif" font-size="11.0" font-weight="400" text-anchor="start" fill="#6B7280">Get assistance</text>
+<text x="344.0" y="381.0" font-family="Inter, Arial, sans-serif" font-size="24.0" font-weight="400" text-anchor="start" fill="#6B7280">›</text>
+<rect x="24.0" y="416.0" width="342.0" height="62.0" rx="16.0" fill="#F9FAFB" stroke="#9CA3AF" stroke-width="1.5"/>
+<text x="42.0" y="453.0" font-family="Inter, Arial, sans-serif" font-size="20.0" font-weight="600" text-anchor="middle" fill="#111827">i</text>
+<text x="65.0" y="441.0" font-family="Inter, Arial, sans-serif" font-size="14.0" font-weight="600" text-anchor="start" fill="#111827">About us</text>
+<text x="65.0" y="461.0" font-family="Inter, Arial, sans-serif" font-size="11.0" font-weight="400" text-anchor="start" fill="#6B7280">Theatre platform information</text>
+<text x="344.0" y="455.0" font-family="Inter, Arial, sans-serif" font-size="24.0" font-weight="400" text-anchor="start" fill="#6B7280">›</text>
+<text x="195.0" y="538.0" font-family="Inter, Arial, sans-serif" font-size="11.0" font-weight="400" text-anchor="middle" fill="#6B7280">App version 1.0.0</text>
+
+</g>
+</svg>

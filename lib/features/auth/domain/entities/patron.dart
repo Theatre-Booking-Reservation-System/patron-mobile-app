@@ -74,3 +74,13 @@ class AuthenticatedPatron extends Equatable {
   @override
   List<Object?> get props => [patron, accessToken, tokenType, expiresAt];
 }
+
+class LoyaltyEnrollment extends Equatable {
+  const LoyaltyEnrollment({required this.patronId, required this.cardNumber});
+
+  final String patronId;
+  final String cardNumber;
+
+  @override
+  List<Object?> get props => [patronId, cardNumber];
+}

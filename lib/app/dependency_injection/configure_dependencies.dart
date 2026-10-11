@@ -17,6 +17,8 @@ import 'package:patron_mobile_app/features/booking/data/repositories/remote_thea
 import 'package:patron_mobile_app/features/booking/domain/repositories/theatre_repository.dart';
 import 'package:patron_mobile_app/features/bookings/presentation/bloc/bookings_bloc.dart';
 import 'package:patron_mobile_app/features/checkout/presentation/bloc/checkout_bloc.dart';
+import 'package:patron_mobile_app/features/production_details/data/device_contact_directory.dart';
+import 'package:patron_mobile_app/features/production_details/domain/contact_directory.dart';
 import 'package:patron_mobile_app/features/programme/presentation/bloc/programme_bloc.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -76,5 +78,8 @@ Future<void> configureDependencies({bool useMockData = false}) async {
     )
     ..registerLazySingleton<ProgrammeBloc>(() => ProgrammeBloc(getIt()))
     ..registerLazySingleton<CheckoutBloc>(() => CheckoutBloc(getIt()))
-    ..registerLazySingleton<BookingsBloc>(() => BookingsBloc(getIt()));
+    ..registerLazySingleton<BookingsBloc>(() => BookingsBloc(getIt()))
+    ..registerLazySingleton<ContactDirectory>(
+      () => const DeviceContactDirectory(),
+    );
 }

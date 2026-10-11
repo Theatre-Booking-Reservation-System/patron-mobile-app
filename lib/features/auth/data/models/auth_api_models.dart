@@ -55,6 +55,25 @@ class PatronRegisterResponseDto {
   final String email;
 }
 
+class LoyaltyEnrollResponseDto {
+  const LoyaltyEnrollResponseDto({
+    required this.patronId,
+    required this.loyaltyCardNo,
+  });
+
+  factory LoyaltyEnrollResponseDto.fromJson(Map<String, Object?> json) =>
+      LoyaltyEnrollResponseDto(
+        patronId: _requiredString(json, 'patronId'),
+        loyaltyCardNo: _requiredString(json, 'loyaltyCardNo'),
+      );
+
+  final String patronId;
+  final String loyaltyCardNo;
+
+  LoyaltyEnrollment toDomain() =>
+      LoyaltyEnrollment(patronId: patronId, cardNumber: loyaltyCardNo);
+}
+
 class PatronDetailResponseDto {
   const PatronDetailResponseDto({required this.patron});
 

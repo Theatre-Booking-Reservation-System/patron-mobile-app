@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 import 'package:patron_mobile_app/app/theme/app_theme.dart';
@@ -8,14 +9,38 @@ import 'package:patron_mobile_app/core/localization/l10n_extension.dart';
 import 'package:patron_mobile_app/core/widgets/production_poster_hero.dart';
 import 'package:patron_mobile_app/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:patron_mobile_app/features/booking/domain/entities/theatre_models.dart';
+import 'package:patron_mobile_app/features/production_details/domain/contact_directory.dart';
+import 'package:patron_mobile_app/features/production_details/presentation/share_production_sheet.dart';
 
-class ProductionDetailsPage extends StatelessWidget {
-  const ProductionDetailsPage({required this.production, super.key});
+class ProductionDetailsPage extends StatefulWidget {
+  const ProductionDetailsPage({
+    required this.production,
+    this.contactDirectory,
+    super.key,
+  });
 
   final Production production;
+  final ContactDirectory? contactDirectory;
+
+  @override
+  State<ProductionDetailsPage> createState() => _ProductionDetailsPageState();
+}
+
+class _ProductionDetailsPageState extends State<ProductionDetailsPage> {
+  final _detailsBoundaryKey = GlobalKey();
+
+  String _castRole(String role) {
+    final words = role.trim().split(RegExp(r'\s+'));
+    return [
+      for (final word in words)
+        if (word.isNotEmpty)
+          '${word[0].toUpperCase()}${word.substring(1)}',
+    ].join(' ');
+  }
 
   @override
   Widget build(BuildContext context) {
+    final production = widget.production;
     final locale = Localizations.localeOf(context).languageCode;
     final language = switch (production.language) {
       ProductionLanguage.sinhala => context.l10n.sinhala,
@@ -23,150 +48,250 @@ class ProductionDetailsPage extends StatelessWidget {
       ProductionLanguage.english => context.l10n.english,
     };
     return Scaffold(
-      body: CustomScrollView(
-        slivers: [
-          SliverAppBar(
-            pinned: true,
-            expandedHeight: 372,
-            foregroundColor: Colors.white,
-            backgroundColor: const Color(0xFF162447),
-            surfaceTintColor: Colors.transparent,
-            actions: [
-              IconButton(
-                tooltip: context.l10n.favourite,
-                onPressed: () {},
-                icon: const Icon(Icons.favorite_border_rounded),
-              ),
-              IconButton(
-                tooltip: 'Share production',
-                onPressed: () {},
-                icon: const Icon(Icons.ios_share_rounded),
-              ),
-              const SizedBox(width: 4),
-            ],
-            flexibleSpace: FlexibleSpaceBar(
-              collapseMode: CollapseMode.parallax,
-              titlePadding: const EdgeInsetsDirectional.fromSTEB(56, 0, 96, 16),
-              title: Text(
-                production.title.resolve(locale),
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
-                style: const TextStyle(
-                  color: Colors.white,
-                  fontWeight: FontWeight.w600,
-                ),
-              ),
-              background: _ProductionHero(
-                production: production,
-                locale: locale,
-              ),
-            ),
-          ),
-          SliverPadding(
-            padding: const EdgeInsets.fromLTRB(20, 24, 20, 40),
-            sliver: SliverList.list(
-              children: [
-                Wrap(
-                  spacing: 8,
-                  runSpacing: 8,
-                  children: [
-                    _DetailChip(icon: Icons.language_rounded, label: language),
-                    _DetailChip(
-                      icon: Icons.category_outlined,
-                      label: production.genre,
-                    ),
-                    _DetailChip(
-                      icon: Icons.location_on_outlined,
-                      label: 'Colombo 07',
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 22),
-                Text(
-                  'About this production',
-                  style: Theme.of(context).textTheme.titleLarge,
-                ),
-                const SizedBox(height: 10),
-                Text(
-                  production.synopsis.resolve(locale),
-                  style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                    color: Theme.of(context).colorScheme.onSurfaceVariant,
-                  ),
-                ),
-                const SizedBox(height: 22),
-                Container(
-                  padding: const EdgeInsets.all(16),
-                  decoration: BoxDecoration(
-                    color: Theme.of(context).colorScheme.surfaceContainerLow,
-                    borderRadius: BorderRadius.circular(18),
-                  ),
-                  child: Row(
-                    children: [
-                      Icon(
-                        Icons.payments_outlined,
-                        color: Theme.of(context).colorScheme.primary,
+      body: Stack(
+        fit: StackFit.expand,
+        children: [
+          RepaintBoundary(
+            key: _detailsBoundaryKey,
+            child: KeyedSubtree(
+              key: const Key('productionDetailsCapture'),
+              child: CustomScrollView(
+                slivers: [
+                  SliverAppBar(
+                    pinned: true,
+                    automaticallyImplyLeading: false,
+                    expandedHeight: 372,
+                    foregroundColor: Colors.white,
+                    backgroundColor: const Color(0xFF162447),
+                    surfaceTintColor: Colors.transparent,
+                    flexibleSpace: FlexibleSpaceBar(
+                      collapseMode: CollapseMode.parallax,
+                      titlePadding: const EdgeInsetsDirectional.fromSTEB(
+                        56,
+                        0,
+                        96,
+                        16,
                       ),
-                      const SizedBox(width: 12),
-                      Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
+                      title: Text(
+                        production.title.resolve(locale),
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        style: const TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                      background: _ProductionHero(
+                        production: production,
+                        locale: locale,
+                      ),
+                    ),
+                  ),
+                  SliverPadding(
+                    padding: const EdgeInsets.fromLTRB(20, 24, 20, 40),
+                    sliver: SliverList.list(
+                      children: [
+                        Wrap(
+                          spacing: 8,
+                          runSpacing: 8,
                           children: [
-                            Text(
-                              'Tickets from',
-                              style: Theme.of(context).textTheme.bodySmall,
+                            _DetailChip(
+                              icon: Icons.language_rounded,
+                              label: language,
                             ),
-                            Text(
-                              AppFormatters.money(production.startingPrice),
-                              style: Theme.of(context).textTheme.titleLarge
-                                  ?.copyWith(fontWeight: FontWeight.w600),
+                            _DetailChip(
+                              icon: Icons.category_outlined,
+                              label: production.genre,
+                            ),
+                            if (production.durationLabel case final duration?)
+                              _DetailChip(
+                                icon: Icons.schedule,
+                                label: duration,
+                              ),
+                            _DetailChip(
+                              icon: Icons.location_on_outlined,
+                              label: 'Colombo 07',
                             ),
                           ],
                         ),
-                      ),
-                      const Flexible(
-                        child: Text(
-                          'VAT-inclusive total shown at checkout',
-                          textAlign: TextAlign.end,
+                        const SizedBox(height: 22),
+                        Text(
+                          'About this production',
+                          style: Theme.of(context).textTheme.titleLarge,
                         ),
-                      ),
-                    ],
-                  ),
-                ),
-                const SizedBox(height: 30),
-                Row(
-                  children: [
-                    Expanded(
-                      child: Text(
-                        context.l10n.selectPerformance,
-                        style: Theme.of(context).textTheme.headlineSmall
-                            ?.copyWith(fontWeight: FontWeight.w600),
-                      ),
+                        const SizedBox(height: 10),
+                        Text(
+                          production.synopsis.resolve(locale),
+                          style: Theme.of(context).textTheme.bodyLarge
+                              ?.copyWith(
+                                color: Theme.of(
+                                  context,
+                                ).colorScheme.onSurfaceVariant,
+                              ),
+                        ),
+                        if (production.castCrew.isNotEmpty) ...[
+                          const SizedBox(height: 22),
+                          Text(
+                            'Cast & crew',
+                            style: Theme.of(context).textTheme.titleLarge,
+                          ),
+                          const SizedBox(height: 10),
+                          for (final member in production.castCrew)
+                            Padding(
+                              padding: const EdgeInsets.only(bottom: 8),
+                              child: Row(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Expanded(
+                                    child: Text(
+                                      _castRole(member.role),
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .bodyMedium
+                                          ?.copyWith(
+                                            fontWeight: FontWeight.w600,
+                                          ),
+                                    ),
+                                  ),
+                                  const SizedBox(width: 12),
+                                  Expanded(
+                                    child: Text(
+                                      member.name,
+                                      textAlign: TextAlign.end,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                        ],
+                        const SizedBox(height: 22),
+                        Container(
+                          padding: const EdgeInsets.all(16),
+                          decoration: BoxDecoration(
+                            color: Theme.of(
+                              context,
+                            ).colorScheme.surfaceContainerLow,
+                            borderRadius: BorderRadius.circular(18),
+                          ),
+                          child: Row(
+                            children: [
+                              Icon(
+                                Icons.payments_outlined,
+                                color: Theme.of(context).colorScheme.primary,
+                              ),
+                              const SizedBox(width: 12),
+                              Expanded(
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      'Tickets from',
+                                      style: Theme.of(
+                                        context,
+                                      ).textTheme.bodySmall,
+                                    ),
+                                    Text(
+                                      AppFormatters.money(
+                                        production.startingPrice,
+                                      ),
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .titleLarge
+                                          ?.copyWith(
+                                            fontWeight: FontWeight.w600,
+                                          ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              const Flexible(
+                                child: Text(
+                                  'VAT-inclusive total shown at checkout',
+                                  textAlign: TextAlign.end,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        const SizedBox(height: 30),
+                        Row(
+                          children: [
+                            Expanded(
+                              child: Text(
+                                context.l10n.selectPerformance,
+                                style: Theme.of(context).textTheme.headlineSmall
+                                    ?.copyWith(fontWeight: FontWeight.w600),
+                              ),
+                            ),
+                            Text(
+                              '${production.performances.length} dates',
+                              style: Theme.of(context).textTheme.bodySmall,
+                            ),
+                          ],
+                        ),
+                        const SizedBox(height: 8),
+                        Text(
+                          'Choose an available date to view the live seat map.',
+                          style: Theme.of(context).textTheme.bodyMedium
+                              ?.copyWith(
+                                color: Theme.of(
+                                  context,
+                                ).colorScheme.onSurfaceVariant,
+                              ),
+                        ),
+                        const SizedBox(height: 14),
+                        for (final performance in production.performances)
+                          Padding(
+                            padding: const EdgeInsets.only(bottom: 12),
+                            child: _PerformanceTile(
+                              production: production,
+                              performance: performance,
+                            ),
+                          ),
+                        const SizedBox(height: 12),
+                        _EarlyAccessCard(production: production),
+                      ],
                     ),
-                    Text(
-                      '${production.performances.length} dates',
-                      style: Theme.of(context).textTheme.bodySmall,
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 8),
-                Text(
-                  'Choose an available date to view the live seat map.',
-                  style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                    color: Theme.of(context).colorScheme.onSurfaceVariant,
                   ),
-                ),
-                const SizedBox(height: 14),
-                for (final performance in production.performances)
-                  Padding(
-                    padding: const EdgeInsets.only(bottom: 12),
-                    child: _PerformanceTile(
+                ],
+              ),
+            ),
+          ),
+          Positioned(
+            top: 0,
+            left: 0,
+            right: 0,
+            child: SafeArea(
+              child: Row(
+                children: [
+                  BackButton(
+                    color: Colors.white,
+                    onPressed: () => Navigator.maybePop(context),
+                  ),
+                  const Spacer(),
+                  IconButton(
+                    tooltip: context.l10n.favourite,
+                    onPressed: () {},
+                    color: Colors.white,
+                    icon: const Icon(Icons.favorite_border_rounded),
+                  ),
+                  IconButton(
+                    key: const Key('shareProductionButton'),
+                    tooltip: context.l10n.shareProduction,
+                    color: Colors.white,
+                    onPressed: () => shareProductionWithContact(
+                      context,
                       production: production,
-                      performance: performance,
+                      directory:
+                          widget.contactDirectory ??
+                          GetIt.instance<ContactDirectory>(),
+                      detailsBoundaryKey: _detailsBoundaryKey,
                     ),
+                    icon: const Icon(Icons.ios_share_rounded),
                   ),
-                const SizedBox(height: 12),
-                _EarlyAccessCard(production: production),
-              ],
+                  const SizedBox(width: 4),
+                ],
+              ),
             ),
           ),
         ],
@@ -399,14 +524,23 @@ class _EarlyAccessCard extends StatelessWidget {
               ? 'Choose any performance. Your 10% loyalty discount is applied automatically.'
               : context.l10n.earlyAccess
         : 'Every performance in this production follows this same release schedule.';
+    final dark = Theme.of(context).brightness == Brightness.dark;
+    // Light green is only readable with dark text. Dark mode uses a dark
+    // green surface and a light foreground for the same card.
+    final loyaltyAccent = dark
+        ? const Color(0xFFD7F5E4)
+        : const Color(0xFF145A4A);
+    final background = loyalty
+        ? (dark ? const Color(0xFF1A3D32) : const Color(0xFFE5F5EC))
+        : guest
+        ? scheme.secondaryContainer
+        : scheme.surfaceContainerLow;
+    final contentColor = loyalty && dark ? loyaltyAccent : null;
+    final textTheme = Theme.of(context).textTheme;
     return Container(
       padding: const EdgeInsets.all(18),
       decoration: BoxDecoration(
-        color: loyalty
-            ? const Color(0xFFE5F5EC)
-            : guest
-            ? scheme.secondaryContainer
-            : scheme.surfaceContainerLow,
+        color: background,
         borderRadius: BorderRadius.circular(20),
       ),
       child: Row(
@@ -420,7 +554,7 @@ class _EarlyAccessCard extends StatelessWidget {
                 : guest
                 ? Icons.lock_person_outlined
                 : Icons.workspace_premium_outlined,
-            color: loyalty ? const Color(0xFF145A4A) : scheme.primary,
+            color: loyalty ? loyaltyAccent : scheme.primary,
           ),
           const SizedBox(width: 12),
           Expanded(
@@ -429,10 +563,15 @@ class _EarlyAccessCard extends StatelessWidget {
               children: [
                 Text(
                   title,
-                  style: Theme.of(context).textTheme.titleMedium,
+                  style: textTheme.titleMedium?.copyWith(color: contentColor),
                 ),
                 const SizedBox(height: 5),
-                Text(description),
+                Text(
+                  description,
+                  style: contentColor == null
+                      ? null
+                      : textTheme.bodyMedium?.copyWith(color: contentColor),
+                ),
                 if (!released && !loyalty) ...[
                   const SizedBox(height: 8),
                   TextButton(
@@ -458,26 +597,13 @@ Future<void> _openPerformance(
   Production production,
   Performance performance,
 ) async {
-  final authBloc = context.read<AuthBloc>();
-  final auth = authBloc.state;
-  if (auth.status != AuthStatus.authenticated) {
-    if (auth.status == AuthStatus.guest) {
-      authBloc.add(const AuthLogoutRequested());
-      await authBloc.stream.firstWhere(
-        (state) => state.status == AuthStatus.anonymous,
-      );
-    }
-    if (context.mounted) context.push('/login');
-    return;
-  }
+  final auth = context.read<AuthBloc>().state;
   final loyalty = auth.patron?.isLoyaltyMember == true;
   if (!production.canBookAt(DateTime.now(), isLoyaltyMember: loyalty)) {
     if (context.mounted) {
       final isEarlyAccess = production.isLoyaltyEarlyAccessAt(DateTime.now());
       final releaseDate = production.releaseDate;
-      ScaffoldMessenger.of(
-        context,
-      ).showSnackBar(
+      ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text(
             isEarlyAccess

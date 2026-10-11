@@ -21,7 +21,7 @@ dependencies:
   go_router: ^16.2.1
   intl: ^0.20.2
   shared_preferences: ^2.5.3
-
+  url_launcher: ^6.3.3
 dev_dependencies:
   flutter_test:
     sdk: flutter

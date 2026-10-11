@@ -204,6 +204,136 @@ void main() {
   );
 
   blocTest<AuthBloc, AuthState>(
+    'enrols the signed-in patron and stores the loyalty card',
+    setUp: () {
+      sessionStore = _RecordingAuthSessionStore(_loyaltySession);
+      final repository = _MockAuthRepository();
+      when(() => repository.enrollLoyalty('patron-id')).thenAnswer(
+        (_) async => const LoyaltyEnrollment(
+          patronId: 'patron-id',
+          cardNumber: 'LOY-0001',
+        ),
+      );
+      _profileRepository = repository;
+    },
+    build: () => AuthBloc(
+      repository: _profileRepository,
+      sessionStore: sessionStore,
+      restoredSession: _loyaltySession,
+    ),
+    act: (bloc) => bloc.add(const AuthLoyaltyEnrollmentRequested()),
+    expect: () => [
+      const AuthState(
+        status: AuthStatus.authenticated,
+        patron: Patron(
+          id: 'patron-id',
+          name: 'Nimal Perera',
+          email: 'nimal@example.com',
+        ),
+        loyaltyEnrollment: LoyaltyEnrollmentStatus.submitting,
+      ),
+      const AuthState(
+        status: AuthStatus.authenticated,
+        patron: Patron(
+          id: 'patron-id',
+          name: 'Nimal Perera',
+          email: 'nimal@example.com',
+          isLoyaltyMember: true,
+          loyaltyCardNumber: 'LOY-0001',
+        ),
+      ),
+    ],
+    verify: (_) {
+      expect(sessionStore.session?.isLoyaltyMember, isTrue);
+      expect(sessionStore.session?.loyaltyCardNumber, 'LOY-0001');
+      verify(() => _profileRepository.enrollLoyalty('patron-id')).called(1);
+    },
+  );
+
+  blocTest<AuthBloc, AuthState>(
+    'loads the existing card when enrolment reports a conflict',
+    setUp: () {
+      final repository = _MockAuthRepository();
+      when(
+        () => repository.enrollLoyalty('patron-id'),
+      ).thenThrow(const ApiException(ApiFailureType.conflict));
+      when(() => repository.getPatron('patron-id')).thenAnswer(
+        (_) async => const Patron(
+          id: 'patron-id',
+          name: 'Nimal Perera',
+          email: 'nimal@example.com',
+          isLoyaltyMember: true,
+          loyaltyCardNumber: 'LOY-0001',
+        ),
+      );
+      _profileRepository = repository;
+    },
+    build: () => AuthBloc(
+      repository: _profileRepository,
+      restoredSession: _loyaltySession,
+    ),
+    act: (bloc) => bloc.add(const AuthLoyaltyEnrollmentRequested()),
+    expect: () => [
+      const AuthState(
+        status: AuthStatus.authenticated,
+        patron: Patron(
+          id: 'patron-id',
+          name: 'Nimal Perera',
+          email: 'nimal@example.com',
+        ),
+        loyaltyEnrollment: LoyaltyEnrollmentStatus.submitting,
+      ),
+      const AuthState(
+        status: AuthStatus.authenticated,
+        patron: Patron(
+          id: 'patron-id',
+          name: 'Nimal Perera',
+          email: 'nimal@example.com',
+          isLoyaltyMember: true,
+          loyaltyCardNumber: 'LOY-0001',
+        ),
+      ),
+    ],
+  );
+
+  blocTest<AuthBloc, AuthState>(
+    'keeps the patron signed in when enrolment cannot reach the server',
+    setUp: () {
+      final repository = _MockAuthRepository();
+      when(
+        () => repository.enrollLoyalty('patron-id'),
+      ).thenThrow(const ApiException(ApiFailureType.noConnection));
+      _profileRepository = repository;
+    },
+    build: () => AuthBloc(
+      repository: _profileRepository,
+      restoredSession: _loyaltySession,
+    ),
+    act: (bloc) => bloc.add(const AuthLoyaltyEnrollmentRequested()),
+    expect: () => [
+      const AuthState(
+        status: AuthStatus.authenticated,
+        patron: Patron(
+          id: 'patron-id',
+          name: 'Nimal Perera',
+          email: 'nimal@example.com',
+        ),
+        loyaltyEnrollment: LoyaltyEnrollmentStatus.submitting,
+      ),
+      const AuthState(
+        status: AuthStatus.authenticated,
+        patron: Patron(
+          id: 'patron-id',
+          name: 'Nimal Perera',
+          email: 'nimal@example.com',
+        ),
+        loyaltyEnrollment: LoyaltyEnrollmentStatus.failure,
+        loyaltyError: 'networkError',
+      ),
+    ],
+  );
+
+  blocTest<AuthBloc, AuthState>(
     'retains date of birth in the local registration result',
     build: AuthBloc.new,
     act: (bloc) => bloc.add(
@@ -225,6 +355,12 @@ void main() {
 }
 
 late _MockAuthRepository _profileRepository;
+
+const _loyaltySession = AuthSessionData(
+  userId: 'patron-id',
+  name: 'Nimal Perera',
+  email: 'nimal@example.com',
+);
 
 class _MockAuthRepository extends Mock implements AuthRepository {}
 

@@ -7,6 +7,7 @@ abstract interface class TheatreRepository {
     required BookingDraft draft,
     required PatronDetails patron,
     required BookingQuote quote,
+    required CardPaymentDetails card,
   });
   Future<List<Booking>> getBookings();
   Future<Booking> getBooking(String reference);

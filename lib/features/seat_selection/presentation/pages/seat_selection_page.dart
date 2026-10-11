@@ -25,9 +25,14 @@ class SeatSelectionPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (_) =>
-          SeatSelectionBloc(getIt<TheatreRepository>())
-            ..add(SeatMapRequested(production, performance)),
+      create: (context) => SeatSelectionBloc(getIt<TheatreRepository>())
+        ..add(
+          SeatMapRequested(
+            production,
+            performance,
+            guest: context.read<AuthBloc>().state.isGuest,
+          ),
+        ),
       child: const _SeatSelectionView(),
     );
   }
@@ -49,11 +54,17 @@ class _SeatSelectionView extends StatelessWidget {
           if (state.status == SeatSelectionStatus.failure) {
             return _SeatLoadFailure(state: state);
           }
-          if (state.seats.isEmpty) {
+          final guestPreview =
+              context.watch<AuthBloc>().state.isGuest && state.seats.isEmpty;
+          if (state.seats.isEmpty && !guestPreview) {
             return _EmptySeatInventory(state: state);
           }
+          final seats = guestPreview ? _guestSeatLayout() : state.seats;
+          final visibleSeats = seats
+              .where((seat) => seat.section == state.section)
+              .toList(growable: false);
           final grouped = <String, List<Seat>>{};
-          for (final seat in state.visibleSeats) {
+          for (final seat in visibleSeats) {
             grouped.putIfAbsent(seat.row, () => []).add(seat);
           }
           return Column(
@@ -72,7 +83,15 @@ class _SeatSelectionView extends StatelessWidget {
                       ),
                     ),
                     const SizedBox(height: 8),
-                    const _Legend(),
+                    if (guestPreview)
+                      Text(
+                        'Sign in to see which seats are available.',
+                        style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                          color: Theme.of(context).colorScheme.onSurfaceVariant,
+                        ),
+                      )
+                    else
+                      const _Legend(),
                     const SizedBox(height: 12),
                     SingleChildScrollView(
                       scrollDirection: Axis.horizontal,
@@ -82,21 +101,21 @@ class _SeatSelectionView extends StatelessWidget {
                           ButtonSegment(
                             value: SeatSection.stalls,
                             label: Text(context.l10n.stalls),
-                            enabled: state.seats.any(
+                            enabled: seats.any(
                               (seat) => seat.section == SeatSection.stalls,
                             ),
                           ),
                           ButtonSegment(
                             value: SeatSection.circle,
                             label: Text(context.l10n.circle),
-                            enabled: state.seats.any(
+                            enabled: seats.any(
                               (seat) => seat.section == SeatSection.circle,
                             ),
                           ),
                           ButtonSegment(
                             value: SeatSection.upperCircle,
                             label: Text(context.l10n.upperCircle),
-                            enabled: state.seats.any(
+                            enabled: seats.any(
                               (seat) => seat.section == SeatSection.upperCircle,
                             ),
                           ),
@@ -159,9 +178,12 @@ class _SeatSelectionView extends StatelessWidget {
                                   for (final seat in entry.value)
                                     _SeatButton(
                                       seat: seat,
-                                      isSelected: state.selected.any(
-                                        (item) => item.id == seat.id,
-                                      ),
+                                      isSelected:
+                                          !guestPreview &&
+                                          state.selected.any(
+                                            (item) => item.id == seat.id,
+                                          ),
+                                      preview: guestPreview,
                                     ),
                                 ],
                               ),
@@ -212,12 +234,14 @@ class _SeatSelectionView extends StatelessWidget {
                               ],
                             ),
                           ),
-                          const SizedBox(width: 10),
-                          Text(
-                            AppFormatters.money(state.vatInclusiveTotal),
-                            style: Theme.of(context).textTheme.titleMedium
-                                ?.copyWith(fontWeight: FontWeight.w600),
-                          ),
+                          if (!guestPreview) ...[
+                            const SizedBox(width: 10),
+                            Text(
+                              AppFormatters.money(state.vatInclusiveTotal),
+                              style: Theme.of(context).textTheme.titleMedium
+                                  ?.copyWith(fontWeight: FontWeight.w600),
+                            ),
+                          ],
                         ],
                       ),
                       const SizedBox(height: 10),
@@ -357,6 +381,37 @@ class _SeatStatusMessage extends StatelessWidget {
   );
 }
 
+void _selectSeat(BuildContext context, Seat seat) {
+  if (context.read<AuthBloc>().state.status != AuthStatus.authenticated) {
+    context.go('/profile');
+    return;
+  }
+  context.read<SeatSelectionBloc>().add(SeatToggled(seat));
+}
+
+List<Seat> _guestSeatLayout() {
+  const sections = [
+    SeatSection.stalls,
+    SeatSection.circle,
+    SeatSection.upperCircle,
+  ];
+  return [
+    for (final section in sections)
+      for (final row in ['A', 'B'])
+        for (var number = 1; number <= 8; number++)
+          Seat(
+            id: 'guest-${section.name}-$row-$number',
+            section: section,
+            row: row,
+            number: number,
+            zoneName: '',
+            multiplierPercent: 100,
+            netPrice: 0,
+            status: SeatStatus.unavailable,
+          ),
+  ];
+}
+
 void _retry(BuildContext context, SeatSelectionState state) {
   final production = state.production;
   final performance = state.performance;
@@ -367,16 +422,23 @@ void _retry(BuildContext context, SeatSelectionState state) {
 }
 
 class _SeatButton extends StatelessWidget {
-  const _SeatButton({required this.seat, required this.isSelected});
+  const _SeatButton({
+    required this.seat,
+    required this.isSelected,
+    this.preview = false,
+  });
 
   final Seat seat;
   final bool isSelected;
+  final bool preview;
 
   @override
   Widget build(BuildContext context) {
     final seatTheme = Theme.of(context).extension<SeatStatusTheme>()!;
     final status = isSelected ? SeatStatus.available : seat.status;
-    final color = isSelected
+    final color = preview
+        ? Theme.of(context).colorScheme.surfaceContainerHighest
+        : isSelected
         ? seatTheme.selected
         : switch (status) {
             SeatStatus.available => seatTheme.available,
@@ -392,9 +454,10 @@ class _SeatButton extends StatelessWidget {
             SeatStatus.booked => context.l10n.booked,
             SeatStatus.unavailable => context.l10n.unavailable,
           };
-    final enabled = seat.status == SeatStatus.available;
-    final label =
-        '${seat.row}${seat.number}, ${seat.zoneName}, ${AppFormatters.money(const TicketPricingService().vatInclusivePreview(seat))}, $statusLabel${seat.isAccessible ? ', ${context.l10n.accessibleSeat}' : ''}';
+    final enabled = preview || seat.status == SeatStatus.available;
+    final label = preview
+        ? 'Seat ${seat.row}${seat.number}. Sign in to book.'
+        : '${seat.row}${seat.number}, ${seat.zoneName}, ${AppFormatters.money(const TicketPricingService().vatInclusivePreview(seat))}, $statusLabel${seat.isAccessible ? ', ${context.l10n.accessibleSeat}' : ''}';
     return Semantics(
       button: true,
       enabled: enabled,
@@ -404,9 +467,7 @@ class _SeatButton extends StatelessWidget {
         message: label,
         child: InkWell(
           key: ValueKey('seat_${seat.id}'),
-          onTap: enabled
-              ? () => context.read<SeatSelectionBloc>().add(SeatToggled(seat))
-              : null,
+          onTap: enabled ? () => _selectSeat(context, seat) : null,
           borderRadius: BorderRadius.circular(6),
           child: Container(
             width: 34,
@@ -422,7 +483,16 @@ class _SeatButton extends StatelessWidget {
                 width: isSelected ? 2 : 1,
               ),
             ),
-            child: seat.isAccessible
+            child: preview
+                ? Text(
+                    '${seat.number}',
+                    style: TextStyle(
+                      fontSize: 11,
+                      color: Theme.of(context).colorScheme.onSurfaceVariant,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  )
+                : seat.isAccessible
                 ? const Icon(Icons.accessible, size: 15, color: Colors.black87)
                 : Text(
                     '${seat.number}',

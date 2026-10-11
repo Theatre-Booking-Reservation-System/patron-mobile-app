@@ -2,6 +2,7 @@ import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
 import 'package:patron_mobile_app/app/theme/app_theme.dart';
+import 'package:patron_mobile_app/core/images/poster_image.dart';
 import 'package:patron_mobile_app/core/localization/l10n_extension.dart';
 
 class ProductionPoster extends StatelessWidget {
@@ -46,11 +47,7 @@ class ProductionPoster extends StatelessWidget {
         children: [
           CustomPaint(painter: _PosterArtwork(seed: seed)),
           if (imageUrl case final url? when url.isNotEmpty)
-            Image.network(
-              url,
-              fit: BoxFit.cover,
-              errorBuilder: (_, _, _) => const SizedBox.shrink(),
-            ),
+            _PosterImage(url: url),
           DecoratedBox(
             decoration: BoxDecoration(
               gradient: LinearGradient(
@@ -113,6 +110,30 @@ class ProductionPoster extends StatelessWidget {
           ),
         ],
       ),
+    );
+  }
+}
+
+class _PosterImage extends StatelessWidget {
+  const _PosterImage({required this.url});
+
+  final String url;
+
+  @override
+  Widget build(BuildContext context) {
+    final bytes = posterImageBytes(url);
+    if (bytes != null) {
+      return Image.memory(
+        bytes,
+        fit: BoxFit.cover,
+        gaplessPlayback: true,
+        errorBuilder: (_, _, _) => const SizedBox.shrink(),
+      );
+    }
+    return Image.network(
+      url,
+      fit: BoxFit.cover,
+      errorBuilder: (_, _, _) => const SizedBox.shrink(),
     );
   }
 }

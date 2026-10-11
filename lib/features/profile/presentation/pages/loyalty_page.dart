@@ -89,23 +89,70 @@ class LoyaltyPage extends StatelessWidget {
           ),
           if (!isMember) ...[
             const SizedBox(height: 28),
-            const FilledButton(
-              onPressed: null,
-              child: Text('Enroll as a loyalty member'),
-            ),
-            const SizedBox(height: 8),
-            Text(
-              'Online enrolment will be available soon.',
-              textAlign: TextAlign.center,
-              style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                color: Theme.of(context).colorScheme.onSurfaceVariant,
-              ),
+            BlocBuilder<AuthBloc, AuthState>(
+              buildWhen: (previous, current) =>
+                  previous.loyaltyEnrollment != current.loyaltyEnrollment ||
+                  previous.loyaltyError != current.loyaltyError,
+              builder: (context, state) {
+                final submitting =
+                    state.loyaltyEnrollment ==
+                    LoyaltyEnrollmentStatus.submitting;
+                final patronId = patron?.id;
+                final canEnroll = patronId != null && patronId.isNotEmpty;
+                return Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    FilledButton(
+                      key: const Key('enrollLoyaltyButton'),
+                      onPressed: submitting || !canEnroll
+                          ? null
+                          : () => context.read<AuthBloc>().add(
+                              const AuthLoyaltyEnrollmentRequested(),
+                            ),
+                      child: submitting
+                          ? const SizedBox(
+                              width: 22,
+                              height: 22,
+                              child: CircularProgressIndicator(strokeWidth: 2),
+                            )
+                          : const Text('Enroll as a loyalty member'),
+                    ),
+                    const SizedBox(height: 8),
+                    Text(
+                      _loyaltyMessage(state, canEnroll: canEnroll),
+                      textAlign: TextAlign.center,
+                      style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                        color:
+                            state.loyaltyEnrollment ==
+                                LoyaltyEnrollmentStatus.failure
+                            ? Theme.of(context).colorScheme.error
+                            : Theme.of(context).colorScheme.onSurfaceVariant,
+                      ),
+                    ),
+                  ],
+                );
+              },
             ),
           ],
         ],
       ),
     );
   }
+}
+
+String _loyaltyMessage(AuthState state, {required bool canEnroll}) {
+  if (!canEnroll) {
+    return 'Sign in with your account to enrol.';
+  }
+  return switch (state.loyaltyError) {
+    'alreadyEnrolled' => 'This account is already enrolled.',
+    'sessionExpired' => 'Your session has expired. Sign in again to enrol.',
+    'patronNotFound' => 'We could not find this account.',
+    'networkError' =>
+      'Unable to reach the server. Check your connection and try again.',
+    'signInRequired' => 'Sign in with your account to enrol.',
+    _ => 'Enrolment is free and applies to this account.',
+  };
 }
 
 class _BenefitTile extends StatelessWidget {

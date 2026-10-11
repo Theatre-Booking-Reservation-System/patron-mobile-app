@@ -206,6 +206,35 @@ class AppLocalizationsSi extends AppLocalizations {
   String get cardPayment => 'කාඩ් ගෙවීම';
 
   @override
+  String get cardDetails => 'කාඩ් විස්තර';
+
+  @override
+  String get cardHolderName => 'කාඩ්පතේ නම';
+
+  @override
+  String get cardNumber => 'කාඩ් අංකය';
+
+  @override
+  String get cardExpiry => 'කල් ඉකුත් වීම';
+
+  @override
+  String get cardCvv => 'CVV';
+
+  @override
+  String get invalidCardNumber =>
+      'ඉලක්කම් 13 සිට 19 දක්වා කාඩ් අංකයක් ඇතුළත් කරන්න.';
+
+  @override
+  String get invalidCardExpiry => 'MM/YY හෝ MM/YYYY ලෙස ඇතුළත් කරන්න.';
+
+  @override
+  String get invalidCardMonth => '01 සිට 12 දක්වා මාසයක් ඇතුළත් කරන්න.';
+
+  @override
+  String get invalidCardCvv =>
+      'ඉලක්කම් 3 ක් හෝ 4 ක් වූ CVV අංකයක් ඇතුළත් කරන්න.';
+
+  @override
   String get mobilePayment => 'ජංගම ගෙවීම';
 
   @override
@@ -219,11 +248,7 @@ class AppLocalizationsSi extends AppLocalizations {
   String get payNow => 'දැන් ගෙවන්න';
 
   @override
-  String get simulateFailure => 'අසාර්ථක ගෙවීමක් අත්හදා බලන්න';
-
-  @override
-  String get paymentFailed =>
-      'ගෙවීම ප්‍රතික්ෂේප විය. ආසන තවත් මිනිත්තු පහක් රඳවා ඇත.';
+  String get paymentFailed => 'ගෙවීම ප්‍රතික්ෂේප විය.';
 
   @override
   String get retry => 'නැවත උත්සාහ කරන්න';
@@ -365,6 +390,61 @@ class AppLocalizationsSi extends AppLocalizations {
 
   @override
   String get favourite => 'ප්‍රියතම';
+
+  @override
+  String get shareProduction => 'නාට්‍යය බෙදාගන්න';
+
+  @override
+  String get shareWithContact => 'සම්බන්ධතාවක් සමඟ බෙදාගන්න';
+
+  @override
+  String get contactsPermissionNeeded =>
+      'ඔබ දන්නා අයෙකු සමඟ මෙම නාට්‍යය බෙදා ගැනීමට සම්බන්ධතා වෙත ප්‍රවේශය අවසර දෙන්න.';
+
+  @override
+  String get contactsPermissionDenied =>
+      'සම්බන්ධතා ප්‍රවේශය අක්‍රියයි. මෙම නාට්‍යය බෙදා ගැනීමට සැකසුම් තුළින් එය අවසර දෙන්න.';
+
+  @override
+  String get openSettings => 'සැකසුම් විවෘත කරන්න';
+
+  @override
+  String get notNow => 'දැන් නොවේ';
+
+  @override
+  String get noContacts => 'සම්බන්ධතා හමු නොවීය.';
+
+  @override
+  String get unnamedContact => 'නමක් නැත';
+
+  @override
+  String get contactHasNoDetails =>
+      'මෙම සම්බන්ධතාවට දුරකථන අංකයක් හෝ විද්‍යුත් තැපෑලක් නැත.';
+
+  @override
+  String get sendMessage => 'පණිවිඩයක් යවන්න';
+
+  @override
+  String get sendEmail => 'විද්‍යුත් තැපෑලක් යවන්න';
+
+  @override
+  String get searchContacts => 'සම්බන්ධතා සොයන්න';
+
+  @override
+  String get shareFailed =>
+      'මෙම සම්බන්ධතාව සඳහා පණිවිඩයක් හෝ විද්‍යුත් තැපෑලක් විවෘත කළ නොහැකි විය.';
+
+  @override
+  String get shareProductionCta =>
+      'Sapumal Theatre යෙදුමෙන් ප්‍රවේශපත්‍ර වෙන්කරන්න.';
+
+  @override
+  String shareChooseChannel(String title) {
+    return '$title යැවිය යුතු ආකාරය තෝරන්න.';
+  }
+
+  @override
+  String get tryAgain => 'නැවත උත්සාහ කරන්න';
 
   @override
   String get bookNow => 'දැන් වෙන්කරන්න';

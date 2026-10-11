@@ -29,6 +29,15 @@ class MockAuthRepository implements AuthRepository {
   }
 
   @override
+  Future<LoyaltyEnrollment> enrollLoyalty(String patronId) async {
+    await Future<void>.delayed(const Duration(milliseconds: 400));
+    if (patronId.trim().isEmpty) {
+      throw const ApiException(ApiFailureType.notFound);
+    }
+    return LoyaltyEnrollment(patronId: patronId, cardNumber: 'LOY-MOCK-0001');
+  }
+
+  @override
   Future<Patron> getPatron(String patronId) async =>
       Patron(id: patronId, name: '', email: '');
 

@@ -8,6 +8,8 @@ abstract interface class AuthRepository {
 
   Future<Patron> getPatron(String patronId);
 
+  Future<LoyaltyEnrollment> enrollLoyalty(String patronId);
+
   Future<Patron> register({
     required String name,
     required String email,

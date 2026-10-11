@@ -1,24 +1,30 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:patron_mobile_app/app/dependency_injection/configure_dependencies.dart';
 import 'package:patron_mobile_app/core/formatters/app_formatters.dart';
 import 'package:patron_mobile_app/core/widgets/booking_qr_code.dart';
 import 'package:patron_mobile_app/features/booking/domain/entities/theatre_models.dart';
-import 'package:patron_mobile_app/features/booking/domain/repositories/theatre_repository.dart';
 import 'package:patron_mobile_app/features/bookings/presentation/bloc/bookings_bloc.dart';
 
-class BookingDetailsPage extends StatelessWidget {
+class BookingDetailsPage extends StatefulWidget {
   const BookingDetailsPage({required this.reference, super.key});
 
   final String reference;
 
   @override
-  Widget build(BuildContext context) => BlocProvider(
-    create: (_) =>
-        BookingsBloc(getIt<TheatreRepository>())
-          ..add(BookingDetailsRequested(reference)),
-    child: const _BookingDetailsView(),
-  );
+  State<BookingDetailsPage> createState() => _BookingDetailsPageState();
+}
+
+class _BookingDetailsPageState extends State<BookingDetailsPage> {
+  @override
+  void initState() {
+    super.initState();
+    context.read<BookingsBloc>().add(
+      BookingDetailsRequested(widget.reference),
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) => const _BookingDetailsView();
 }
 
 class _BookingDetailsView extends StatelessWidget {

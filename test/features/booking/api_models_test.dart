@@ -15,7 +15,13 @@ void main() {
       'descriptionTa': 'Tamil description',
       'baseTicketCost': 1250.0,
       'releaseDate': '2026-10-02',
+      'duration': '2h 45m',
       'posterImageUrl': 'http://example.com/poster.jpg',
+      'castCrew': [
+        {'key': 'Director', 'value': 'Ranjan Perera'},
+        {'key': ' ', 'value': 'Ignored'},
+        {'key': 'Lead Actor', 'value': 'Sanath Gunathilake'},
+      ],
       'status': 1,
     });
 
@@ -23,6 +29,11 @@ void main() {
     expect(production.language, 'english');
     expect(production.baseTicketCost, 1250);
     expect(production.posterImageUrl, 'http://example.com/poster.jpg');
+    expect(production.duration, '2h 45m');
+    expect(
+      production.castCrew.map((member) => (member.role, member.name)),
+      [('Director', 'Ranjan Perera'), ('Lead Actor', 'Sanath Gunathilake')],
+    );
     expect(production.releaseDate, DateTime(2026, 10, 2));
     expect(production.title['ta'], 'Tamil title');
   });

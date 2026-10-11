@@ -55,8 +55,10 @@ class BookingsPage extends StatelessWidget {
           title: Text(context.l10n.bookings),
           bottom: TabBar(
             indicatorColor: Theme.of(context).colorScheme.secondary,
-            labelColor: Colors.white,
-            unselectedLabelColor: Colors.white70,
+            labelColor: Theme.of(context).colorScheme.onSurface,
+            unselectedLabelColor: Theme.of(
+              context,
+            ).colorScheme.onSurfaceVariant,
             tabs: [
               Tab(text: context.l10n.upcomingTab),
               Tab(text: context.l10n.pastTab),
@@ -79,13 +81,11 @@ class BookingsPage extends StatelessWidget {
             final now = DateTime.now();
             final upcoming = state.bookings
                 .where(
-                  (booking) =>
-                      booking.canCancel &&
-                      !booking.performance.dateTime.isBefore(now),
+                  (booking) => !booking.performance.dateTime.isBefore(now),
                 )
                 .toList();
             final past = state.bookings
-                .where((booking) => !upcoming.contains(booking))
+                .where((booking) => booking.performance.dateTime.isBefore(now))
                 .toList();
             return RefreshIndicator.adaptive(
               onRefresh: () async {
